@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>dao</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/dao/${subModuleName}</filePath>
+	<fileName>${ClassName}Mapper.java</fileName>
+	<content><![CDATA[
+
+package ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>;
+
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import com.yonyou.iuap.persistence.mybatis.anotation.MyBatisRepository;
+import java.util.List;
+@MyBatisRepository
+public interface ${ClassName}Mapper{
+	public ${ClassName} get(String id);
+	
+	public List<${ClassName}> findList(${ClassName} ${className});
+	
+	public List<${ClassName}> findAllList(${ClassName} ${className});
+	
+	public void update(${ClassName} ${className});
+	
+	public void save(${ClassName} ${className});
+	
+	public void delete(${ClassName} ${className});
+}]]>
+	</content>
+</template>

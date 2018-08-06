@@ -1,0 +1,101 @@
+.modify-password{
+	padding-top:10px;
+}
+.nav-tabs{
+	height: 42px;
+	padding-left:10px;
+}
+.modify-cont{
+	padding: 35px 20px;
+}
+.modify-cont label{
+	width: 100px;
+	text-align: right;
+}
+.modify-cont input{
+	text-indent: 4px;
+}
+.btn-pass{
+	border:none;
+	font-size: 14px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    background:#2298ef;
+	width:50px;
+	height:24px;
+}
+.btn-pass:hover{
+	background: #00a8ff;
+}
+.btn-cont{
+	text-align: center;
+    width: 330px;
+    margin-top: 30px;
+}
+.error-tip{
+	color:#F4511E;
+	font-size: 12px;
+}
+.modify-success{
+	width: 628px;
+	margin: 0 auto;
+	padding: 20px 0 0 0;
+	min-height: 400px;
+}
+.success-cont{
+	padding: 20px 0 0 0;
+}
+.next-btn{
+	padding-top: 40px;
+	text-align: center;
+}
+
+a.btn-next {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 230px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    background: #29e; 
+}
+
+a.btn-next:hover {
+    background: #00a8ff; 
+}
+
+a.btn-next:active {
+    background: #07c; 
+}
+
+.success-icon{
+    text-align: center;
+    margin: 30px 0 0 0;
+    padding:110px 0 0 0;
+    font-size: 18px;
+    background: url(images/zhmm-success.jpg) no-repeat center top;
+}
+.hide{
+	display: none !important;
+}
+.save-success-new {
+	display: none; 
+	position: absolute; 
+	top: 210px; 
+	left: 50%; 
+	margin-left: -30px; 
+	font-size: 16px; 
+	color:#333;
+	background: url("images/icon_success.png") no-repeat;
+	height: 52px;
+    width: 119px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 12px;
+}
+

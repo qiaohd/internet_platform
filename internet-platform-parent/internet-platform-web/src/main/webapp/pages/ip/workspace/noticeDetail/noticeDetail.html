@@ -1,0 +1,31 @@
+<div class="list-wrapper">
+	<div class="detail-left">
+		<div class="left-button">
+			<a id="detail-go-new" href="#/ip/workspace/noticeNew/noticeNew" type="button" class="btn btn-primary btn-lg btn-block">+新建公告</a>
+		</div>
+		<div class="left-button">
+			<a id="go-list" href="#/ip/workspace/noticeList/noticeList" type="button" class="btn btn-primary btn-lg btn-block">全部公告</a>
+		</div>
+	</div>
+	<div class="detail-right">
+		<div class="btn-conts">
+			<button id="edit-notice" class="btn" type="button" data-bind="click:editNotice">编辑</button>
+			<button id="delete-notice" class="btn" type="button" data-bind="click:deleteNotice">删除</button>
+		</div>
+		<div class="detail-cont clearfix">
+		<input id="noticeId" type="hidden" />
+			<div class="clearfix">
+				<p id="notice-tit" class="notice-tit"></p>
+				<div class="append-cont">
+					<p class="append-classfy">
+						<a class="append-selected">发布人：<span id="notice-author"></span></a>|
+						<a>发布时间<span id="notice-time"></span></a>
+					</p>
+				</div>
+			</div>
+			<div id="notice-cont" class="notice-cont">
+				
+			</div>
+		</div>
+	</div>
+</div>

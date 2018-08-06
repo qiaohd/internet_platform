@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd 
+      http://code.alibabatech.com/schema/dubbo
+      http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+      
+	<!-- dubbo 配置 -->
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="${dubbo.application.name}"/>
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" timeout="15000"/>
+    <dubbo:consumer check="false" retries="0" timeout="${dubbo.service.timeout}"/>
+ <!--消费者声明
+	<dubbo:annotation package="com.ufgov.ip.web" /> -->
+	
+<dubbo:reference id="DictionaryServiceI" interface="com.ufgov.ip.api.base.DictionaryServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.base.DictionaryServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IPCommonServiceI" interface="com.ufgov.ip.api.base.IPCommonServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.base.IPCommonServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IPDataTableServiceI" interface="com.ufgov.ip.api.base.IPDataTableServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.base.IPDataTableServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="RegionServiceI" interface="com.ufgov.ip.api.base.RegionServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.base.RegionServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="SendMessageServiceI" interface="com.ufgov.ip.api.message.phoneverity.SendMessageServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.message.phoneverity.SendMessageServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IpCompanyServiceI" interface="com.ufgov.ip.api.sysmanager.IpCompanyServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IpCompanyServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IpOrgSortServiceI" interface="com.ufgov.ip.api.sysmanager.IpOrgSortServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IpOrgSortServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IpRoleMenuServiceI" interface="com.ufgov.ip.api.sysmanager.IpRoleMenuServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IpRoleMenuServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IPRoleServiceI" interface="com.ufgov.ip.api.sysmanager.IPRoleServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IPRoleServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IpUserCompanyServiceI" interface="com.ufgov.ip.api.sysmanager.IpUserCompanyServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IpUserCompanyServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="IpUserRoleServiceI" interface="com.ufgov.ip.api.sysmanager.IpUserRoleServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.sysmanager.IpUserRoleServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="HirerAccountServiceI" interface="com.ufgov.ip.api.system.HirerAccountServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.HirerAccountServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="HirerRegisterServiceI" interface="com.ufgov.ip.api.system.HirerRegisterServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.HirerRegisterServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="MenuServiceI" interface="com.ufgov.ip.api.system.MenuServiceI" timeout="6000" url="${dubbo.reference.address}/com.ufgov.ip.api.system.MenuServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IpMenuIconServiceI" interface="com.ufgov.ip.api.system.IpMenuIconServiceI" timeout="6000" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IpMenuIconServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="UserAccountServiceI" interface="com.ufgov.ip.api.system.UserAccountServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.UserAccountServiceI" check="false" version="0.0.1"/>
+ 
+ <dubbo:reference id="AskForLeaveServiceI" interface="com.ufgov.ip.api.system.AskForLeaveServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.AskForLeaveServiceI" check="false" version="0.0.1"/>
+<dubbo:reference id="AskTicketListServiceI" interface="com.ufgov.ip.api.system.AskTicketListServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.AskTicketListServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="BpmSynchronousServiceI" interface="com.ufgov.ip.api.system.BpmSynchronousServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.BpmSynchronousServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="GenTableServiceI" interface="com.ufgov.ip.api.system.GenTableServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.GenTableServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="GenSchemeServiceI" interface="com.ufgov.ip.api.system.GenSchemeServiceI" timeout="6000" url="${dubbo.reference.address}/com.ufgov.ip.api.system.GenSchemeServiceI" version="0.0.1"/>
+ <dubbo:reference id="JsonResultServiceI" interface="com.ufgov.ip.api.system.JsonResultServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.JsonResultServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="ProcessServiceI" interface="com.ufgov.ip.api.system.ProcessServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.ProcessServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IPUserCompanyQueryServiceI" interface="com.ufgov.ip.api.system.IPUserCompanyQueryServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IPUserCompanyQueryServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IpUserInfoServiceI" interface="com.ufgov.ip.api.system.IpUserInfoServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IpUserInfoServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="DatapartitionServiceI" interface="com.ufgov.ip.api.system.DatapartitionServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.DatapartitionServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IpUserInfoKServiceI" interface="com.ufgov.ip.api.system.IpUserInfoKServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IpUserInfoKServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="IpUserLe123ServiceI" interface="com.ufgov.ip.api.system.IpUserLe123ServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IpUserLe123ServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="SolrServiceI" interface="com.ufgov.ip.api.system.SolrServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.SolrServiceI" check="false" version="0.0.1"/>
+ <dubbo:reference id="NoticeServiceI" interface="com.ufgov.ip.api.system.NoticeServiceI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.NoticeServiceI" timeout="6000" check="false" version="0.0.1"/>
+ <dubbo:reference id="IndexConfigI" interface="com.ufgov.ip.api.system.IndexConfigI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.IndexConfigI" timeout="6000" check="false" version="0.0.1"/>
+ <dubbo:reference id="QuartzJobBeanForSolrI" interface="com.ufgov.ip.api.system.QuartzJobBeanForSolrI" url="${dubbo.reference.address}/com.ufgov.ip.api.system.QuartzJobBeanForSolrI" timeout="6000" check="false" version="0.0.1"/>
+</beans>

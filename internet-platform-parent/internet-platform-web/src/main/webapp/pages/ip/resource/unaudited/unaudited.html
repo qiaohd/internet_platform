@@ -1,0 +1,87 @@
+<div class="duty-info">
+    <ul id="unaudited-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a >未审核的请假条</a></li>
+    </ul>
+    <div id="unauditedTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="division-list"
+             aria-labelledby="list-tab">
+            <span id="askHirerId" class="hidden">111</span>
+            <span id="askCoId" class="hidden">111</span>
+            <span id="askUserId" class="hidden">111</span>
+            <span id="roleType" class="hidden">111</span>
+            <span id="askTaskId" class="hidden">111</span>
+            <span id="businessId" class="hidden">111</span>
+            <div class="division-list-content">
+                <div class="division-result-content">
+                    <div type="text"
+                         u-meta='{"id":"leave-grid","data":"leaveDataTable","type":"grid","editable":false,"autoExpand":false}'>
+                        <div options='{"field":"id","dataType":"String","title":"序号","editType":"String","width": 100}'></div>
+                        <div options='{"field":"proposer","dataType":"String","title":"请假人","editType":"String","width": 100}'></div>
+                        <div options='{"field":"startDate","dataType":"String","title":"请假开始时间","editType":"Date","width": 150}'></div>
+                        <div options='{"field":"endDate","dataType":"String","title":"请假结束时间","editType":"Date","width": 150}'></div>
+                        <div options='{"field":"type","dataType":"String","title":"请假类型","editType":"string","width": 100}'></div>
+                        <div options='{"field":"reason","dataType":"String","title":"请假理由","editType":"string","width": 300}'></div>
+                        <div options='{"field":"taskId","dataType":"String","title":"任务id","editType":"string","width": 0}'></div>
+                        <div options='{"field":"String","dataType":"String","title":"操作","editType":"string","width": 200,"renderType":"SetFun"}'></div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete-region-notice" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content jump-content-delete">
+                            <div class="jump-header">
+                                <p class="jump-header-title">驳回意见</p>
+                                <a class="jump-header-close" href="javascript:void(0);"
+                                   data-bind="click: delete_region_close;">
+                                    <img src="images/ip/menu/close.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body">
+                                <div class="jump-body-delete">
+                                    <p>请填写驳回意见:</p>
+                                    <p>
+                                        <textarea id="suggestion" class="reason-text"></textarea>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="jump-footer">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" onclick="mgrDisAgree()">确定</button>
+                                    <button class="jump-btn-cancel" data-bind="click: delete_region_close;">
+                                        取消
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="modal fade" id="error-notice" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content jump-content-delete">
+                            <div class="jump-header">
+                                <p class="jump-header-title">错误提示</p>
+                                <a class="jump-header-close" href="javascript:void(0);"
+                                   data-bind="click: errorNoticeClose">
+                                    <img src="images/ip/menu/close.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body">
+                                <div class="jump-body-delete">
+                                    <p id="error-notic-text"></p>
+                                </div>
+                            </div>
+                            <div class="jump-footer">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" data-bind="click: errorNoticeClose">确定</button>
+                                    <!-- <button class="jump-btn-cancel" data-bind="click: delete_region_close;">取消</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

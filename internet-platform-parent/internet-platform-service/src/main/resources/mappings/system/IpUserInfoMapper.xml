@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.IpUserInfoMapper">
+    
+	<sql id="ipUserInfoColumns">
+		
+			    a.user_sex AS "userSex",
+			    a.password AS "password",
+			    a.graduatioin_time AS "graduatioinTime",
+			    a.education AS "education",
+			    a.hobby AS "hobby",
+			    a.user_id AS "userId",
+			    a.login_name AS "loginName"
+	</sql>
+	
+	<sql id="ipUserInfoJoins">
+		
+	</sql>
+    
+	<select id="get" resultType="IpUserInfo">
+		SELECT 
+			<include refid="ipUserInfoColumns"/>
+		FROM ip_user_info a
+		<include refid="ipUserInfoJoins"/>
+		WHERE a.USER_ID = #{id}
+	</select>
+	
+	<select id="findList" resultType="IpUserInfo">
+		SELECT 
+			<include refid="ipUserInfoColumns"/>
+		FROM ip_user_info a
+		<include refid="ipUserInfoJoins"/>
+		<where>
+			
+			<if test="userSex != null and userSex != ''">
+				AND a.user_sex = #{userSex}
+			</if>
+			<if test="graduatioinTime != null">
+				AND a.graduatioin_time = #{graduatioinTime}
+			</if>
+			<if test="education != null and education != ''">
+				AND a.education = #{education}
+			</if>
+			<if test="hobby != null and hobby != ''">
+				AND a.hobby = #{hobby}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				AND a.login_name LIKE concat('%',#{loginName},'%')
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="findAllList" resultType="IpUserInfo">
+		SELECT 
+			<include refid="ipUserInfoColumns"/>
+		FROM ip_user_info a
+		<include refid="ipUserInfoJoins"/>
+		<where>
+			
+		</where>		
+		
+	</select>
+	
+	<insert id="save">
+		INSERT INTO ip_user_info(
+			               	user_sex,
+			               	password,
+			               	graduatioin_time,
+			               	education,
+			               	hobby,
+			               	user_id,
+			            	login_name
+		
+
+		) VALUES (
+			               	#{userSex},
+			               	#{password},
+			               	#{graduatioinTime},
+			               	#{education},
+			               	#{hobby},
+			               	#{userId},
+			            	#{loginName}
+		
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ip_user_info SET 	
+				
+			               	user_sex = #{userSex},
+			               	password = #{password},
+			               	graduatioin_time = #{graduatioinTime},
+			               	education = #{education},
+			               	hobby = #{hobby},
+			               	user_id = #{userId},
+			            	login_name = #{loginName}
+			
+		WHERE user_id = #{userId}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM ip_user_info 
+		WHERE user_id = #{id}
+	</delete>
+	
+</mapper>

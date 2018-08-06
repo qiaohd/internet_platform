@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.sysmanager.IPRoleMenuMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.sysmanager.IpRoleMenu">
+        <id column="THE_ID" property="theId" jdbcType="VARCHAR"/>
+        <result column="MENU_ID" property="menuId" jdbcType="VARCHAR"/>
+        <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR"/>
+        <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        THE_ID, MENU_ID, MENU_NAME, ROLE_ID
+    </sql>
+    <sql id="key">
+        <!-- 去掉最后一个, -->
+        <trim suffixOverrides=",">
+            <if test="theId != null">
+                THE_ID,
+            </if>
+            <if test="menuId != null">
+                MENU_ID,
+            </if>
+            <if test="menuName != null">
+                MENU_NAME,
+            </if>
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <!-- 去掉最后一个, -->
+        <trim suffixOverrides=",">
+            <if test="theId != null">
+                #{theId,jdbcType=VARCHAR},
+            </if>
+            <if test="menuId != null">
+                #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </sql>
+    
+    <select id="findByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_role_menu
+		where MENU_ID = #{menuId,jdbcType=VARCHAR}	 
+	</select>
+	<select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_role_menu
+		where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+    	delete from ip_role_menu
+    	where ROLE_ID = #{roleId}
+  	</delete>
+  	
+  	<insert id="save" parameterType="com.ufgov.ip.entity.sysmanager.IpRoleMenu">
+     	insert into ip_role_menu(<include refid="key"/>) values(<include refid="value"/>)
+    </insert>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+<div class="duty-info">
+   <ul id="dictionary-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#dictionary-list" id="partition-list-tab" role="tab"
+                                                  data-toggle="tab" aria-controls="list"
+                                                  aria-expanded="false" data-bind="click: queryMain" >分区列表</a></li>
+        <li role="presentation" class=""><a href="#dictionary-edit" role="tab" id="dictionary-edit-tab"
+                                            data-toggle="tab" aria-controls="edit"
+                                            aria-expanded="true" data-bind="click: clearEditPartition" >分区编辑</a>
+        </li>
+    </ul>
+    <div id="dictionaryTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="dictionary-list"
+             aria-labelledby="list-tab">
+            <div class="dictionary-list-content">
+                <div class="dictionary-result-content">
+                    <div type="text"
+                         u-meta='{"id":"dictionary-grid","data":"mainDataTable","type":"grid","editable":false}'>
+                        <div options='{"field":"data_id","dataType":"String","visible":"false","title":"id","editType":"string","width": 10}'></div>
+                        <div options='{"field":"host","dataType":"String","title":"主机/IP地址","editType":"string","width": 150}'></div>
+                        <div options='{"field":"port","dataType":"String","title":"端口","editType":"string","width": 60}'></div>
+                        <div options='{"field":"user_name","dataType":"String","title":"用户名","editType":"string","width": 80}'></div>
+                        <div options='{"field":"password","dataType":"password","title":"密码","editType":"string","width": 80}'></div>
+                        <!-- <div options='{"field":"schema_name","dataType":"String","title":"数据库对象","editType":"string","width": 150}'></div> -->
+                        <div options='{"field":"area_name","dataType":"String","title":"所属地区","editType":"string","width": 150}'></div>
+                        <div options='{"field":"db_driver","dataType":"String","title":"数据库驱动","editType":"string","width": 200}'></div>
+                        <div options='{"field":"create_date","dataType":"Date","title":"创建日期","editType":"Date","width": 120}'></div>
+                        <div options='{"field":"update_date","dataType":"Date","title":"修改日期","editType":"Date","width": 120}'></div>
+                        <div options='{"field":"String","dataType":"String","title":"操作","editType":"string","width": 120,"renderType":"dictionarySetFun"}'></div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete-dictionary-notice" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content jump-content-delete">
+                            <div class="jump-header">
+                                <p class="jump-header-title">系统提示</p>
+                                <a class="jump-header-close" href="javascript:void(0);"
+                                   data-bind="click: delete_dictionary_close;">
+                                    <img src="images/ip/menu/close.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body">
+                                <div class="jump-body-delete">
+                                    <p id="jump-delete-text">您确定要删除吗？</p>
+                                </div>
+                            </div>
+                            <div class="jump-footer">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" data-bind="click: delete_dictionary">确定</button>
+                                    <button class="jump-btn-cancel" data-bind="click: delete_dictionary_close;">
+                                        取消
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="dictionary-edit"
+             aria-labelledby="edit-tab">
+            <div class="dictionary-edit-content">
+                <div class="dictionary-edit-text">
+                	<p>
+                        <label><span class="must-set">*</span>数据库驱动：</label><input id="db-driver" type="text" class="" disabled="true" value="com.mysql.jdbc.Driver">
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>主机名/ip地址：</label><input id="host" type="text" class="" data-bind="event:{blur: checkHost"><span id="KValue-error" class="error-notice">请输入主机/IP地址</span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>端口：</label><input id="port" type="text" class="" maxlength="10" data-bind="event:{blur: checkDictionaryLabel}"><span id="label-error" class="error-notice">请输入端口</span>
+                    </p>
+                    <!-- <p>
+                        <label><span class="must-set">*</span>数据库对象：</label><input id="schema-name" type="text" maxlength="10" data-bind="event:{blur: checkSchemaName}"><span id="schema-error" class="error-notice">请输入数据库对象</span>
+                    </p> -->
+                    <p>
+                        <label><span class="must-set">*</span>用户名：</label><input id="user-name" type="text" class="" data-bind="event:{blur: checkDictionaryType}"><span id="type-error" class="error-notice">请输入用户名</span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>密码：</label><input id="password" type="text" maxlength="10" data-bind="event:{blur: checkDictionaryDesc}"><span id="desc-error" class="error-notice">请输入密码</span>
+                    </p>
+                    <p>
+                        <label>所属地区：</label><input id="area-name" type="text" maxlength="10" >
+                    </p>
+                </div>
+                <div class="dictionary-edit-function-btn">
+                	<button class="dictionary-edit-save common-btn" data-bind="click: testPartitionEdit">测试连接</button>
+                    <button class="dictionary-edit-save common-btn" data-bind="click: savePartitionEdit">创建</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="error-notice" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="jump-content error-notice-content">
+                <div class="jump-header">
+                    <p class="jump-header-title">系统提示</p>
+                    <a class="jump-header-close" href="javascript:void(0);">
+                        <img src="images/ip/menu/close.png" width="12" height="13">
+                    </a>
+                </div>
+                <div class="jump-body">
+                    <div class="jump-body-error">
+                        <p id="error-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

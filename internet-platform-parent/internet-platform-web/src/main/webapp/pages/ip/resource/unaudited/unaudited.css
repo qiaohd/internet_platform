@@ -1,0 +1,47 @@
+.u-grid td{
+	line-height: 1.6em !important;
+}
+.u-grid-header-link {
+    display: block;
+    padding-left: 1.33em;
+    padding-right: 2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333333;
+    font-size: 0.85em;
+    height: 2.83em;
+    line-height: 2.83em;
+}
+.reason-text {
+    margin-top: 10px;
+    padding-left: 10px;
+    width: 255px;
+    height: 100px;
+    border: 1px solid #e1e1e1;
+    resize:none;
+}
+.clearfix:before,
+.nav::before, .navbar::before,
+.navbar-header::before,
+.selectpicker::before,
+.navbar-collapse::before {
+    display: table;
+    content: " ";
+}
+
+.clearfix:after,
+.nav::after, .navbar::after,
+.navbar-header::after,
+.container-fluid::after,
+.selectpicker::after,
+.navbar-collapse::after {
+    clear: none;
+!important;
+}
+#unaudited-tabs {
+    height:42px;
+}
+#unauditedTabContent {
+    margin-top: 20px;
+}

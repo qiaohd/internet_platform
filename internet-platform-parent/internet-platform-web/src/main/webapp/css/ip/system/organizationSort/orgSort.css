@@ -1,0 +1,102 @@
+.duty-info{
+    padding-top:70px;
+}
+.bg {
+    background-color: #f8f8f8;
+}
+.ztree {
+    display: none;
+}
+.duty-info ul {
+    margin: 10px;
+    padding-left: 10px;
+}
+#myTabContent {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.duty-info .nav-tabs li.active a {
+    font-weight: bold;
+    background: #FFFFFF;
+    color: #333333;
+    border-bottom-color: transparent;
+}
+.duty-info .nav-tabs li a {
+    color: #333333;
+    border-radius: 0;
+    line-height: 1;
+    background-color: white;
+}
+.drag-sort-btn {
+    width: 70px;
+}
+.drag-sort-btn:active {
+    background-color: #ececec;
+}
+.letters-sort-btn {
+    width: 85px;
+}
+.drag-sort-btn-common {
+    height: 26px;
+    font-size: 12px;
+    background-color: #f9f9f9;
+    border: 1px solid #cdcdcd;
+}
+.tab-content table {
+    margin-top: 10px;
+}
+.tab-content table thead tr {
+    background-color: #53abeb;
+}
+.tab-content table thead tr th {
+    height: 35px;
+    color: white;
+}
+.department-num {
+    width: 200px;
+    text-align: center;
+}
+.department-name {
+    width: 700px;
+    text-align: left;
+}
+.tab-content table tbody tr {
+    height: 35px;
+}
+.tab-content table tbody tr:nth-child(even) {
+    background-color: #ececec;
+}
+.sotabjump-window tbody tr {
+    height: 30px;
+    display: block;
+    margin-top: 3px;
+    line-height: 30px;
+}
+.sotabjump-window tbody tr td{
+    width: 300px;
+    text-align: left;
+    padding-left: 30px;
+}
+.user-num {
+    width: 200px;
+    text-align: center;
+}
+.user-name {
+    width: 200px;
+    text-align: center;
+}
+.user-account {
+    width: 200px;
+    text-align: center;
+}
+.user-duty-name {
+    width: 200px;
+    text-align: center;
+}
+.sotabjump-window tr {
+    margin-top: 2px;
+    border: 1px solid #e1e1e1;
+}
+.jump-body {
+    padding: 20px 10px;
+}

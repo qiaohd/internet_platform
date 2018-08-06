@@ -1,0 +1,56 @@
+#code-area {
+		    min-height: 400px;
+		    width: 800px;
+		    /*background-color: #afd9ee;*/
+		    border: 5px solid #d7d7d7;
+			}
+			#code-area .common {
+			    height: 35px;
+			    line-height: 35px;
+			    text-align: left;
+			    padding-left: 15%;
+			}
+			#code-area .common label {
+			    float: left;
+			}
+			#code-area .common div {
+			    float: left;
+			}
+			#code-area .common input[type="text"] {
+			    height: 30px;
+			    width: 200px;
+			    margin-left: 5px;
+			    border: 1px solid #d7d7d7;
+			}
+			#code-area .common input[type="radio"] {
+			    width: 17px;
+			    height: 17px;
+			    margin-left: 7px;
+			    margin-top: 10px;
+			}
+			#code-area .common input[type="checkbox"] {
+			    width: 17px;
+			    height: 17px;
+			    margin-left: 7px;
+			    margin-top: 10px;
+			}
+			#code-area .common select {
+			    height: 30px;
+			    width: 200px;
+			    margin-left: 5px;
+			    border: 1px solid #d7d7d7;
+			}
+			#code-area .common textarea {
+			    height: 40px;
+			    line-height: 20px;
+			    max-height: 100px;
+			    overflow-y: scroll;
+			    width: 200px;
+			    margin-left: 5px;
+			    /*resize: vertical;*/
+			    resize: none;
+			    border: 1px solid #d7d7d7;
+			}
+			#area-type label {
+			    vertical-align: top;
+			}

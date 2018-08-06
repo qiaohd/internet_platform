@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IpHirerMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.system.IpHirer">
+        <id column="HIRER_ID" property="hirerId" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="CELLPHONE_NO" property="cellphoneNo" jdbcType="VARCHAR"/>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="duty" property="duty" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="fax" property="fax" jdbcType="VARCHAR"/>
+        <result column="HIRER_LOGO_URL" property="hirerLogoUrl" jdbcType="VARCHAR"/>
+        <result column="HIRER_NAME" property="hirerName" jdbcType="VARCHAR"/>
+        <result column="HIRER_NO" property="hirerNo" jdbcType="VARCHAR"/>
+        <result column="HIRER_PIC_URL" property="hirerPicUrl" jdbcType="VARCHAR"/>
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR"/>
+        <result column="HIRER_SHORT_NAME" property="hirerShortName" jdbcType="VARCHAR"/>
+        <result column="HIRER_TYPE" property="hirerType" jdbcType="VARCHAR"/>
+        <result column="linkman" property="linkman" jdbcType="VARCHAR"/>
+        <result column="login_ts" property="loginTs" jdbcType="BIGINT"/>        
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="postcode" property="postcode" jdbcType="VARCHAR"/>
+        <result column="region" property="region" jdbcType="VARCHAR"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="website" property="website" jdbcType="VARCHAR"/>
+        <result column="DATA_ID" property="dataId" jdbcType="VARCHAR"/>
+        <result column="DB_URL" property="dbUrl" jdbcType="VARCHAR"/>
+        <result column="IS_VALID" property="isValid" jdbcType="VARCHAR"/>
+        <result column="DB_SCHEMA" property="dbSchema" jdbcType="VARCHAR"/>
+        <result column="MYCAT_SCHEMA" property="mycatSchema" jdbcType="VARCHAR"/>
+    </resultMap>
+     <sql id="Base_Column_List">
+        HIRER_ID, address, CELLPHONE_NO, CREATE_DATE, duty, email, fax,
+        HIRER_LOGO_URL, HIRER_NAME, HIRER_NO, HIRER_PIC_URL, LOGIN_NAME,
+        HIRER_SHORT_NAME,HIRER_TYPE,linkman,login_ts,password,PHONE_NO,
+        postcode,region,salt,sex,UPDATE_DATE,website,DATA_ID,DB_URL,IS_VALID,DB_SCHEMA,MYCAT_SCHEMA
+    </sql>
+	<select id="findHirerByCondition" resultMap="BaseResultMap" parameterType="com.ufgov.ip.entity.system.IpHirer" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_hirer h
+		<where>
+			  <if test="hirerId != null and hirerId!=''">
+			  	h.HIRER_ID = #{hirerId}
+			  	</if>
+			  	<if test="cellphoneNo != null and cellphoneNo!=''">
+			  	 and h.CELLPHONE_NO = #{cellphoneNo}
+			  	</if>
+			  	<if test="loginName != null and loginName!=''">
+			  	and h.LOGIN_NAME = #{loginName}
+			  	</if>
+			  	<if test="hirerName != null and hirerName!=''">
+			  	and h.HIRER_NAME = #{hirerName}
+			  	</if>
+			  	<if test="email != null and email!=''">
+			  	and h.email = #{email}
+			  	</if>
+			  	<if test="password != null and password!=''">
+			  	and h.password = #{password}
+			  	</if>
+			</where>
+	</select>
+	<select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_hirer h 
+		where 1 ${conditionSql}
+	</select>
+	<select id="findHirerByEmailOrLoginNameOrCellphoneNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_hirer h
+		where LOGIN_NAME = #{loginName} OR CELLPHONE_NO = #{loginName} OR EMAIL = #{loginName}	 
+	</select>
+	<select id="findHirerAll" resultMap="BaseResultMap" parameterType="com.ufgov.ip.entity.system.IpHirer" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_hirer h
+		order by HIRER_NO asc
+	</select>
+	<insert id="insert" parameterType="com.ufgov.ip.entity.system.IpHirer">
+        insert into ip_hirer 
+        <trim prefix="(" suffixOverrides=",">
+			<if test="hirerId != null">HIRER_ID,</if>
+			<if test="address != null">address,</if>
+			<if test="cellphoneNo != null">CELLPHONE_NO,</if>
+			<if test="createDate != null">CREATE_DATE,</if>
+			<if test="duty != null">duty,</if>
+			<if test="email != null">email,</if>
+			<if test="fax != null">fax,</if>
+			<if test="hirerLogoUrl != null">HIRER_LOGO_URL,</if>
+			<if test="hirerName != null">HIRER_NAME,</if>
+			<if test="hirerNo != null">HIRER_NO,</if>
+			<if test="hirerPicUrl != null">HIRER_PIC_URL,</if>
+			<if test="loginName != null">LOGIN_NAME,</if>
+			<if test="hirerShortName != null">HIRER_SHORT_NAME,</if>
+			<if test="hirerType != null">HIRER_TYPE,</if>
+			<if test="linkman != null">linkman,</if>
+			<if test="loginTs != null">login_ts,</if>		
+			<if test="password != null">password,</if>
+			<if test="phoneNo != null">PHONE_NO,</if>
+			<if test="postcode != null">postcode,</if>
+			<if test="region != null">region,</if>			
+			<if test="salt != null">salt,</if>
+			<if test="sex != null">sex,</if>
+			<if test="updateDate != null">UPDATE_DATE,</if>		
+			<if test="website != null">website,</if>
+			<if test="dataId != null">DATA_ID,</if>
+			<if test="dbUrl != null">db_Url,</if>
+			<if test="isValid != null">is_Valid</if>
+		</trim>
+		)
+		values
+		<trim prefix="(" suffixOverrides=",">
+			<if test="hirerId != null">#{hirerId},</if>
+			<if test="address != null">#{address},</if>
+			<if test="cellphoneNo != null">#{cellphoneNo},</if>
+			<if test="createDate != null">#{createDate},</if>
+			<if test="duty != null">#{duty},</if>
+			<if test="email != null">#{email},</if>
+			<if test="fax != null">#{fax},</if>
+			<if test="hirerLogoUrl != null">#{hirerLogoUrl},</if>
+			<if test="hirerName != null">#{hirerName},</if>
+			<if test="hirerNo != null">#{hirerNo},</if>
+			<if test="hirerPicUrl != null">#{hirerPicUrl},</if>
+			<if test="loginName != null">#{loginName},</if>
+			<if test="hirerShortName != null">#{hirerShortName},</if>
+			<if test="hirerType != null">#{hirerType},</if>
+			<if test="linkman != null">#{linkman},</if>
+			<if test="loginTs != null">#{loginTs},</if>		
+			<if test="password != null">#{password},</if>
+			<if test="phoneNo != null">#{phoneNo},</if>
+			<if test="postcode != null">#{postcode},</if>
+			<if test="region != null">#{region},</if>			
+			<if test="salt != null">#{salt},</if>
+			<if test="sex != null">#{sex},</if>
+			<if test="updateDate != null">#{updateDate},</if>		
+			<if test="website != null">#{website},</if>
+			<if test="dataId != null">#{dataId},</if>
+			<if test="dbUrl != null">#{dbUrl},</if>
+			<if test="isValid != null">#{isValid}</if>
+		</trim>
+		)
+    </insert>
+	<update id="update" parameterType="com.ufgov.ip.entity.system.IpHirer">
+        update ip_hirer
+        <set>
+        	<if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="cellphoneNo != null">
+                CELLPHONE_NO = #{cellphoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate,jdbcType=DATE},
+            </if>
+            <if test="duty != null">
+                duty = #{duty,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerLogoUrl != null">
+                HIRER_LOGO_URL = #{hirerLogoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerName != null">
+                HIRER_NAME = #{hirerName,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerNo != null">
+                HIRER_NO = #{hirerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerPicUrl != null">
+                HIRER_PIC_URL = #{hirerPicUrl,jdbcType=VARCHAR},
+            </if>  
+            
+            <if test="loginName != null">
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerShortName != null">
+                HIRER_SHORT_NAME = #{hirerShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="hirerType != null">
+                HIRER_TYPE = #{hirerType,jdbcType=VARCHAR},
+            </if>
+            <if test="linkman != null">
+                linkman = #{linkman,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTs != null">
+                login_ts = #{loginTs,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNo != null">
+                PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="region != null">
+                region = #{region,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>    
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE = #{updateDate,jdbcType=DATE},
+            </if>
+            <if test="website != null">
+                website = #{website,jdbcType=VARCHAR},
+            </if>
+            <if test="dataId != null">
+                DATA_ID = #{dataId,jdbcType=VARCHAR},
+            </if>
+            <if test="dbSchema != null">
+                DB_SCHEMA = #{dbSchema,jdbcType=VARCHAR},
+            </if>
+            <if test="mycatSchema != null">
+                MYCAT_SCHEMA = #{mycatSchema,jdbcType=VARCHAR},
+            </if>
+            <if test="isValid != null">
+                IS_VALID = #{isValid,jdbcType=VARCHAR},
+            </if>
+                 
+        </set>
+        where HIRER_ID = #{hirerId,jdbcType=VARCHAR}
+    </update>
+     <delete id="deleteByPk" parameterType="com.ufgov.ip.entity.system.IpHirer">
+    delete from ip_hirer
+    where HIRER_ID = #{hirerId}
+  </delete>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>serviceI</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/service/${subModuleName}</filePath>
+	<fileName>${ClassName}ServiceI.java</fileName>
+	<content><![CDATA[
+
+package ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public interface ${ClassName}ServiceI{
+
+	public ${ClassName} get(String id);
+	
+	public List<${ClassName}> findList(${ClassName} ${className});
+	
+	public List<${ClassName}> findAllList(${ClassName} ${className});
+	
+	public void update(${ClassName} ${className});
+	
+	public void delete(${ClassName} ${className});
+	
+	<#if schemeType=='3' || schemeType=='0'>
+	   public void saveAndStartBpm(${ClassName} ${className}, String userId);
+	<#else>
+		public void save(${ClassName} ${className});
+	</#if>
+	
+}]]>
+	</content>
+</template>

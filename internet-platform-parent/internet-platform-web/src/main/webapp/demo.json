@@ -1,0 +1,23 @@
+{
+  "datas":[
+    {
+      "name": "select",
+      "type": "select",
+      "source":[
+        {
+          "name": "cc1",
+          "value": "03"
+        },
+        {
+          "name": "dd1",
+          "value": "04"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "date",
+      "format": "YYYY-MM-DD"
+    }
+  ]
+}

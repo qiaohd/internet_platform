@@ -1,0 +1,274 @@
+.top {
+	margin-bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 999;
+}
+.top .navbar-brand {
+	color: #fff;
+	cursor: pointer;
+	top: 0px;
+}
+.top .navbar-brand:hover {
+	color: #fff;
+	background-color: #666666;
+}
+.right-nav {
+	padding-right: 20px;
+}
+.right-nav>li>a {
+	color: #fff !important;
+}
+.right-nav>li:hover {
+	background-color: #666666 !important;
+}
+.right-nav>.active {
+	background-color: #666666 !important;
+}
+.right-nav>.open {
+	background-color: #666666 !important;
+}
+.right-nav>.open>a {
+	background-color: #666666 !important;
+}
+.right-nav>li {
+	border-left: 1px solid #5E6264;
+}
+.leftpanel {
+	float: left;
+	width: 220px;
+	min-height: 530px;
+	overflow: hidden;
+	display: none;
+	border-right: solid 1px #E1E1E1;
+	border-left: solid 1px #E1E1E1;
+	border-top: solid 1px white;
+}
+.leftpanel-collapse {
+	width: 60px;
+}
+.content {
+	padding-left: 220px;
+	padding-top: 50px;
+}
+.content-collapse {
+	padding-left: 60px;
+}
+
+/*left menu 要抽取成插件*/
+
+.left-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 220px;
+}
+.left-menu>li {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0px;
+	line-height: 20px;
+	border-top: solid 1px #E1E1E1;
+	border-bottom: solid 1px #E1E1E1;
+}
+.left-menu>li.open a {
+	background-color: #eee;
+}
+.left-menu>li>a {
+	color: #8b91a0;
+	display: block;
+	position: relative;
+	margin: 0;
+	border: 0px;
+	padding: 11.5px 31px 11.5px 31px;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: normal;
+	cursor: pointer;
+}
+.left-menu li a:hover{
+	/*background-color: #eee;*/
+}
+
+.left-menu>li>ul.sub-menu {
+	display: none;
+	list-style: none;
+	clear: both;
+	margin: 0px;
+	/*background-color: #22262e;*/
+	padding: 8px 0px 10px 0px;
+}
+.left-menu>li>ul.sub-menu>li {
+	/*background: none;*/
+	margin: 0px;
+	padding: 0px;
+	margin-top: 1px !important;
+}
+.left-menu>li>ul.sub-menu>li.active{
+	background-color: #e8f5fe;
+}
+.left-menu>li>ul.sub-menu>li>a {
+	margin-left: 0px;
+	padding-left: 5px;
+	display: block;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 0px;
+	padding-left: 53px !important;
+	color: #777;
+	text-decoration: none;
+	/*text-shadow: 0 1px 1px #000;*/
+	font-size: 13px;
+	font-weight: 300;
+	background: none;
+	cursor: pointer;
+}
+.left-menu>li>ul.sub-menu>li>a:hover{
+	background-color: bule;
+}
+
+.left-menu .arrow{
+	float:right;
+}
+
+
+.container-fixed{
+	margin:15px;
+}
+.container-fixed .row{
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.container-fixed .row .ec-menu,.ec-search{
+	padding-left:0px;
+	padding-right:0px;
+}	
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999;
+  border-radius: 10px;
+}
+
+.badge {
+  text-shadow: none;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  background-color: #d1dade;
+  font-size: 11px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 4px;
+  color: #5E5E5E;
+}
+
+.badge-important {
+  background-color: #f35958;
+  color: #ffffff;
+  position: absolute;
+  right: 6px;
+  top: 7px;
+}
+.change-theme {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 230px;
+	/*background-color: #eee;*/
+	background: url("../images/ip/changeBg.png") repeat-x;
+	opacity: 0.7;
+	z-index:1040;
+}
+.change-theme-content {
+	width: 250px;
+	margin: 0 auto;
+}
+.change-theme-header {
+	margin-top: 30px;
+	height: 25px;
+	line-height: 25px;
+}
+#close-theme-btn {
+	width: 15px;
+	height: 15px;
+	background: url("../images/ip/choiceClose.png") center no-repeat;
+}
+.change-theme-main {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.change-theme-main dl {
+	float: left;
+	width: 50px;
+	margin: 0 15px
+}
+.change-theme-main dl dt{
+	position: relative;
+	margin-left: 9px;
+	width: 30px;
+	height: 30px;
+	border: 3px solid #e66622;
+}
+.change-theme-main dl dt span.choice-sure {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 14px;
+	height: 17px;
+	background: url("../images/ip/choiceSure.png") no-repeat;
+}
+.change-theme-main dl dt:hover {
+	cursor: pointer;
+}
+.blue-color {
+	background-color: #4898e8;
+}
+.black-color {
+	background-color: black;
+}
+.red-color {
+	background-color: red;
+}
+.change-theme-main dl dd {
+	font-size: 15px;
+	margin-top: 5px;
+}
+.theme-header {
+	display: inline-block;
+	width: 186px;
+	text-align: right;
+	font-size: 17px;
+}
+.change-theme-footer {
+	text-align: center;
+}
+.change-theme-footer button {
+	width: 86px;
+	height: 36px;
+	line-height: 28px;
+	color: white;
+	border: 0;
+}
+.choice-color-sure {
+	background-color: #4898e8;
+}
+.choice-color-cancel {
+	background-color: #868686;
+}
+
+.u-grid-content-focus-row {
+    background-color: #4F8EDC !important;
+    color: #FFF !important;
+}

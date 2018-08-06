@@ -1,0 +1,2 @@
+consumerMultiTenant=com.yonyougov.fcfa.dubbo.rpc.filter.ConsumerMultiTenantFilter
+providerMultiTenant=com.yonyougov.fcfa.dubbo.rpc.filter.ProviderMultiTenantFilter

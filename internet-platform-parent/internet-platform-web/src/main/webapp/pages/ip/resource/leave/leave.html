@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>	
+		<div class="duty-info">
+		  <ul id="division-tabs" class="nav nav-tabs">
+		    <li role="presentation" class="active">
+		      <a >请假申请</a>
+		    </li>
+		  </ul>
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane" aria-labelledby="edit-tab">
+		      <div class="division-edit-content">
+		        <div class="division-edit-text">
+		          <p>
+		            <label>请假人：</label><label id="proposer">李某某</label>
+		          </p>
+		
+		          <p>
+		            <label>请假时间：</label>
+		            <span class='u-datepicker' style="display:inline-block;"><input id="staff-own-askStartTime" type="text" class='u-input' placeholder="请假开始日期"></span>
+		            至
+		            <span class='u-datepicker' style="display:inline-block;"><input id="staff-own-askEndTime" type="text" class='u-input' placeholder="请假结束日期"></span>
+		          </p>
+		          <p><label>请假类型：</label>
+		            <span class="qjlx"><input type="radio" name="qjlx" value="年假"> 年假</span>
+		            <span class="leavelx qjlx"><input type="radio" name="qjlx" value="事假"> 事假 </span>
+		            <span class="leavelx qjlx"><input type="radio" name="qjlx" value="病假"> 病假 </span>
+		            <span class="leavelx qjlx"><input type="radio" name="qjlx" value="婚假"> 婚假 </span>
+		            <span class="leavelx qjlx"><input type="radio" name="qjlx" value="哺乳假"> 哺乳假 </span>
+		            <span class="leavelx qjlx"><input type="radio" name="qjlx" value="其他"> 其他 </span>
+		          </p>
+		          <p>
+		            <label>请假理由：</label>
+		            <textarea  id="reason" class="reason-text"></textarea>
+		          </p>
+		        </div>
+		        <div class="division-edit-function-btn">
+		          <button class="division-edit-save common-btn" data-bind="click:submitSupport">提交</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		 
+		</div>
+		<div class="modal fade" id="sure_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+            	<div id="jump-content" class="jump-content jump-content-organ">
+				    <div class="jump-header">
+				        <p class="jump-header-title" >系统提示</p>
+				        <a class="jump-header-close" href="javascript:void(0);">
+				        	<img src="" width="12" height="13">
+				        </a>
+				    </div>
+				    <div class="jump-body">
+				    	<div id="error_add_group-warn" class="jump-body-icon">
+				        	<img src="" /><span></span>
+				        </div>
+					</div>
+				    <div class="jump-footer">
+				        <div class="jump-footer-btn-right fr">
+				            <button id="jump-btn-save" class="jump-btn-save" onclick="jump_btn_close()">确定</button>
+				        </div>
+				    </div>
+				</div>
+            </div>
+        </div>
+	</body>
+   </html>
+      

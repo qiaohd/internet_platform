@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.GenSchemeMapper">
+    
+    <!--
+    	private String schemeName; 	// 名称
+		private String category;		// 分类
+		private String packageName;		// 生成包路径
+		private String moduleName;		// 生成模块名
+		private String subModuleName;		// 生成子模块名
+		private String functionName;		// 生成功能名
+		private String functionNameSimple;		// 生成功能名（简写）
+		private String functionAuthor;		// 生成功能作者
+		private GenTable genTable;		// 业务表名
+		private String flag; 	// 0：保存方案； 1：保存方案并生成代码
+		private Boolean replaceFile;	// 是否替换现有文件    0：不替换；1：替换文件
+		protected String remarks;	// 备注
+		protected String createBy;	// 创建者
+		protected Date createDate;	// 创建日期
+		protected String updateBy;	// 更新者
+		protected Date updateDate;	// 更新日期
+		protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
+    	-->
+    
+    <resultMap id="SchemeResultMap" type="com.ufgov.ip.entity.system.GenScheme">
+		<result column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+		<result column="category" property="category" jdbcType="VARCHAR"/>
+		<result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+		<result column="update_date" property="updateDate" jdbcType="DATE"/>
+		<result column="del_flag" property="delFlag" jdbcType="CHAR"/>
+		<result column="function_author" property="functionAuthor" jdbcType="VARCHAR"/>
+		<result column="function_name" property="functionName" jdbcType="VARCHAR"/>
+		<result column="function_name_simple" property="functionNameSimple" jdbcType="VARCHAR"/>
+		<result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
+		<result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+		<result column="package_name" property="packageName" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+		<result column="package_name" property="packageName" jdbcType="VARCHAR"/>
+		<result column="gen_table_id" property="genTableId" jdbcType="VARCHAR"/>
+		<result column="replaceFile" property="replaceFile" jdbcType="VARCHAR"/>
+		<result column="schemeType" property="schemeType" jdbcType="VARCHAR"/>
+		<association property="genTable" javaType="com.ufgov.ip.entity.system.GenTable">
+             <id property="id" column="id"/>
+        </association>
+	</resultMap>
+   
+    
+    <sql id="genSchemeColumns">
+		a.*
+		<!--a.gen_table_id AS "genTable.id"-->
+	</sql>
+	
+	<sql id="genSchemeJoins">
+		
+    </sql>
+    
+    <select id="get" resultMap="SchemeResultMap">
+		SELECT 
+			<include refid="genSchemeColumns"/>
+		FROM gen_scheme a
+		<include refid="genSchemeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultMap="SchemeResultMap">
+		SELECT 
+			<include refid="genSchemeColumns"/>
+		FROM gen_scheme a
+		<include refid="genSchemeJoins"/>
+		WHERE a.del_flag = #{genScheme.DEL_FLAG_NORMAL} 
+		<if test="schemeName != null and schemeName != ''">
+			AND a.scheme_name LIKE 
+				<if test="dbType == 'oracle'">'%'||#{genScheme.schemeName}||'%'</if>
+				<if test="dbType == 'mssql'">'%'+#{genScheme.schemeName}+'%'</if>
+				<if test="dbType == 'mysql'">concat('%',#{genScheme.schemeName},'%')</if>
+		</if>
+		ORDER BY a.update_date DESC
+	</select>
+	
+	<select id="findAllList" resultMap="SchemeResultMap">
+		SELECT 
+			<include refid="genSchemeColumns"/>
+		FROM gen_scheme a
+		<include refid="genSchemeJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} 
+		ORDER BY a.update_date DESC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gen_scheme(
+			id, 
+			scheme_name, 
+			category, 
+			package_name, 
+			module_name, 
+			sub_module_name, 
+			function_name, 
+			function_name_simple, 
+			function_author, 
+			gen_table_id, 
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks, 
+			del_flag,
+			schemeType,
+			replaceFile
+		) VALUES (
+			#{id}, 
+			#{schemeName}, 
+			#{category},  
+			#{packageName},  
+			#{moduleName},  
+			#{subModuleName},  
+			#{functionName},  
+			#{functionNameSimple},  
+			#{functionAuthor},  
+			#{genTable.id},  
+			#{createBy}, 
+			#{createDate}, 
+			#{updateBy}, 
+			#{updateDate}, 
+			#{remarks}, 
+			#{delFlag},
+			#{schemeType},
+			#{replaceFile}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gen_scheme SET 
+			scheme_name = #{schemeName}, 
+			category = #{category},  
+			package_name = #{packageName},  
+			module_name = #{moduleName},  
+			sub_module_name = #{subModuleName},  
+			function_name = #{functionName},  
+			function_name_simple = #{functionNameSimple},  
+			function_author = #{functionAuthor},  
+			gen_table_id = #{genTable.id},  
+			update_by = #{updateBy}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks},
+			schemeType = #{schemeType},
+			replaceFile = #{replaceFile}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gen_scheme SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

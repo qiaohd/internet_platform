@@ -1,0 +1,125 @@
+<div class="duty-info">
+    <ul id="dictionary-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#dictionary-list" id="dictionary-list-tab" role="tab"
+                                                  data-toggle="tab" aria-controls="list"
+                                                  aria-expanded="false">索引配置列表</a></li>
+        <li role="presentation" class=""><a href="#dictionary-edit" role="tab" id="dictionary-edit-tab"
+                                            data-toggle="tab" aria-controls="edit"
+                                            aria-expanded="true">索引配置增加</a>
+        </li>
+    </ul>
+    <div id="dictionaryTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="dictionary-list"
+             aria-labelledby="list-tab">
+            <div class="dictionary-list-content">
+                <!-- <div class="dictionary-search-content">
+                    <select  id="dictionary-search-type" class="dictionary-search-common">
+                        <option class="placeholder-type">请选择枚举类型</option>
+                    </select>
+                    <input id="dictionary-search-desc" class="dictionary-search-common" type="text" placeholder="描述">
+                    <button class="dictionary-search-btn" data-bind="click: searchDictionary">查询</button>
+                </div> -->
+                <div class="dictionary-result-content">
+                    <div type="text"
+                         u-meta='{"id":"dictionary-grid","data":"solrConfigDataTable","type":"grid","editable":false}'>
+                        <div options='{"field":"menuName","dataType":"String","title":"权限菜单名称","editType":"string","width": 100}'></div>
+                        <div options='{"field":"catalog","dataType":"String","title":"索引分类","editType":"string","width": 100}'></div>
+                        <div options='{"field":"routerAddr","dataType":"String","title":"路由地址","editType":"string","width": 200}'></div>
+                        <div options='{"field":"interfaceAddr","dataType":"String","title":"接口地址","editType":"string","width": 200}'></div>
+                        <div options='{"field":"interParam","dataType":"String","title":"接口参数名称","editType":"string","width": 200}'></div>
+                        <div options='{"field":"isUse","dataType":"String","title":"是否启用","editType":"string","width": 100}'></div>
+                        <div options='{"field":"String","dataType":"String","title":"操作","editType":"string","width": 200,"renderType":"dictionarySetFun"}'></div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete-dictionary-notice" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content jump-content-delete">
+                            <div class="jump-header">
+                                <p class="jump-header-title">系统提示</p>
+                                <a class="jump-header-close" href="javascript:void(0);"
+                                   data-bind="click: delete_dictionary_close;">
+                                    <img src="images/ip/menu/close.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body">
+                                <div class="jump-body-delete">
+                                    <p id="jump-delete-text">您确定要删除吗？</p>
+                                </div>
+                            </div>
+                            <div class="jump-footer">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" data-bind="click: delete_dictionary">确定</button>
+                                    <button class="jump-btn-cancel" data-bind="click: delete_dictionary_close;">
+                                        取消
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="dictionary-edit"
+             aria-labelledby="edit-tab">
+            <div class="dictionary-edit-content">
+                <div class="dictionary-edit-text">
+                    <p>
+                        <label><span class="must-set">*</span>权限菜单名：</label>
+                    	<select id="shiro-menu-name">
+                    		<option>无</option/>
+                    	</select>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>索引分类：</label>
+                        <input id="solr-classfy" type="text" class="" maxlength="10" data-bind="event:{blur: checkDictionaryLabel}">
+                        <span id="label-error" class="error-notice">不能为空</span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>路由地址：</label>
+                        <input id="router-address" type="text" class="" data-bind="event:{blur: checkDictionaryType}">
+                        <span id="type-error" class="error-notice">不能为空</span>
+                        <span id="type-error-repeat" class="error-notice"></span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>接口地址：</label>
+                        <input id="port-address" type="text" maxlength="10" data-bind="event:{blur: checkDictionaryDesc}">
+                        <span id="desc-error" class="error-notice">不能为空</span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>接口参数名称：</label>
+                        <input id="port-param-name" type="text" maxlength="10" data-bind="event:{blur: checkDictionaryParam}">
+                        <span id="post-error" class="error-notice">不能为空</span>
+                    </p>
+                    <p>
+                        <label><span class="must-set">*</span>操作：</label>
+                        <input class="solr-radio" id="Y" name="solrs" checked type="radio">启用
+                        <input class="solr-radio" id="N" name="solrs" type="radio">停用
+                    </p>
+                </div>
+                <div class="dictionary-edit-function-btn">
+                    <button class="dictionary-edit-save common-btn" data-bind="click: saveDictionaryEdit">保存</button>
+                    <button class="dictionary-edit-back common-btn" data-bind="click: cancelDictionaryEdit">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="error-notice" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="jump-content error-notice-content">
+                <div class="jump-header">
+                    <p class="jump-header-title">系统提示</p>
+                    <!--data-bind="click: error_notice_close;"-->
+                    <a class="jump-header-close" href="javascript:void(0);">
+                        <img src="images/ip/menu/close.png" width="12" height="13">
+                    </a>
+                </div>
+                <div class="jump-body">
+                    <div class="jump-body-error">
+                        <p id="error-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</div>

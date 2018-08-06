@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var basePath="/internet-platform-web";
+		</script>
+		<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="sys.css" rel="stylesheet" type="text/css">
+		<script src="jquery-1.12.3.min.js" type="text/javascript"></script>
+		<script src="systemInfo.js" type="text/javascript"></script>		
+	</head>
+
+
+	<body style="background-color: #a4cbe7;">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="span20 st-securitybg">
+					<div class="st-security">
+						<h4 class="text-center me-margin-top20">为了用户的数据安全，请输入登录密码</h4>
+						<form id="loginForm" class="form-horizontal">
+							<div class="control-group me-margin-top20">
+								<label class="control-label remark_6" for="pwd">&nbsp;登录密码：</label>
+								<div class="controls">
+									<input id="password" class="w288" type="password" maxlength="60" value="" />
+								</div>
+							</div>
+						</form>
+						<div class="form-horizontal me-margin-left20 me-margin-bottom20">
+							<div class="control-group me-margin-top20">
+								<div class="controls">
+									<button id="btn_ok" type="button" class="btn btn-large btn-primary me-margin-right10" onclick="input_pwd_sys()">确定</button>
+									<button id="btn_close" type="button" class="btn btn-large btn-close" onclick="btn_close()">关闭</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

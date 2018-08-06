@@ -1,0 +1,303 @@
+.ws-wrapper{
+	position: relative;
+    margin: -10px;
+    background-color: #edeff0;
+    height: 530px;
+}
+.ws-left{
+	position: absolute;
+	width: 230px;
+	border:1px solid #eee;
+    background-color: #fff;
+	min-height: 500px;
+}
+.left-top{
+	border-bottom: 1px solid #ededed;
+	height: 200px;
+	text-align: center;
+}
+.top-img{
+	height:100px;
+	width: 100px;
+	border: 1px solid #eee;
+	border-radius: 100px;
+	margin: 10px auto;
+	overflow: hidden;
+}
+.left-center{
+	height: auto;
+}
+.ws-right{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 230px;
+	padding-bottom: 22px;
+	border:1px solid #eee;
+    background-color: #fff;
+	min-height: 500px;
+}
+.ws-right li a{
+	color: #333;
+}
+.ws-right li a:hover{
+	color:rgb(72, 152, 232);
+}
+.more-notice{
+	position: absolute;
+    right: 20px;
+    bottom: 5px;
+}
+.ws-center{
+	margin:0 238px;
+	width: auto;
+	border:1px solid #eee;
+    background-color: #fff;
+	min-height: 500px;
+}
+.ws-center h4,.ws-right h4{
+	padding-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 0;
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: solid 1px #eee;
+}
+.center-content{
+	padding: 10px 25px;
+}
+.center-content-menu{
+	float: left;
+}
+.center-content-menu dl{
+	position: relative;
+}
+.center-content-menu dl dd.close-icon{
+	position: absolute;
+    right: 5px;
+    top: -10px;
+    /*background-image: url(images/fs02_c_u38.png);
+    background-size:25px 25px;
+    background-repeat:no-repeat;*/
+    font-size: 30px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    display: none;
+}
+.center-content-menu dl:hover dd.close-icon{
+	display:block;
+}
+.center-content-menu dl,.menu-add{
+	float: left;
+	height: 180px;
+	width: 180px;
+	background: #efefef;
+	margin: 10px;
+	text-align: center;
+}
+#menu-add{
+	display: block;
+	height:180px;
+}
+.center-content-menu dl:hover,.menu-add:hover{
+   background-color: #f4f4f4;
+    cursor: pointer;
+}
+.center-content-menu dl dt{
+	margin-top: 50px;
+}
+.center-content-menu dl dd{
+	margin-top: 8px;
+	font-size: 16px;
+	color: #333;
+}
+.center-content-menu dl:hover dd{
+
+}
+.menu-add img{
+	margin-top: 58px;
+}
+.ws-right ul{
+	margin: 20px 0;
+	padding-left:10px;
+}
+.ws-right ul li{
+    list-style-type:disc;
+	overflow: hidden; /*自动隐藏文字*/
+    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+    white-space: nowrap;/*强制不换行*/
+    margin-bottom: 5px;
+}
+/*jump*/
+#manage-jump {
+    width: 420px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+.manage-jump-header {
+	width: 100%;
+    height: 35px;
+    line-height: 35px;
+    background-color: #208bda;
+    height: 35px;
+    line-height: 35px;
+    font-family: 'arial', '微软雅黑', '宋体';
+    font-size: 14px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#manage-jump-menu-rank {
+	width: 75px;
+}
+.manage-jump-content-common-width{
+	    width: 180px;
+}
+.manage-jump-choice-btn {
+	display: inline-block;
+    position: relative;
+    top: -4px;
+    width: 27px;
+    height: 27px;
+    text-align: center;
+    background-color: #777;
+    margin-left: -30px;
+    cursor: pointer;
+}
+#manage-jump-menu-name {
+    margin-top: 15px;
+}
+.manage-jump-common-color {
+    color: red;
+}
+#manage-jump-brief-introduction-text {
+    width: 275px;
+    height: 70px;
+    resize: none;
+}
+#manage-jump-brief-introduction {
+    vertical-align: top;
+}
+.manage-jump-footer {
+    width: 100%;
+    height: 36px;
+    background-color: #eeeeee;
+}
+
+.manage-jump-btn button {
+    width: 55px;
+    height: 30px;
+    border: 0;
+    color: white;
+    margin-top: 3px;
+    margin-right: 10px;
+    font-family: '宋体';
+    font-weight: normal;
+}
+.manage-jump-btn-save {
+    background-color: #2298ef;
+}
+.manage-jump-btn-cancel {
+    background-color: #999999;
+}
+#treeTable1s {
+    width: 100%;
+    border-collapse:collapse;
+    border:none;
+}
+#manage-jump-choice-content {
+    width: 240px;
+    min-height: 340px;
+    background-color: white;
+    border: 1px solid #e7e7e7;
+}
+#manage-jump-choice-content {
+    display: none;
+}
+.manage-jump-choice-content-top {
+    height: 2px;
+    width: 100%;
+    background-color: #3093db;
+}
+#manage-jump-choice-btn-save {
+    background-color: #2298ef;
+}
+#manage-jump-choice-btn-cancel {
+    background-color: #999999;
+}
+#manage-jump-choice-content {
+    position: fixed;
+    top: 80px;
+    left: 350px;
+    left: 680px\9;
+    top: 170px\9;
+}
+.manage-jump-choice-content-text {
+    min-height: 300px;
+}
+#pages th, #pages td {
+    text-align: left;
+}
+#manage-jump-choice-content-close-window {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+}
+.manage-tree-content,.manage-icon-content{
+	float: left;
+	border: 1px solid #cecece;
+	margin: 10px 5px;
+	width: 200px;
+	height: 320px;
+}
+.manage-tree-content .ztree{
+	height: 280px;
+    padding:9px;
+    font-size:14px;
+}
+.manage-icon-content{
+	
+}
+.menuicon-list{
+	padding: 10px 0;
+}
+.menuicon-list li{
+	float: left;
+	margin-left: 12px;
+    margin-bottom: 5px;
+    position: relative;
+}
+.menuicon-list .active{
+	background: url(images/icon/TaskIcon_03_02.png) no-repeat;
+	position: absolute;
+	width: 15px;
+	height: 14px;
+	bottom: -4px;
+	right: -4px;
+}
+
+.ztree li span.button.switch.noline_close:after,
+.ztree li span.button.ico_close:after,
+.ztree li span.button.ico_docu:after,
+.ztree li span.button.ico_open:after,
+.ztree li span.button.switch.noline_open:after{
+	/*content:"";*/
+}
+.ztree li span.button.noline_open{
+	margin-left:0;
+}
+.ztree li a{
+	display: inline-block;
+	width: 100%;
+	width: 198px\0;
+}
+.select-menuname{
+    background-color: #f8f8f8;
+    height: 30px;
+    padding:0 10px;
+    line-height: 30px;
+}

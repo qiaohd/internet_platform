@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>mapper</name>
+	<filePath>src/main/resources/mappings/${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${ClassName}Mapper.xml</fileName>
+	<content><![CDATA[
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Mapper">
+    
+    <#-- 输出字段列 -->
+	<sql id="${className}Columns">
+		
+			<#list table.columnList as c>
+		     <#if !c_has_next>
+			     a.${c.columnName} AS "${c.javaFieldId}"
+			  <#else>
+			    a.${c.columnName} AS "${c.javaFieldId}",
+			 </#if>
+			</#list>
+			<#list table.columnList as c>
+				<#-- 父表关联字段 -->
+				<#if table.parentExists && table.parentTableFk == c.columnName>
+					<#list c.javaFieldAttrs as a>
+						<#if !c_has_next>
+			     			b.${a[1]} AS "${c.simpleJavaField}.${a[0]}"
+			            <#else>
+			               b.${a[1]} AS "${c.simpleJavaField}.${a[0]}",
+			             </#if>
+					</#list>
+				</#if>
+			</#list>
+		
+
+	</sql>
+	
+	<#-- 输出字段关联表 -->
+	<sql id="${className}Joins">
+		<#-- 关联父表 -->
+		<#if table.parentExists>
+		LEFT JOIN ${table.parent.tableName} b ON b.id = a.${table.parentTableFk}
+		</#if>
+		
+	</sql>
+    
+	<select id="get" resultType="${ClassName}">
+		SELECT 
+			<include refid="${className}Columns"/>
+		FROM ${table.tableName} a
+		<include refid="${className}Joins"/>
+		
+		<#list table.columnList as c>
+			<#if c.isPk?? && c.isPk == "Y"> 
+			  WHERE a.${c.columnName} = ${"#"}{id}
+			</#if>
+		</#list>
+	</select>
+	
+	<select id="findList" resultType="${ClassName}">
+		SELECT 
+			<include refid="${className}Columns"/>
+		FROM ${table.tableName} a
+		<include refid="${className}Joins"/>
+		<where>
+			<#if table.delFlagExists>a.del_flag = ${"#"}{DEL_FLAG_NORMAL}</#if>
+			<#list table.columnList as c>
+				<#if (c.isQuery?? && c.isQuery == "Y") || (table.parentExists && table.parentTableFk == c.columnName)>
+					<#if c.queryType ?? && c.queryType == 'between'>
+			<if test="begin${c.simpleJavaField?cap_first} != null and end${c.simpleJavaField?cap_first} != null <#if c.simpleJavaField != c.javaFieldId>and begin${c.javaFieldId?cap_first} != null and end${c.javaFieldId?cap_first} != null </#if>and begin${c.javaFieldId?cap_first} != '' and end${c.javaFieldId?cap_first} != ''">
+					<#else>
+						<#if c.javaType ?? && c.javaType == 'java.util.Date'>
+							<if test="${c.simpleJavaField} != null<#if c.simpleJavaField != c.javaFieldId> and ${c.javaFieldId} != null</#if>">
+						<#else>
+							<if test="${c.simpleJavaField} != null<#if c.simpleJavaField != c.javaFieldId> and ${c.javaFieldId} != null</#if> and ${c.javaFieldId} != ''">
+						</#if>
+					</#if>
+					<#if c.queryType ?? && c.queryType == 'between'>
+				AND a.${c.columnName} BETWEEN ${"#"}{begin${c.simpleJavaField?cap_first}} AND ${"#"}{end${c.simpleJavaField?cap_first}}
+					<#elseif c.queryType ?? && c.queryType == 'like'>
+				AND a.${c.columnName} LIKE concat('%',${"#"}{${c.javaFieldId}},'%')
+					<#elseif c.queryType ?? && c.queryType == 'left_like'>
+				AND a.${c.columnName} LIKE concat('%',${"#"}{${c.javaFieldId}})
+					<#elseif c.queryType ?? && c.queryType == 'right_like'>
+				AND a.${c.columnName} LIKE concat(${"#"}{${c.javaFieldId}},'%')
+					<#else>
+				AND a.${c.columnName} ${c.queryType} ${"#"}{${c.javaFieldId}}
+					</#if>
+			</if>
+				</#if>
+			</#list>
+		</where>
+		
+	</select>
+	
+	<select id="findAllList" resultType="${ClassName}">
+		SELECT 
+			<include refid="${className}Columns"/>
+		FROM ${table.tableName} a
+		<include refid="${className}Joins"/>
+		<where>
+			<#if table.delFlagExists>a.del_flag = ${"#"}{DEL_FLAG_NORMAL}</#if>
+		</where>		
+		
+	</select>
+	
+	<insert id="save">
+		INSERT INTO ${table.tableName}(
+		
+			<#list table.columnList as c>
+				
+				<#if c.isPk?? && c.isPk == "Y">
+					<#if !c_has_next>
+			            	${c.columnName}
+			               <#else>
+			               	${c.columnName},
+			            </#if>
+				</#if>
+				<#if c.isInsert?? && c.isInsert == "Y">
+					<#if c.isPk?? && c.isPk == "Y">
+					  <#else>
+						<#if !c_has_next>
+			            	${c.columnName}
+			               <#else>
+			               	${c.columnName},
+			            </#if>
+					</#if>
+				</#if>
+			</#list>
+		) VALUES (
+		
+			<#list table.columnList as c>
+				<#if c.isPk?? && c.isPk == "Y">
+					<#if !c_has_next>
+			            	${"#"}{${c.javaFieldId}}
+			               <#else>
+			               	${"#"}{${c.javaFieldId}},
+			            </#if>
+				</#if>
+				<#if c.isInsert?? && c.isInsert == "Y">
+					<#if c.isPk?? && c.isPk == "Y">
+					   <#else>
+					   	<#if !c_has_next>
+			            	${"#"}{${c.javaFieldId}}
+			               <#else>
+			               	${"#"}{${c.javaFieldId}},
+			            </#if>	
+					</#if>
+				</#if>
+			</#list>
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ${table.tableName} SET 	
+				
+				<#list table.columnList as c>
+					<#if c.isEdit?? && c.isEdit == "Y">
+			            <#if !c_has_next>
+			            	${c.columnName} = ${"#"}{${c.javaFieldId}}
+			               <#else>
+			               	${c.columnName} = ${"#"}{${c.javaFieldId}},
+			            </#if>
+					</#if>
+				</#list>
+		<where>
+			1=1 
+			<#list table.columnList as c>
+				<#if c.isPk?? && c.isPk == "Y">
+						AND ${c.columnName} = ${"#"}{${c.javaFieldId}} 
+				</#if>
+			</#list>
+		</where>
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM ${table.tableName} 
+		<where>
+			1=1 
+			<#list table.columnList as c>
+				<#if c.isPk?? && c.isPk == "Y">
+                   AND ${c.columnName} = ${"#"}{${c.javaFieldId}} 
+				</#if>
+			</#list>
+		</where>
+	</delete>
+	
+</mapper>]]>
+	</content>
+</template>

@@ -1,0 +1,28 @@
+.btn-save {
+    color: #fff;
+    background-color: #990000;
+    border: none;
+    border-radius: 0;
+}
+.btn-save:hover{
+    color:#fff;
+    background-color: #258cd9;
+    border: none;
+}
+#plan-grid_header_table tr th div {
+    text-align: center;
+}
+#work-table-name,
+#model-class {
+    margin-right: 10px;
+}
+.u-checkbox.is-upgraded {
+    width: 140px;
+    margin-left: 10px;
+}
+#plan-grid table {
+    padding: 0;
+}
+#create-choice {
+    width: 140px;
+}

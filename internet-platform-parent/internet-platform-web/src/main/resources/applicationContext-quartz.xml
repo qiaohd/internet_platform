@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<!-- solr定时同步 -->
+    <bean id="jobBean" class="com.ufgov.ip.web.quartz.TimedTask" />  
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <property name="targetObject" ref="jobBean" />  
+        <property name="targetMethod" value="execute" />  
+        <!--将并发设置为false-->  
+        <property name="concurrent" value="false" />  
+    </bean>  
+  
+    <bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+        <property name="jobDetail" ref="jobDetail" />  
+        <property name="cronExpression" value="0 0 23 * * ?" />  
+    </bean>  
+  
+    <!--  总管理类如果将lazy-init='false'那么容器启动就会执行调度程序   -->  
+    <bean id="startQuertz" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false" >  
+        <property name="triggers">  
+            <list>  
+                <!--作业调度器,list下可加入其他的调度器-->  
+                <ref bean="trigger" />  
+            </list>  
+        </property>  
+    </bean>  
+</beans>

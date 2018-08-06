@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.GenTableMapper">
+    
+    <!--
+        private String tableName; 	// 名称
+		private String tableComments;		// 描述
+		private String className;		// 实体类名称
+		private String parentTable;		// 关联父表
+		private String parentTableFk;		// 关联父表外键
+	    private String layout;     
+    -->
+    
+     <resultMap id="TableResultMap" type="com.ufgov.ip.entity.system.GenTable">
+		<id column="id" property="id" jdbcType="VARCHAR"/>
+		<result column="table_name" property="tableName" jdbcType="VARCHAR"/>
+		<result column="table_comments" property="tableComments" jdbcType="VARCHAR"/>
+		<result column="class_name" property="className" jdbcType="VARCHAR"/>
+		<result column="parent_table" property="parentTable" jdbcType="VARCHAR"/>
+		<result column="parent_table_fk" property="parentTableFk" jdbcType="VARCHAR"/>
+		<result column="layout" property="layout" jdbcType="VARCHAR"/>
+		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+		<result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+		<result column="update_date" property="updateDate" jdbcType="DATE"/>
+		<result column="del_flag" property="delFlag" jdbcType="CHAR"/>
+		<result column="isGen" property="isGen" jdbcType="CHAR"/>
+		<result column="hirer_id" property="hirerId" jdbcType="VARCHAR"/>
+	</resultMap>
+    
+    
+    <sql id="genTableColumns">
+		a.*
+	</sql>
+	
+	<sql id="genTableJoins">
+		
+    </sql>
+    
+    <select id="get" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{GEN_CODE_USE}  
+		<!--<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+	    </if>-->
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name LIKE 
+				<if test="dbName == 'oracle'">'%'||#{tableName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{tableName}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{tableName},'%')</if>
+		</if>
+		<if test="tableComments != null and tableComments != ''">
+			AND a.table_comments LIKE 
+				<if test="dbName == 'oracle'">'%'||#{tableComments}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{tableComments}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{tableComments},'%')</if>
+		</if>
+		<if test="parentTable != null and parentTable != ''">
+			AND a.parent_table = #{parentTable}
+		</if>
+		
+	</select>
+	
+	<select id="findListByName" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{GEN_CODE_USE}  
+		<!--<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+	    </if>-->
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+				<!--<if test="dbName == 'oracle'">'%'||#{tableName}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{tableName}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{tableName},'%')</if>-->
+		</if>
+		<if test="tableComments != null and tableComments != ''">
+			AND a.table_comments LIKE 
+				<if test="dbName == 'oracle'">'%'||#{tableComments}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{tableComments}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{tableComments},'%')</if>
+		</if>
+		<if test="parentTable != null and parentTable != ''">
+			AND a.parent_table = #{parentTable}
+		</if>
+		
+	</select>
+	
+	<select id="findAllList" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{GEN_CODE_USE}
+	</select>
+	
+	<select id="findByTableName" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{GEN_CODE_USE}  
+		<!--<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+	    </if>-->
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+		</if>
+	</select>
+	
+	
+	<select id="findByTableNameAndIsGen" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{DEPT_CODE_USE}  
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+		</if>
+	</select>
+	
+	<select id="findByTableNameAndGen" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{GEN_CODE_USE}  
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+		</if>
+	</select>
+	
+	
+	<select id="findByTableNameAndIsGenAndHirerId" resultMap="TableResultMap">
+		SELECT 
+			<include refid="genTableColumns"/>
+		FROM gen_table a
+		<include refid="genTableJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.isGen=#{DEPT_CODE_USE} AND a.hirer_id=#{hirerId}  
+		<if test="tableName != null and tableName != ''">
+			AND a.table_name = #{tableName}
+		</if>
+	</select>
+	
+	
+	
+	
+	<insert id="insert">
+		INSERT INTO gen_table(
+			id, 
+			table_name, 
+			table_comments, 
+			class_name, 
+			parent_table, 
+			parent_table_fk,
+			layout, 
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks, 
+			del_flag,
+			isGen
+		) VALUES (
+			#{id}, 
+			#{tableName}, 
+			#{tableComments}, 
+			#{className}, 
+			#{parentTable}, 
+			#{parentTableFk}, 
+			#{layout}, 
+			#{createBy}, 
+			#{createDate}, 
+			#{updateBy}, 
+			#{updateDate}, 
+			#{remarks}, 
+			#{delFlag},
+			#{isGen}
+		)
+	</insert>
+	
+	
+	<insert id="insertDeptCol">
+		INSERT INTO gen_table(
+			id, 
+			table_name, 
+			table_comments, 
+			class_name, 
+			parent_table, 
+			parent_table_fk,
+			layout, 
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks, 
+			del_flag,
+			isGen,
+			hirer_id
+		) VALUES (
+			#{id}, 
+			#{tableName}, 
+			#{tableComments}, 
+			#{className}, 
+			#{parentTable}, 
+			#{parentTableFk}, 
+			#{layout}, 
+			#{createBy}, 
+			#{createDate}, 
+			#{updateBy}, 
+			#{updateDate}, 
+			#{remarks}, 
+			#{delFlag},
+			#{isGen},
+			#{hirerId}
+		)
+	</insert>
+	
+	
+	
+	<update id="update">
+		UPDATE gen_table SET <!-- 
+			name = #{name},  -->
+			table_comments = #{tableComments}, 
+			class_name = #{className}, 
+			parent_table = #{parentTable}, 
+			parent_table_fk = #{parentTableFk}, 
+			layout = #{layout}, 
+			update_by = #{updateBy}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	
+	
+	
+	<update id="delete">
+		UPDATE gen_table SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

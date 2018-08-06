@@ -1,0 +1,70 @@
+<div class="duty-permission-container">
+    <div class="clearfix">
+        <p class="dutytTitle">&gt;&gt;<a href="">职务权限</a>&nbsp;&gt;&gt;新建职务<a href="" class="fr back-right"><img src="${ctx}/../../images/ip/sys/back.png"/>返回</a></p>
+    </div>
+    <div class="duty">
+        <p><span class="duty-tit"><strong>*</strong>职务名称:</span><input id="dutyName" type="text" data-bind="value:dutyName,event:{blur:showNewWranCheack}"></input><span class="warn-red" data-bind="visible:showNewWran">这是必填项，空格无效</span></p>
+        <p class=""><span class="duty-tit">职务描述:</span><textarea id="duty-desc" maxlength="64" rows="" cols="" data-bind="value: dutyDisc" ></textarea><span class="wran-gray">（最多输入64个字）</span></p>
+    </div>
+    <div class="duty-info">
+        <ul id="myTabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">查看权限</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+			<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+				<div class="ztree"
+					 u-meta='{"id":"tree2","data":"menuDataTable","type":"tree","idField":"menuId","pidField":"parentMenuId","nameField":"menuName","setting":"treeSetting"}'>
+				</div>
+			</div>
+        </div>
+    </div>
+    
+	<div class="modal fade" id="dialog_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div id="add-new-permission" class="jump-content" data-bind="visible: showSubmitNotice">
+	            <div class="jump-header">
+	                <p class="jump-header-title" >系统提示</p>
+	                <a id="close-jump-submit" class="jump-header-close" href="javascript:void(0);"  data-bind="click:add_permission_close">
+	                    <img src="../images/ip/sys/close.png" width="12" height="13">
+	                </a>
+	            </div>
+	            <div class="jump-body">
+	                <div class="jump-body-icon">
+	                    <img src="../images/ip/sys/question.png" /><span>确定要提交吗？</span>
+	                </div>
+	            </div>
+	            <div class="jump-footer">
+	                <div class="jump-footer-btn-right fr">
+	                    <button class="jump-btn-save" data-bind="click:save_new_department">确定</button>
+	                    <button class="jump-btn-cancel" data-bind="click:add_permission_close">取消</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!--<div class="modal fade" id="show_error" tabindex="-1" role="dialog" aria-hidden="true">-->
+		<!--<div class="modal-dialog">-->
+			<!--<div class="jump-content jump-content-delete">-->
+				<!--<div class="jump-header">-->
+					<!--<p class="jump-header-title">系统提示</p>-->
+					<!--<a class="jump-header-close" href="javascript:void(0);"-->
+					   <!--data-bind="click: close_error;">-->
+						<!--<img src="../images/ip/sys/close.png" width="12" height="13">-->
+					<!--</a>-->
+				<!--</div>-->
+				<!--<div class="jump-body">-->
+					<!--<div id="show-error-info" class="jump-body-delete">-->
+						<!--<p></p>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+
+</div>
+<div class="duty-operation-function">
+	<p class="showChoiceDutyWran"><span class="warn-red" data-bind="visible:showChoiceDutyWran">请至少选择一项权限！</span></p>
+	<button class="duty-submit-btn" data-bind="click:add_permission_open">提交</button>
+	<a class="duty-cancel" href="">取消</a>
+</div>

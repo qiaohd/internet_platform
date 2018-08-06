@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IPUserCompanyQueryDAO">
+	<!--获取各部门及部门下的所有用户(根据用户表和用户部门表查询用户login_name -->
+		<select id="getAssignedUserInfoByCode" parameterType="String" resultType="String">
+	     	<if test="dbType == 'mysql'">
+	     	select Login_name from IP_USER u right join 
+  				(select * from IP_USER_COMPANY uc
+   				where uc.co_code like concat(#{co_code},'%'))t 
+   				ON u.user_id = t.user_id
+   				</if>
+   				<if test="dbType == 'oracle'">
+	     	select Login_name from IP_USER u right join 
+  				(select * from IP_USER_COMPANY uc
+   				where uc.co_code like #{co_code} || '%')t 
+   				ON u.user_id = t.user_id
+   				</if>
+		</select>
+		<!-- 查询主管部门（级别为2）的单位编码-->
+		<select id="selectChargeCompanyCode" parameterType="java.lang.String" resultType="java.lang.String">
+	     	select CO_CODE from IP_COMPANY where hirer_id=#{hirer_id} and AGCFS_DW_TYPE=2 
+		</select>
+</mapper>

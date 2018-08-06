@@ -1,0 +1,49 @@
+#code-area {
+         padding-left: 20px;
+        }
+        #search {
+            padding-top: 10px;
+            min-height: 100px;
+            line-height: 50px;
+        }
+        .search-common {
+            float: left;
+            min-width: 30%;
+            /*min-width: 200px;*/
+            height: 25px;
+            line-height: 25px;
+            margin-bottom: 10px;
+        }
+#code-area .nav {
+    height: 40px;
+}
+#code-area .u-checkbox.is-upgraded {
+    padding-left: 24px;
+    float: left;
+    width: 60px;
+}
+#code-area table,
+#code-area td{
+    padding: 0;
+}
+        .search-common>label {
+            min-width: 70px;
+            text-align: right;
+        }
+        .search-common>label,
+        .search-common>div {
+            float: left;
+            padding-right: 10px;
+        }
+        .active {
+            background-color: white;
+        }
+        .education {
+            width: inherit;
+        }
+        .u-grid-content-focus-row .u-grid-content-td-div > a.other-fun {
+            color: white !important;
+        }
+        .save-success-new {
+            display: none;
+        }

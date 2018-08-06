@@ -1,0 +1,167 @@
+.duty-info{
+	padding-top: 10px;
+}
+.nav-tabs{
+	height: 42px;
+	padding-left:10px;
+}
+.jc-demo-box #targetBg{
+	display: inline-block;
+	width: 320px;
+	height :320px;
+	background: url(../images/upload_logo.jpg) no-repeat;
+}
+.toggle-msg{
+	background: #f2f2f2;
+    display: inline-block;
+    width: 755px;
+    height: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+    text-indent: 10px;
+    line-height: 30px;
+    color: #111;
+    font-size: 12px;
+}
+.upload-logo-btn-cont{
+	position: relative;
+	
+}
+.upload-logo-btn-cont{
+	display:inline-block;
+	color: #fff;
+	font-size: 16px;
+	text-align:center;
+	font-weight: bold;
+	background: #2298ef;
+	border: none;
+	width: 130px;
+	margin-left: 50px;
+	margin-top: 36px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 4px;
+}
+.upload-logo{
+	padding-bottom: 20px;
+}
+.upload-logo-btn{
+	width: 130px;
+	height: 40px;
+	display: inline-block;
+		opacity: 0;
+		 filter:Alpha(opacity=0);
+-webkit-opacity: 0;
+   -moz-opacity: 0;
+ -khtml-opacity: 0;
+	 -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	     filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.preview-img{
+	position: relative;
+	padding: 10px 50px 20px;
+}
+.upload-logo-img{
+	/*非IE的主流浏览器识别的垂直居中的方法*/ 
+	display: table-cell; 
+	vertical-align:middle; 
+	width: 320px;
+    height: 320px;
+    border:1px solid #eee;
+    background:#fff;
+    overflow: hidden;
+    /*设置水平居中*/ 
+    text-align: center;
+    /* 针对IE的Hack */ 
+	*display: block; 
+	*font-size: 280px;/*约为高度的0.873，200*0.873 约为175 其中200指代是容器的高度值*/ 
+	*font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/ 
+}
+.upload-logo-img img{
+	/*设置图片垂直居中*/ 
+	vertical-align:middle; 
+}
+.upload-logo-save-btn{
+	color: #FFFFFF;
+	font-weight: bold;
+	width: 105px;
+	height: 40px;
+	margin-left: 50px;
+	margin-right: 15px;
+	/*background:#2298ef;*/
+	background:#dadada;
+	border: none;
+}
+.upload-logo-delete{
+	color: #0b5d9b;
+	font-size: 12px;
+}
+.upload-logo-delete{
+	color: #0b5d9b;
+	border:none;
+	background: none; 
+}
+.sys-right-content{
+	width:774px;
+    height: auto;
+}
+
+.tips-text{
+	display: inline-block;
+	padding-left:10px;
+	color: #999;
+	font-size: 12px;
+}
+/**/
+
+.jc-demo-box {
+  /*text-align: left;
+  margin: 2em auto;
+  background: white;
+  border: 1px #bbb solid;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;*/
+  /*-webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);*/
+  /*box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);*/
+  padding: 10px 50px 20px;
+}
+.jcrop-holder{
+	border: 1px #eee solid;
+	background-color: white !important;
+}
+#preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 70px;
+  right: -150px;
+  padding: 6px;
+  border: 1px #eee solid;
+  background-color: white;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+#preview-pane .preview-container {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+}
+#target{
+	width:320px !important;
+	height:320px !important;
+	display: block;
+}
+
+s
+

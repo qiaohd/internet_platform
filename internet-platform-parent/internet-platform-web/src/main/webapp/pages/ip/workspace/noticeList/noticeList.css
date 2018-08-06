@@ -1,0 +1,126 @@
+body{
+	margin-top: 0 !important;
+}
+.detail-wrapper{
+	position: relative;
+}
+.detail-wrapper .detail-right{
+	padding-left: 20px;
+	padding-right: 10px;
+}
+.detail-left{
+	position: absolute;
+	width: 230px;
+}
+.left-button{
+	width: 200px;
+	margin: 15px auto 20px;
+}
+.left-button .btn-primary{
+	background-color: rgb(72, 152, 232);
+	border-color: rgb(72, 152, 232);
+	border-radius: 0;
+}
+.left-button .btn-primary:hover{
+	background-color: rgb(72, 146, 226);
+}
+.left-bottom{
+	height: 40px;
+	line-height:40px;
+	padding-left: 40px;
+	border-top:1px solid #dedede;
+	border-bottom:1px solid #dedede;
+	background: #efefef;
+}
+.detail-wrapper .detail-right{
+	width: auto;
+	margin-left: 220px;
+}
+.detail-wrapper .append-search{
+	margin-left: 40px;
+}
+.detail-wrapper .append-search input{
+	height: 28px;
+	line-height: 28px;
+	float: left;
+	margin-right:4px;
+	width: 180px;
+}
+.detail-wrapper .append-search .btn{
+	padding: 3px 10px;
+	float: left;
+}
+.detail-wrapper .append-cont{
+	float: right;
+	padding:10px 10px 0 0;
+}
+.detail-wrapper .append-classfy,.append-search{
+	float: left;
+    margin-bottom: 0;
+    height: 28px;
+    line-height: 28px;
+}
+.detail-wrapper .append-classfy a{
+	margin: 0 10px;
+	color: #444;
+}
+.detail-wrapper .append-classfy a.append-selected{
+	color: blue;
+}
+.detail-wrapper .list-content ul{
+	margin-top: 20px;
+	padding-left: 0;
+}
+.detail-wrapper .list-content li{
+	border: 1px solid #f4f4f4;
+	background-color: #fff;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.detail-wrapper .list-content li a p{
+	color:#333;
+}
+.detail-wrapper .list-content li a .notice-cont p,.detail-wrapper .list-content li a .notice-tail,.detail-wrapper .list-content li a .notice-tail span{
+	color:#999;
+}
+.detail-wrapper .notice-tit{
+	background: #f8f8f8;
+	padding-left: 20px;
+	height: 40px;
+	line-height: 40px;
+}
+.detail-wrapper .notice-cont{
+	padding-left: 20px;
+	height: 54px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.detail-wrapper .notice-tail{
+	color: #8c8c8c;
+    padding-left: 20px;
+    border-top: 1px solid #eee;
+    margin-bottom: 0;
+    height: 40px;
+    line-height: 40px;
+}
+.detail-wrapper .tail-author,
+.detail-wrapper .tail-time{
+	color: #333;
+    margin-right: 6px;
+}
+.tail-author,
+.tail-time {
+	font-size: 14px;
+}
+.detail-wrapper .tail-time{
+	margin-left: 6px;
+}
+.notice-title2{
+	background-color: #f5f5f5;
+	height: 47px;
+}
+.notice-title2 h5{
+	line-height: 47px;
+	padding-left:10px;
+}

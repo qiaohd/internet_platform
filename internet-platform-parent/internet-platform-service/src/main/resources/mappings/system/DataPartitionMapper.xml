@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.DataPartitionMapper">
+	<resultMap type="com.ufgov.ip.entity.system.IpDataPartition" id="BaseResultMap">
+		<id 	jdbcType="VARCHAR" property="data_id" column="data_id"/>
+		<result jdbcType="VARCHAR" property="host" column="host"/>
+		<result jdbcType="VARCHAR" property="port" column="port"/>
+		<result jdbcType="VARCHAR" property="user_name" column="user_name"/>
+		<result jdbcType="VARCHAR" property="password" column="password"/>
+		<result jdbcType="VARCHAR" property="schema_name" column="schema_name"/>
+		<result jdbcType="VARCHAR" property="area_name" column="area_name"/>
+		<result jdbcType="VARCHAR" property="db_driver" column="db_driver"/>
+		<result jdbcType="VARCHAR" property="url" column="url"/>
+		<result jdbcType="DATE" property="create_date" column="create_date"/>
+		<result jdbcType="DATE" property="update_date" column="update_date"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List"> data_id, host, port, user_name, password, schema_name, area_name, db_driver, url, create_date, update_date </sql>
+	<insert id="insert">
+		INSERT INTO ip_data_partition(
+		data_id,
+		host,
+		port,
+		user_name,
+		password,
+		schema_name,
+		area_name,
+		db_driver,
+		url,
+		create_date,
+		update_date
+		) VALUES (
+			#{data_id}, 
+			#{host}, 
+			#{port},  
+			#{user_name},  
+			#{password},  
+			#{schema_name},  
+			#{area_name},  
+			#{db_driver}, 
+			#{url}, 
+			#{create_date},  
+			#{update_date}
+		)
+	</insert>
+	
+	<select id="selectByUrl" resultType="com.ufgov.ip.entity.system.IpDataPartition" >
+		SELECT data_id,host,port,user_name,password,schema_name,area_name,db_driver,url,create_date,update_date
+		FROM ip_data_partition h
+		WHERE h.url = #{url}
+	</select>
+	
+	<select id="getMainPage" resultMap="BaseResultMap" parameterType="map">
+		select 
+			<include refid="Base_Column_List"/>
+		from ip_data_partition
+	</select>
+	
+	<select id="getHirerInforetrievePage" resultType="com.ufgov.ip.entity.system.IpHirer">
+		select hirer_id as hirerId,
+		ih.hirer_name as hirerName,
+		ih.hirer_short_name as hirerShortName,
+		ih.password as password,
+		ih.linkman,
+		ih.phone_no as phoneNo,
+		ih.cellphone_no as cellphoneNo,
+		ih.sex,
+		ih.duty,
+		ih.email,
+		ih.fax,
+		ih.hirer_type as hirerType,
+		ih.region,
+		ih.address,
+		ih.website,
+		ih.postcode,
+		ih.salt,
+		ih.login_ts as loginTs,
+		ih.hirer_no as hirerNo,
+		ih.create_date as createDate,
+		ih.update_date as updateDate,
+		ih.hirer_logo_url as hirerLogoUrl,
+		ih.hirer_pic_url as hirerPicUrl,
+		ih.login_name as loginName,
+		ih.data_id as dataId,
+		ih.db_url as dbUrl,
+		ih.is_valid as isValid,
+		dp.area_name as areaName
+		from ip_hirer ih 
+		LEFT JOIN  ip_data_partition dp
+		on ih.data_id = dp.data_id
+	</select>
+	<select id="getHirerInfo" resultType="com.ufgov.ip.entity.system.IpHirer">
+		select hirer_id as hirerId,
+		ih.hirer_name as hirerName,
+		ih.hirer_short_name as hirerShortName,
+		ih.password as password,
+		ih.linkman,
+		ih.phone_no as phoneNo,
+		ih.cellphone_no as cellphoneNo,
+		ih.sex,
+		ih.duty,
+		ih.email,
+		ih.fax,
+		ih.hirer_type as hirerType,
+		ih.region,
+		ih.address,
+		ih.website,
+		ih.postcode,
+		ih.salt,
+		ih.login_ts as loginTs,
+		ih.hirer_no as hirerNo,
+		ih.create_date as createDate,
+		ih.update_date as updateDate,
+		ih.hirer_logo_url as hirerLogoUrl,
+		ih.hirer_pic_url as hirerPicUrl,
+		ih.login_name as loginName,
+		ih.data_id as dataId,
+		ih.db_url as dbUrl,
+		ih.is_valid as isValid,
+		dp.area_name as areaName
+		from ip_hirer ih 
+		LEFT JOIN  ip_data_partition dp
+		on ih.data_id = dp.data_id
+	</select>
+	<select id="getDataPartitionByCondition" resultMap="BaseResultMap" parameterType="map">
+		select 
+			<include refid="Base_Column_List"/>
+		from ip_data_partition idp
+		<where>
+			  <if test="data_id != null and data_id!=''">
+			  	idp.DATA_ID = #{data_id}
+			  </if> 
+		</where>
+	</select>
+	<select id="getHirerInfoMy"   resultType="com.ufgov.ip.entity.system.IpHirer">
+		select hirer_id as hirerId,
+		ih.hirer_name as hirerName,
+		ih.hirer_short_name as hirerShortName,
+		ih.password as password,
+		ih.linkman,
+		ih.phone_no as phoneNo,
+		ih.cellphone_no as cellphoneNo,
+		ih.sex,
+		ih.duty,
+		ih.email,
+		ih.fax,
+		ih.hirer_type as hirerType,
+		ih.region,
+		ih.address,
+		ih.website,
+		ih.postcode,
+		ih.salt,
+		ih.login_ts as loginTs,
+		ih.hirer_no as hirerNo,
+		ih.create_date as createDate,
+		ih.update_date as updateDate,
+		ih.hirer_logo_url as hirerLogoUrl,
+		ih.hirer_pic_url as hirerPicUrl,
+		ih.login_name as loginName,
+		ih.data_id as dataId,
+		ih.db_url as dbUrl,
+		ih.is_valid as isValid,
+		dp.area_name as areaName
+		from ip_hirer ih 
+		LEFT JOIN  ip_data_partition dp
+		on ih.data_id = dp.data_id
+		<where> 
+			<if test="isVaild!=null and isVaild !=''">  
+	    		  ih.is_valid = #{isVaild}  
+			</if>  
+		</where>
+		limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getHirerInfoCounts" resultType="java.lang.Integer">
+		select count(*) from ip_hirer ih LEFT JOIN ip_data_partition dp on ih.data_id = dp.data_id
+		<where>
+			<if test="isVaild!=null and isVaild!=''">  
+	    		 ih.is_valid = #{isVaild}  
+			</if>
+		</where>
+	</select>
+	
+</mapper>

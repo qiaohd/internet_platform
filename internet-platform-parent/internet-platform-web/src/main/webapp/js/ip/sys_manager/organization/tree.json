@@ -1,0 +1,87 @@
+{
+	"dataTables": {
+		"dataTable1": {
+			"select": [],
+			"current": -1,
+			"pageSize": 20,
+			"pageIndex": 0,
+			"totalPages": null,
+			"totalRow": null,
+			"rows": [
+
+			 {
+					"id": "r93214",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2YV",
+						"pk_fatherorg": "0001X11000000000A2YJ",
+						"name": "水利部"
+						
+					}
+				}, {
+					"id": "r55646",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2YY",
+						"pk_fatherorg": "0001X11000000000A2YV",
+						"name": "财务司"
+						
+					}
+				}, {
+					"id": "r27107",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2Z5",
+						"pk_fatherorg": "0001X11000000000A2YV",
+						"name": "人事司"
+						
+					}
+				}
+			],
+			"meta": null
+		},
+		"dataTable2": {
+			"select": [],
+			"current": -1,
+			"pageSize": 20,
+			"pageIndex": 0,
+			"totalPages": null,
+			"totalRow": null,
+			"rows": [
+
+			 {
+					"id": "r93214",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2YV",
+						"pk_fatherorg": "0001X11000000000A2YJ",
+						"name": "水利部"
+						
+					}
+				}, {
+					"id": "r55646",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2YY",
+						"pk_fatherorg": "0001X11000000000A2YV",
+						"name": "财务司"
+						
+					}
+				}, {
+					"id": "r27107",
+					"status": "new",
+					"data": {
+						"pk_org": "0001X11000000000A2Z5",
+						"pk_fatherorg": "0001X11000000000A2YV",
+						"name": "人事司"
+						
+					}
+				}
+			],
+			"meta": null
+		},
+	},
+	"comps": "",
+	"contentType": "",
+	"custom": ""
+}

@@ -1,0 +1,279 @@
+/**
+ *     公共less方法
+ */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.ui-hide {
+  display: none !important;
+}
+.ui-input {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  overflow: hidden !important;
+  width: 216px;
+  height:18px;
+}
+.ui-input input,
+.ui-input textarea {
+  border: 0 !important;
+  padding: 0 !important;
+}
+.ui-tab-title {
+  background-color: #fff;
+  height: 40px;
+  line-height: 34px;
+  position: relative;
+}
+.ui-tab-item {
+  float: left;
+  background: none;
+  padding: 4px 8px 0;
+  color: #1e1e1f;
+  font-weight: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  cursor: pointer;
+}
+.ui-tab-item:hover{
+	color: #29e;
+}
+.ui-tab-item div.left-menu {
+  width: 85px;
+  padding: 0 10px;
+  text-align: center;
+
+}
+.apps-title i {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  visibility: hidden;
+}
+.ui-tab-item:hover div.left-menu{
+	padding: 0 10px;
+    width: 85px;
+	border-bottom: 2px solid #29e;
+    text-align: center;
+}
+.ui-tab-item .workbench{
+  background-position: 0 -70px;
+  margin: 0 0px -4px -0px;
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  position: static;
+  visibility: visible;
+}
+.ui-tab-item .menu-manage {
+  background-position: 0 -70px;
+  margin: 0 0px -4px -0px;
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  position: static;
+  visibility: visible;
+}
+.ui-tab-item:hover .workbench{
+	background-position: -20px -70px;
+}
+.ui-tab-item .menu-remove {
+	visibility: hidden;
+	position: absolute;
+    top: 4px;
+    right: 2px;
+    background-position: 0px -112px;
+}
+.ui-tab-item:hover .menu-remove {
+	visibility: visible;	
+}
+.ui-tab-item:hover .menu-remove:hover {
+    background-position: -20px -112px;
+}
+#headAdd {
+  position: relative;
+  right: 0;
+  padding: 0;
+  padding: 4px 0 0 0;
+}
+.ui-tab-item .add{
+  z-index: 3;
+  background-position: 0px -91px;
+  position: relative;
+  top: 8px;
+  visibility: visible;
+  cursor: pointer;
+  height: 21px;
+  width: 20px;
+}
+.ui-tab-item:hover .add{
+	background-position: -20px -91px;
+}
+.ui-tab-item-selected{
+	color: #29e;
+}
+.ui-tab-item-selected div.left-menu{
+	border-bottom: 2px solid #29e;
+    width: 85px;
+}
+.ui-tab-item-selected .workbench{
+	background-position: -20px -70px;
+}
+.ui-tab-item-selected .menu-manage{
+	background-position: -45px -70px;
+}
+/**
+ *   导航添加菜单弹框
+ */
+.app-items {
+  min-width: 1275px;
+  background-color: #fffefe;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  position:absolute;
+  filter: alpha(opacity=95);
+  top: 92px;
+  border-bottom: solid 1px #cecece;
+  z-index: 99;
+}
+.app-items .line {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: #e2e2e2;
+}
+.app-items .layout {
+  position: relative;
+}
+
+.app-items .mid {
+}
+.app-items .mid .ui-tab {
+  padding-top: 7px;
+  border: none;
+}
+.app-items .mid .ui-tab-title {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 40px;
+  text-align: center;
+  width: 854px;
+  background-color: #fff;
+  line-height: 34px;
+}
+.app-items .mid .ui-tab-title .ui-tab-item {
+  padding: 4px 20px 8px 20px;
+  background: none;
+  border-bottom: 2px solid #fff;
+  position: relative;
+  top: -2px;
+  height: 26px;
+  width: 80px;
+}
+.app-items .mid .ui-tab-title .ui-item-selected {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #29e;
+  border-top: 1px solid #fff;
+}
+.app-items .mid .ui-tab-title .ui-tab-item i {
+  background-image: url("../css/img/third/third_icon1x.png");
+  height: 12px;
+  width: 25px;
+  background-position: -199px 0;
+  position: absolute;
+  top: 4px;
+}
+.app-items .mid ul {
+  margin-top: 5px;
+  padding-left: 5px;
+  list-style-type: none;
+  font-size: 0;
+}
+.app-items .mid ul li {
+  font-size: 14px;
+  height: 98px;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  margin-top: 8px;
+  cursor: pointer;
+  margin-left: 19px;
+  margin-right: 19px;
+  vertical-align: top;
+}
+.app-items .mid ul li i {
+  height: 48px;
+  width: 48px;
+  margin-left: 6px;
+  display: block;
+}
+.app-items .ui-app div {
+  text-align: center;
+  margin-top: 12px;
+  width: 60px;
+}
+.app-items .notice {
+  background-position: 0px -131px;
+}
+.app-items .calendar {
+  background-position: -48px -131px;
+}
+.app-items .sysremd {
+  background-position: -96px -131px;
+}
+.app-items .notices{
+ background-position: 0px -180px;	
+}
+.app-items .know{
+ background-position: -48px -180px;	
+}
+.app-items .doc{
+ background-position: -96px -180px;	
+}
+.app-items .Icon1 {
+  background: url("../images/ip/menu/icon/TaskIcon1.png");
+}
+.app-items .Icon2 {
+  background: url("../images/ip/menu/icon/TaskIcon2.png");
+}
+.app-items .Icon3 {
+  background: url("../images/ip/menu/icon/TaskIcon3.png");
+}
+.app-items .Icon4 {
+  background: url("../images/ip/menu/icon/TaskIcon4.png");
+}
+.app-items .Icon5 {
+  background: url("../images/ip/menu/icon/TaskIcon5.png");
+}
+.app-items .Icon6 {
+  background: url("../images/ip/menu/icon/TaskIcon6.png");
+}
+.app-items .Icon7 {
+  background: url("../images/ip/menu/icon/TaskIcon7.png");
+}
+.app-items .Icon8 {
+  background: url("../images/ip/menu/icon/TaskIcon8.png");
+}
+.app-items .Icon9 {
+  background: url("../images/ip/menu/icon/TaskIcon9.png");
+}
+

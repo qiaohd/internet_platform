@@ -1,0 +1,69 @@
+<div class="hirer-msg-container" id="hirer-msg-container">
+	<p class="tenantTitle">>>租户设置</p>
+	<span class="titleinfo">基本信息</span>
+	<hr style="height: 1px;" />
+	<form action="" class="hirer-msg-form" id="hirer-msg-form">
+		<span id="password" style="display:none"></span>
+		<p><label>租户号：</label><span id="hirerNo" class="hirerNo" data-bind="text:hirerNo"></span></p>
+		<p><label><span class="star">&lowast;</span>租户名称：</label><input maxlength="30" id="hirerName" type="text" name="" data-bind="value:hirerName,event:{blur:hirerNameCheck}" />
+			<label style="color:red; width:150px;text-align: left;" id="labelHirerName"></label>
+		</p>
+	 	<p><label><span class="star">&lowast;</span>租户简称：</label><input maxlength="20" id="hirerNameShort" type="text" name="" data-bind="value:hirerNameShort,event:{blur:hirerNameShortCheck}" />
+	 		<label style="color:red; width:150px;text-align: left;" id="labelNameshort"></label>
+	 	</p>
+	 	<p id="sexall"><label><span class="star">&lowast;</span>租户联系人：</label>
+	 		<input maxlength="20" id="hirerLinkName" type="text" name="" style="margin-left: -6px; width: 218px;" data-bind="value:hirerLinkName,event:{blur:hirerLinkNameCheck}" />
+	 		<input  type="radio" class="hirer-msg-sex" name="hirer-sex" value="1" data-bind="checked: hirerSexMan"/><span>男</span>
+	 	    <input  type="radio" class="hirer-msg-sex" name="hirer-sex" value="2" data-bind="checked: hirerSexWomen"/><span>女</span>
+	 	    <label style="color:red; width:150px; text-align: left" id="labelLinkName"></label>
+	 	</p>
+	 	<p><label>职务：</label><input maxlength="20" type="text" name="" class="short" id="duty" data-bind="value:duty"/></p>
+	 	<p><label>电话：</label><input maxlength="14" type="text" name="" class="short" id="phoneNo" data-bind="value:phoneNo,event:{blur:checkPhoString}"/>
+	 		<label style="color:red; width:250px; text-align: left;" id="labelPhoString"></label>
+	 	</p>
+	 	<p><label><span class="star">&lowast;</span>手机：</label><input maxlength="14" type="text" name="" class="short" id="cellphoneNo" data-bind="value:cellphoneNo,event:{blur:checkTelString}"/>
+	 		<label style="color:red; width:250px;text-align: left;" id="labelTelString"></label>
+	 	</p>
+	 	<p><label>邮箱：</label><input maxlength="30" type="text" name="" class="short" id="email"  data-bind="value:email,event:{blur:emailstringCheck}"/>
+	 		<label style="color:red; width:250px;text-align: left;" id="labelemailString"></label>
+	 	</p>
+	 	<p><label>传真：</label><input maxlength="13" type="text" name="" class="short" id="fax" data-bind="value:fax"/></p>
+	 	<p><label>租户类型：</label><select class="hirer-type" id="hirer-type"></select></p>
+	    <p><label>所在地区：</label>
+	    	<select class="hirer-addr" id="province"><option>请选择省</option></select>
+	    	<select class="hirer-addr" id="city"><option>请选择市</option></select>
+	    	<select class="hirer-addr" id="county"><option>请选择区县</option></select></p>
+	    <p><label>通讯地址：</label><input maxlength="50" type="text" name="" id="address"  data-bind="value:address"/></p>
+	    <p><label>邮政编码：</label><input maxlength="6" type="text" name="" class="" id="postcode"  data-bind="value:postcode,event:{blur:postcodeCheck}"/>
+	    	<label style="color:red; width:155px;text-align: left;" id="label5"></label></p>
+	    <p><label>网址：</label><input maxlength="50" type="text" name="" id="website"  data-bind="value:website,event:{blur:urlstringCheck}"/>
+	    	<label style="color:red; width:260px;text-align: left;" id="labelurlString"></label></p>
+	    <input type="button" value="保存" class="hirer-save" data-bind="event:{click:HirerInfoSave}"/>
+	</form>
+	<div class="modal fade" id="sure_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+            	<div id="jump-content" class="jump-content jump-content-organ">
+				    <div class="jump-header">
+				        <p class="jump-header-title" >系统提示</p>
+				        <a class="jump-header-close" href="javascript:void(0);" data-bind="click:jump_btn_close">
+				        	<img src="../images/ip/menu/close.png" width="12" height="13">
+				        </a>
+				    </div>
+				    <div class="jump-body">
+				    	<div id="error_add_group-warn" class="jump-body-icon">
+				        	<img src="../images/ip/menu/errorNotice.png" /><span>确定要删除吗？</span>
+				        </div>
+					</div>
+				    <div class="jump-footer">
+				    	<!--<div class="jump-footer-btn-left fl">
+				        	<button class="jump-btn-left" >删除部门</button>
+				        </div>-->
+				        <div class="jump-footer-btn-right fr">
+				            <button id="jump-btn-save" class="jump-btn-save" data-bind="click:jump_btn_close">确定</button>
+				            <button id="jump-btn-cancel" class="jump-btn-cancel" data-bind="click:jump_btn_close">取消</button>
+				        </div>
+				    </div>
+				</div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.IndexConfigMapper">
+    
+    <resultMap id="IndexConfigMap" type="com.ufgov.ip.entity.system.IndexConfigEntity">
+		<id column="config_id" property="configId" jdbcType="VARCHAR"/>
+		<id column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+		<result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+		<result column="catalog" property="catalog" jdbcType="VARCHAR"/>
+		<result column="router_addr" property="routerAddr" jdbcType="VARCHAR"/>
+		<result column="interface_addr" property="interfaceAddr" jdbcType="VARCHAR"/>
+		<result column="inter_param" property="interParam" jdbcType="VARCHAR"/>
+		<result column="isUse" property="isUse" jdbcType="DATE"/>
+	</resultMap>
+    
+	<sql id="IndexConfigColumn">
+		
+			    n.config_id AS "configId",
+			    n.menu_id AS "menuId",
+			    n.menu_name AS "menuName",
+			    n.catalog AS "catalog",
+			    n.router_addr AS "routerAddr",
+			    n.interface_addr AS "interfaceAddr",
+			    n.inter_param AS "interParam",
+			    n.isUse AS "isUse"
+	</sql>
+	
+	
+	<select id="getIndexConfig" resultMap="IndexConfigMap">
+		SELECT 
+			<include refid="IndexConfigColumn"/>
+		FROM ip_index_config n
+		WHERE n.catalog = #{catalog}
+	</select>
+	
+	<select id="backShowIndexConfig" resultMap="IndexConfigMap">
+		SELECT 
+			<include refid="IndexConfigColumn"/>
+		FROM ip_index_config n
+		WHERE n.config_id = #{configId}
+	</select>
+	
+	<select id="getAllIndexConfigByIsUse" resultMap="IndexConfigMap">
+		SELECT 
+			<include refid="IndexConfigColumn"/>
+		FROM ip_index_config n
+		WHERE n.isUse = #{isUse}
+	</select>
+	
+	<select id="getAllIndexConfig" resultMap="IndexConfigMap">
+		SELECT 
+			<include refid="IndexConfigColumn"/>
+		FROM ip_index_config n
+	</select>
+	
+	<insert id="saveConfig">
+		INSERT INTO ip_index_config(
+				
+			               	config_id,
+				
+			               	menu_id,
+				
+			               	menu_name,
+				
+			               	catalog,
+				
+			               	router_addr,
+				
+			            	interface_addr,
+			            	
+			            	inter_param,
+			            	
+			            	isUse
+		) VALUES (
+			               	#{configId},
+			               	#{menuId},
+			               	#{menuName},
+			               	#{catalog},
+			               	#{routerAddr},
+			               	#{interfaceAddr},
+			            	#{interParam},
+			            	#{isUse}
+		)
+		
+	</insert>
+	
+	<update id="updateConfig">
+		UPDATE ip_index_config SET 	
+			               	menu_name = #{menuName},
+			               	catalog = #{catalog},
+			               	router_addr = #{routerAddr},
+			               	interface_addr = #{interfaceAddr},
+			               	inter_param = #{interParam},
+			               	isUse = #{isUse}
+		<where>
+			 config_id = #{configId} 
+		</where>
+	</update>
+	
+	
+	<delete id="deleteIndexConfig">
+		DELETE FROM ip_index_config 
+		<where>
+			config_id = #{configId}
+		</where>
+	</delete>
+	
+	
+	
+	
+</mapper>

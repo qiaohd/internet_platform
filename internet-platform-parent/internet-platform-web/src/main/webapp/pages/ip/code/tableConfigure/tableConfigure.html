@@ -1,0 +1,143 @@
+<div id="table-set">
+    <div class="table-title">业务表配置</div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" data-bind="click: tableList" class="active"><a href="#tableList" data-toggle="tab">业务表列表</a></li>
+        <li role="presentation" data-bind="click: addTable"><a id="table-add" href="#tabledit" data-toggle="tab">业务表添加</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tableList">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="tableName">表名:</label>
+                    <input type="text" class="form-control" id="tableName">
+                </div>
+                <div class="form-group">
+                    <label for="tableIntro">说明:</label>
+                    <input type="text" class="form-control" id="tableIntro">
+                </div>
+                <button type="button" class="btn btn-default" data-bind="click: searchBusiness">查询</button>
+            </form>
+            <div class="talbe-list">
+                <div class="u-widget-body">
+                    <div class="table-fixedheader-body">
+                        <div type="text"
+                             u-meta='{"id":"business-grid","data":"listData","type":"grid","editable":false,"autoExpand":false}'>
+                            <div options='{"field":"tableName","dataType":"String","title":"表名","editType":"string","width": 200}'></div>
+                            <div options='{"field":"tableComments","dataType":"String","title":"说明","editType":"string","width": 100}'></div>
+                            <div options='{"field":"className","dataType":"String","title":"类名","editType":"string","width": 200}'></div>
+                            <div options='{"field":"parentTable","dataType":"String","title":"父表","editType":"string","width": 200}'></div>
+                            <div options='{"field":"operate","dataType":"String","title":"操作","editType":"string","width": 100,"renderType":"businessSetFun"}'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tabledit">
+            <div class="table-name">
+                <p>
+                    <label>表名:</label>
+                    <select id="tName"></select>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-default" data-bind="click: getTableInfo">下一步</button>
+                </p>
+            </div>
+            <div class="table-edit-text">
+                <div>基本信息</div>
+                <p>
+                    <label>表名:</label>
+                    <input type="text" id="inTableName" readonly>
+                </p>
+
+                <p>
+                    <label>说明:</label>
+                    <input type="text" id="inTableIntro">
+                </p>
+
+                <p>
+                    <label>类名:</label>
+                    <input type="text" id="class-name">
+                </p>
+
+                <p>
+                    <label>页面布局:</label>
+                    <select id="show-column-num">
+                        <option>1列</option>
+                        <option>2列</option>
+                    </select>
+                </p>
+                <p>
+                    <label class="father-table">父表:</label>
+                    <select id="father-table"></select>
+                    <label class="other-key">当前表外键:</label>
+                    <select id="other-key"></select>
+                </p>
+                <div>字段列表</div>
+                <div class="talbe-list">
+                    <div class="u-widget-body">
+                        <div class="table-fixedheader-body">
+                            <div type="text"
+                                 u-meta='{"id":"table-list-grid","editType":"default","editable":true,"data":"tableListData","type":"grid","autoExpand":false}'>
+                                <div options='{"field":"columnName","dataType":"String","title":"列名","editType":"string","width": 100}'></div>
+                                <div options='{"field":"columnComments","dataType":"String","title":"说明","editType":"string","editOptions":{"id":"column-comments","type":"string","maxLength":6},"width": 150}'></div>
+                                <div options='{"field":"jdbcType","dataType":"String","title":"物理类型","editType":"string","width": 100}'></div>
+                                <div options='{"field":"javaType","dataType":"String","title":"Java类型","editOptions":{"id":"java-type","type":"combo","datasource":"javaType"},"editType":"combo","renderType":"comboRender","width": 200,"afterEType":"javaTypeChange"}'></div>
+                                <div options='{"field":"javaField","dataType":"String","title":"Java属性名称","editType":"string","editOptions":{"id":"java-field","type":"string","maxLength":6},"width": 200}'></div>
+                                <div options='{"field":"isPk","dataType":"String","title":"主键","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"isNull","dataType":"String","title":"可空","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"isInsert","dataType":"String","title":"插入","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"isEdit","dataType":"String","title":"编辑","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"isList","dataType":"String","title":"列表","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"isQuery","dataType":"String","title":"查询","editType":"checkbox","renderType":"booleanRender","width": 100}'></div>
+                                <div options='{"field":"queryType","dataType":"String","title":"查询匹配方式","editOptions":{"id":"query-type","type":"combo","datasource":"queryType"},"editType":"combo","renderTy":"comboRender","width": 200,"afterEType":"queryTypeChange"}'></div>
+                                <div options='{"field":"showType","dataType":"String","title":"显示表单类型","editOptions":{"id":"show-type","type":"combo","datasource":"showType"},"editType":"combo","renderTy":"comboRender","width": 200,"afterEType":"showTypeChange"}'></div>
+                                <div options='{"field":"dictType","dataType":"String","title":"字典类型","editType":"string","width": 200}'></div>
+                                <div options='{"field":"sort","dataType":"String","title":"排序","editType":"string","width": 100}'></div>
+                                <!--<div options='{"field":"sort","dataType":"String","title":"排序","editOptions":{"id":"sort-type","type":"combo","datasource":"sortType"},"editType":"combo","renderTy":"comboRender","width": 100,"afterEType":"sortTypeChange"}'></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-save-bt">
+                    <button type="button" class="btn btn-default" data-bind="click: saveTableEdit">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="error_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div id="delete_error_window" class="delete_error_window" style="width: 300px; position: absolute; top: 150px; left: 50%; margin-left: -150px;">
+                <div class="manage-jump-header">
+                    系统提示
+                    <a class="close-jump-window fr" href="#" data-bind="click:close_jump_window_delete"><img src="images/ip/menu/close.png"></a>
+                </div>
+                <div class="icon_error" style="background:white;height: 80px; text-align: center; line-height: 80px;"><div id="jump-delete-text"><img id="jump-delete-img" src="images/ip/menu/errorNotice.png" />确定要删除吗？</div></div>
+                <div class="manage-jump-footer">
+                    <div class="manage-jump-btn fr">
+                        <button class="manage-jump-btn-save" class="manage-jump-btn-save" type="button" data-bind="click:delete_business">确定</button>
+                        <button class="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button" data-bind="click:close_jump_window_delete">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="save_error_group" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div id="save_error_window" class="delete_error_window" style="width: 300px; position: absolute; top: 150px; left: 50%; margin-left: -150px;">
+                <div class="manage-jump-header">
+                    系统提示
+                    <a class="close-jump-window fr" href="#" data-bind="click:close_jump_window_save"><img src="images/ip/menu/close.png"></a>
+                </div>
+                <div class="icon_error" style="background:white;height: 80px; text-align: center; line-height: 80px;"><div id="jump-save-text"><img id="jump-error-img" src="images/ip/menu/errorNotice.png" /></div></div>
+                <div class="manage-jump-footer">
+                    <div class="manage-jump-btn fr">
+                        <button class="manage-jump-btn-save" class="manage-jump-btn-save" type="button" data-bind="click: close_jump_window_save">确定</button>
+                        <button class="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button" data-bind="click:close_jump_window_save">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>

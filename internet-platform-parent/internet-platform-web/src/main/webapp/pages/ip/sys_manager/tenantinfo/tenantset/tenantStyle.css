@@ -1,0 +1,94 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.hirer-msg-container{
+	margin:0 10px;
+	padding-top:80px;
+	padding-bottom: 30px;
+}
+span.prompt{
+	color: red;
+	display:inline-block;
+	padding-left: 10px;
+}
+span.titleinfo{
+	color: #0b5d9b;
+	font-size: 14px;
+	font-weight: bold;
+	text-indent: 2em;
+	display: block;
+}
+hr{
+	margin:5px 10px 10px 23px;
+}
+.tenantTitle{
+	background: #F2F2F2;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 14px;
+	text-indent:1em;
+}
+.hirer-msg-form{
+	font-size: 12px;
+}
+.hirer-msg-form p{
+	margin-bottom: 10px;
+}
+.hirer-msg-form span.star{
+	color: #f00;
+	font-size: 14px;
+}
+.hirer-msg-form label{
+    display: inline-block;
+    font-size: 14px;
+    text-align: right;
+    margin-right: 10px;
+    width: 100px;
+    font-weight: normal;
+    /*float: left;*/
+}
+
+.hirer-msg-form input{
+	/*float: left;*/
+}
+.hirer-msg-form input[type=text]{
+	width: 280px;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 5px;
+	border: 1px solid #cccccc;
+}
+.hirer-msg-form input.short{
+	width:155px;
+}
+.hirer-msg-form .hirer-type{
+	width: 155px;
+	height: 30px;
+	border: 1px solid #cccccc;
+}
+.hirer-msg-form .hirer-addr{
+	width:89px;
+	height:30px;
+	border:1px solid #CCCCCC;
+}
+.hirer-msg-form input.hirer-save{
+	margin: 15px 0 0 165px;
+	width: 108px;
+	font-weight: bold;
+	height: 40px;
+	border: none;
+	background: #2298ef;
+	color: #FFFFFF;
+	
+}
+.hirer-msg-form input.hirer-save:hover{
+	background: #00a8ff;
+}
+.hirer-msg-form input.hirerNum {
+	border: none;
+	
+}
+#province {
+	margin-left: -6px;
+}

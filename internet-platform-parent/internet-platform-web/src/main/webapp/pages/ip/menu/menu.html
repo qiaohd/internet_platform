@@ -1,0 +1,343 @@
+<link rel="stylesheet" href="css/ip/changeTree.css">
+<div id="manage">
+    <section>
+        <div class="manage-nav clearfix">
+            <div class="manage-nav-operate fl">
+                <ul id="manage-nav">
+                    <li class="manage-nav-common-bg">
+                        <a id="manage-add" href="#" data-bind="click:f_group_add">新增</a>
+                    </li>
+                    <li class="manage-nav-common-bg manage-nav-common-space">
+                        <a id="manage-write" href="#" data-bind="click:menu_edit">编辑</a>
+                    </li>
+                    <li class="manage-nav-common-bg manage-nav-common-space">
+                        <a id="manage-delete" href="#" data-bind="click:f_error_add">删除</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="manage-nav-search fr">
+                <input id="manage-nav-search-text" class="fl" type="text">
+                <button id="manage-nav-search-btn" class="fl" data-bind="click:search_menu;"></button>
+            </div>
+        </div>
+        <div id="page">
+            <table id="treeTable1">
+                <thead>
+                <tr>
+                    <th id="manage-menu-name">菜单名称</th>
+                    <th id="manage-father-menu">父级菜单</th>
+                    <th id="manage-menu-rank">菜单级次</th>
+                    <th id="manage-menu-order">菜单顺序</th>
+                    <th id="manage-choice-low">是否底级</th>
+                    <th id="manage-url">URL</th>
+                    <th id="manage-permission">权限标识</th>
+                    <th id="manage-choice-show">菜单图标</th>
+                    <th id="manage-empower-rank">授权级别</th>
+                    <th id="manage-choice-jump">是否弹窗</th>
+                    <th id="manage-brief-introduction">简要说明</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="dialog_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div id="manage-jump">
+                    <div class="manage-jump-header">
+                        新增
+                        <a class="close-jump-window fr" href="#" data-bind="click:close_jump_window"><img src="images/ip/menu/close.png"></a>
+                    </div>
+                    <div id="manage-jump-content">
+                        <form method="post">
+                            <p id="manage-jump-menu-name">
+                                <label><span class="manage-jump-common-color">&lowast;</span>菜单名称：</label>
+                                <input id="manage-jump-menu-name-value" type="text">
+                                <span id="manage-jump-notice" style="color:#f00; display: none;">菜单名称不能为空!</span>
+                            </p>
+
+                            <p>
+                                <label>父级菜单：</label>
+                               	<input id="manage-jump-choice" type="text" value="无" class="0"/>
+                                <span class="manage-jump-choice-btn" data-bind="click:manage_jump_choice">...</span>
+                            </p>
+
+                            <p>
+                                <label>菜单级层：</label>
+                                <input id="manage-jump-menu-rank" type="text" value="一级"  data-bind="event:{change: setOtherFunction}" disabled/>
+                            </p>
+                            <p>
+                                <label>菜单顺序：</label>
+                                <input id="manage-jump-menu-order" type="number" value="3" min="3" data-bind="event:{blur: checkPositive}">
+                            </p>
+                            <p>
+                                <label>是否底级：</label>
+                                <select id="manage-jump-choice-low">
+                                    <option>否</option>
+                                    <option>是</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>URL：</label>
+                                <input id="manage-jump-url" type="text" maxlength="320" data-bind="event:{blur: checkUrl}">
+                                <span class="warn-red" data-bind="visible: showURL">url不能为空！</span>
+                            </p>
+                            <p>
+                                <label>权限标识：</label>
+                                <input id="manage-jump-permission" type="text" maxlength="200">
+
+                                <span class="help-inline"></span>
+                                <span>例如：OA:audit:edit</span>
+                            </p>
+                            <p style="display: none;">
+                                <label>是否显示：</label>
+                                <input id="manage-jump-choice-show" value="是">
+                                <!--<select id="manage-jump-choice-show">-->
+                                <!--<option>否</option>-->
+                                <!--<option>是</option>-->
+                                <!--</select>-->
+                            </p>
+                            <p>
+                                <label>授权级别：</label>
+                                <!--<input id="manage-jump-set-rank" type="text" value="3-能同时给租户和用户授权" disabled/>-->
+                                <select id="manage-jump-set-rank" disabled>
+                                	<option>1-强制授权，必须展示</option>
+                                    <option>2-租户管理</option>
+                                    <option selected>3-业务功能</option>
+                                </select>
+                            </p>
+                            <p>
+                            	<label>菜单图标:</label>
+                            	<a id="menu-select-icon" href="javascript:void(0);" data-bind="click:menuselectIcon">
+                                    <img class="Icon1" src="pages/ip/menu/images/icon/TaskIcon1.png" width="48" height="48" style="width: 24px; height: 24px; margin-left: 5px; margin-right: 5px;">
+                                    请选择
+                                </a>
+                            	<div id="add-menu"  class="menu-select-icons">
+                            		<ul class="menuiconList clearfix" id="menu-select-icons" >
+                            			<input type="hidden" id="getIconAdd"/>
+                            			<li><img class="Icon1" src="pages/ip/menu/images/icon/TaskIcon1.png"  width="48" height="48" /><span class="active"></span></li>
+                            			<li><img class="Icon2" src="pages/ip/menu/images/icon/TaskIcon2.png"  width="48" height="48"/><span></span></li>
+                            			<li><img class="Icon3" src="pages/ip/menu/images/icon/TaskIcon3.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon4" src="pages/ip/menu/images/icon/TaskIcon4.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon5" src="pages/ip/menu/images/icon/TaskIcon5.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon6" src="pages/ip/menu/images/icon/TaskIcon6.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon7" src="pages/ip/menu/images/icon/TaskIcon7.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon8" src="pages/ip/menu/images/icon/TaskIcon8.png"  width="48" height="48" /><span></span></li>
+                            			<li><img class="Icon9" src="pages/ip/menu/images/icon/TaskIcon9.png"  width="48" height="48" /><span></span></li>
+                            		</ul>
+	                            	<div class="manage-jump-footer">
+				                        <div class="manage-jump-btn fr">
+				                            <button id="" class="manage-jump-btn-save" type="submit" data-bind="click:save_menu_icon">保存</button>
+				                            <button id="" class="manage-jump-btn-cancel" type="button"  data-bind="click:close_menu_icon" >取消</button>
+				                        </div>
+				                    </div>
+                            	</div>
+
+                            </p>
+                            <p>
+                                <label>是否弹窗：</label>
+                                <select id="manage-jump-choice-jump">
+                                    <option>否</option>
+                                    <option>是</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label id="manage-jump-brief-introduction">简要说明：</label>
+                                <textarea id="manage-jump-brief-introduction-text" maxlength="20"></textarea>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="manage-jump-footer">
+                        <div class="manage-jump-btn fr">
+                            <button id="manage-jump-btn-save" class="manage-jump-btn-save" type="submit" data-bind="click:save_new_menu">保存</button>
+                            <button id="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button"  data-bind="click:close_jump_window" >取消</button>
+                        </div>
+                    </div>
+                    <div id="manage-jump-choice-content">
+                        <div class="manage-jump-choice-content-top"></div>
+                        <div class="manage-jump-choice-content-text">
+                            <a id="manage-jump-choice-content-close-window" class="" href="#" data-bind="click:close_manage_jump_choice"><img src="images/ip/menu/close2.png"></a>
+                            <div id="pages">
+                                <div class="ztree"
+                                     u-meta='{"id":"choice-father-menu","data":"menuDataTable","type":"tree","idField":"menuId","pidField":"parentMenuId","nameField":"menuName","setting":"choiceFatherMenuSetting"}'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="manage-jump-footer">
+                            <div class="manage-jump-btn fr">
+                                <button id="manage-jump-choice-btn-save" class="manage-jump-btn-save" type="button" data-bind="click:close_manage_jump_choice">保存</button>
+                                <button id="manage-jump-choice-btn-cancel" class="manage-jump-btn-cancel" type="button"  data-bind="click:close_manage_jump_choice">取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="modal fade" id="dialog_add_group_edit" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div id="manage-jump-edit">
+                    <div id="manage-jump-header-edit">
+                        编辑
+                        <a id="close-jump-window-edit" class="fr" data-bind="click:close_jump_window_edit"><img src="images/ip/menu/close.png"></a>
+                    </div>
+                    <div id="manage-jump-content-edit">
+                        <form method="post">
+                            <p id="manage-jump-menu-name-edit">
+                                <label><span class="manage-jump-common-color-edit">&lowast;</span>菜单名称：</label>
+                                <input id="manage-jump-menu-name-value-edit" class="manage-jump-content-common-width" type="text">
+                                <span id="manage-jump-notice-edit" style="color:#f00; display: none;">菜单名称不能为空!</span>
+                            </p>
+
+                            <p>
+                                <label>父级菜单：</label>
+                                <input id="manage-jump-choice-edit" class="manage-jump-content-common-width" type="text" value="无">
+                                <span class="manage-jump-choice-btn" data-bind="click:manage_jump_choice_edit">...</span>
+                            </p>
+
+                            <p>
+                                <label>菜单级层：</label>
+                                <input id="manage-jump-menu-rank-edit" value="一级" disabled>
+                            </p>
+                            <p>
+                                <label>菜单顺序：</label>
+                                <input id="manage-jump-menu-order-edit" class="manage-jump-content-common-width" type="number" value="2" min="3" data-bind="event:{blur: checkPositiveEdit}">
+                            </p>
+
+                            <p>
+                                <label>是否底级：</label>
+                                <select id="manage-jump-choice-low-edit">
+                                    <option>否</option>
+                                    <option>是</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>URL：</label>
+                                <input id="manage-jump-url-edit" class="manage-jump-content-common-width" type="text" maxlength="320" data-bind="event:{blur: checkUrlEdit}">
+                                <span class="warn-red" data-bind="visible: showURLEdit">url不能为空！</span>
+                            </p>
+                            <p>
+                                <label>权限标识：</label>
+                                <input id="manage-jump-permission-edit" type="text" maxlength="200">
+                                <span>例如：OA:audit:edit</span>
+                            </p>
+                            <p style="display: none;">
+                                <label>是否显示：</label>
+                                <input id="manage-jump-choice-show-edit" value="是">
+                                <!--<select id="manage-jump-choice-show-edit">-->
+                                    <!--<option>否</option>-->
+                                    <!--<option>是</option>-->
+                                <!--</select>-->
+                            </p>
+                            <p>
+                                <label>授权级别：</label>
+                                <!--<input id="manage-jump-set-rank-edit" type="text" value="3-能同时给租户和用户授权" disabled/>-->
+                                <select id="manage-jump-set-rank-edit" disabled>
+                                    <option>1-强制授权，必须展示</option>
+                                    <option>2-租户管理</option>
+                                    <option>3-业务功能</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>菜单图标:</label>
+                                <a id="edit-menu-select-icon" href="javascript:void(0);" data-bind="click:editMenuselectIcon">
+                                    请选择
+                                </a>
+                                <div id="edit-menu"  class="menu-select-icons">
+                                    <ul class="menuiconList clearfix" id="edit-menu-select-icons" >
+                                        <input type="hidden" id="getIconEdit"/>
+                                        <li><img class="Icon1" src="pages/ip/menu/images/icon/TaskIcon1.png"  width="48" height="48" /><span class="active"></span></li>
+                                        <li><img class="Icon2" src="pages/ip/menu/images/icon/TaskIcon2.png"  width="48" height="48"/><span></span></li>
+                                        <li><img class="Icon3" src="pages/ip/menu/images/icon/TaskIcon3.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon4" src="pages/ip/menu/images/icon/TaskIcon4.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon5" src="pages/ip/menu/images/icon/TaskIcon5.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon6" src="pages/ip/menu/images/icon/TaskIcon6.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon7" src="pages/ip/menu/images/icon/TaskIcon7.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon8" src="pages/ip/menu/images/icon/TaskIcon8.png"  width="48" height="48" /><span></span></li>
+                                        <li><img class="Icon9" src="pages/ip/menu/images/icon/TaskIcon9.png"  width="48" height="48" /><span></span></li>
+                                    </ul>
+                                    <div class="manage-jump-footer">
+                                        <div class="manage-jump-btn fr">
+                                            <button id="" class="manage-jump-btn-save" type="submit" data-bind="click:edit_save_menu_icon">保存</button>
+                                            <button id="" class="manage-jump-btn-cancel" type="button"  data-bind="click:edit_close_menu_icon" >取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p>
+                            <p>
+                                <label>是否弹窗：</label>
+                                <select id="manage-jump-choice-jump-edit">
+                                    <option>否</option>
+                                    <option>是</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label id="manage-jump-brief-introduction-edit">简要说明：</label>
+                                <textarea id="manage-jump-brief-introduction-text-edit" maxlength="20"></textarea>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="manage-jump-footer-edit">
+                        <div class="manage-jump-btn-edit fr">
+                            <button id="manage-jump-btn-save-edit" class="manage-jump-btn-save-edit" type="submit" data-bind="click:save_change_menu">保存</button>
+                            <button id="manage-jump-btn-cancel-edit" class="manage-jump-btn-cancel-edit" type="button" data-bind="click:close_jump_window_edit">取消</button>
+                        </div>
+                    </div>
+                    <div id="manage-jump-choice-content-edit">
+                        <div class="manage-jump-choice-content-top-edit"></div>
+                        <div class="manage-jump-choice-content-text-edit">
+                            <a id="manage-jump-choice-content-close-window-edit" class="" href="#" data-bind="click:close_manage_jump_choice_edit"><img src="images/ip/menu/close2.png"></a>
+                            <div id="pages-edit">
+                                <div class="ztree"
+                                     u-meta='{"id":"choice-father-menu-edit","data":"menuDataTable","type":"tree","idField":"menuId","pidField":"parentMenuId","nameField":"menuName","setting":"choiceFatherMenuEditSetting"}'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="manage-jump-footer-edit">
+                            <div class="manage-jump-btn-edit fr">
+                                <button id="manage-jump-choice-btn-save-edit" class="manage-jump-btn-save-edit" type="submit" data-bind="click:close_manage_jump_choice_edit">保存</button>
+                                <button id="manage-jump-choice-btn-cancel-edit" class="manage-jump-btn-cancel-edit" type="button" data-bind="click:close_manage_jump_choice_edit">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="modal fade" id="error_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+            	<div id="delete_error_window" class="delete_error_window" style="width: 300px; position: absolute; top: 150px; left: 50%; margin-left: -150px;">
+            		<div class="manage-jump-header">
+                        系统提示
+                    	<a class="close-jump-window fr" href="#" data-bind="click:close_jump_window_delete"><img src="images/ip/menu/close.png"></a>
+                	</div>
+            		<div class="icon_error" style="background:white;height: 80px; text-align: center; line-height: 80px;"><div><img src="images/ip/menu/errorNotice.png" />确定要删除吗？</div></div>
+            		<div class="manage-jump-footer">
+                    	<div class="manage-jump-btn fr">
+                    		<button class="manage-jump-btn-save" class="manage-jump-btn-save" type="button" data-bind="click:delete_menu">确定</button>
+                        	<button class="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button" data-bind="click:close_jump_window_delete">取消</button>
+                    	</div>
+                	</div>
+            	</div>
+            </div>
+        </div>
+        <div class="modal fade" id="sure_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+            	<div id="sure_error_window" class="delete_error_window" style="width: 300px; position: absolute; top: 150px; left: 50%; margin-left: -150px;">
+            		<div class="manage-jump-header">
+                        系统提示
+                    	<a class="close-jump-window fr" href="#" data-bind="click:close_jump_window_sure"><img src="images/ip/menu/close.png"></a>
+                	</div>
+            		<div class="icon_error" style="background:white;height: 80px; text-align: center; line-height: 80px;"><div id="delete-error-text"><img src="images/ip/menu/errorNotice.png" />请您选择一项，进行编辑。</div></div>
+            		<div class="manage-jump-footer">
+                    	<div class="manage-jump-btn fr">
+                    		<button class="manage-jump-btn-save" class="manage-jump-btn-save" type="button" data-bind="click:close_jump_window_sure">确定</button>
+                        	<button class="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button" data-bind="click:close_jump_window_sure">取消</button>
+                    	</div>
+                	</div>
+            	</div>
+            </div>
+        </div>
+
+    </section>
+</div>

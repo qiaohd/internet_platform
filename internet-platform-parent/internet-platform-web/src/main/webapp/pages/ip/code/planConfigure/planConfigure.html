@@ -1,0 +1,106 @@
+<div id="plan-set">
+    <div class="table-title">生成方案配置</div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" data-bind="click: PlanList" class="active"><a id="work-list" href="#planList" data-toggle="tab">生成方案列表</a></li>
+        <li role="presentation" data-bind="click: planAdd"><a id="work-add" href="#planEdit" data-toggle="tab">生成方案添加</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="planList">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="tableName">方案名称:</label>
+                    <input type="text" class="form-control" id="tableName">
+                </div>
+                <button type="button" class="btn btn-default" data-bind="click: searchPlan">查询</button>
+            </form>
+            <div class="talbe-list">
+                <div class="u-widget-body">
+                    <div class="table-fixedheader-body">
+                        <div type="text"
+                             u-meta='{"id":"plan-grid","data":"planListData","type":"grid","editable":false,"autoExpand":false}'>
+                            <div options='{"field":"schemeName","dataType":"String","title":"方案名称","editType":"string","width": 150}'></div>
+                            <div options='{"field":"moduleName","dataType":"String","title":"生成模块","editType":"string","width": 200}'></div>
+                            <div options='{"field":"subModuleName","dataType":"String","title":"模块名","editType":"string","width": 200}'></div>
+                            <div options='{"field":"functionName","dataType":"String","title":"功能名","editType":"string","width": 150}'></div>
+                            <div options='{"field":"functionAuthor","dataType":"String","title":"功能作者","editType":"string","width": 150}'></div>
+                            <div options='{"field":"operate","dataType":"String","title":"操作","editType":"string","width": 150,"renderType":"planSetFun"}'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="planEdit">
+            <div class="table-edit-text">
+                <p>
+                    <label>方案名称:</label>
+                    <input type="text" class="" id="planName" >
+                </p>
+                <p class="fl">
+                    <label id="model-class">模板分类:</label>
+                    <div u-meta='{"id":"radio-model","type":"u-radio","data":"radioData","field":"radio","datasource":"radiodata"}' style="margin-top: -5px;">
+                        <label  class="u-radio" >
+                            <input type="radio" class="u-radio-button" name="options">
+                            <span class="u-radio-label"></span>
+                        </label>
+                    </div>
+                </p>
+                <p>
+                    <label>生成包路径:</label>
+                    <input type="text" id="create-router">
+                </p>
+                <p>
+                    <label>生成模块名:</label>
+                    <input type="text" id="create-module-name">
+                </p>
+                <p>
+                    <label>生成子模块名:</label>
+                    <input type="text" id="create-child-module-name">
+                </p>
+                <p>
+                    <label>生成功能描述:</label>
+                    <input type="text" id="create-fun-disc">
+                </p>
+                <p>
+                    <label>生成功能名:</label>
+                    <input type="text" id="create-fun-name">
+                </p>
+                <p>
+                    <label>生成功能作者:</label>
+                    <input type="text" id="create-fun-author">
+                </p>
+                <p>
+                    <label id="work-table-name">业务表名:</label>
+                    <select id="tName" style="width:500px;"></select>
+                </p>
+                <p>
+                    <label>生成选项:</label>
+                    <label id="create-choice" class="u-checkbox w-64">
+                        <input type="checkbox" class="u-checkbox-input" name="createChoice"> 是否替换现有文件
+                    </label>
+                </p>
+                <div class="table-save-bt">
+                    <button type="button" class="btn btn-default" data-bind="click: workSave.bind($data, '0')">保存</button>
+                    <button type="button" class="btn btn-save" data-bind="click: workSave.bind($data, '1')">保存并生成代码</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="error_add_group" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div id="delete_error_window" class="delete_error_window" style="width: 300px; position: absolute; top: 150px; left: 50%; margin-left: -150px;">
+                <div class="manage-jump-header">
+                    系统提示
+                    <a class="close-jump-window fr" href="#" data-bind="click:close_jump_window_delete"><img src="images/ip/menu/close.png"></a>
+                </div>
+                <div class="icon_error" style="background:white;height: 80px; text-align: center; line-height: 80px;"><div id="jump-delete-text"><img id="jump-delete-img" src="images/ip/menu/errorNotice.png" />确定要删除吗？</div></div>
+                <div class="manage-jump-footer">
+                    <div class="manage-jump-btn fr">
+                        <button class="manage-jump-btn-save" class="manage-jump-btn-save" type="button" data-bind="click:delete_plan">确定</button>
+                        <button class="manage-jump-btn-cancel" class="manage-jump-btn-cancel" type="button" data-bind="click:close_jump_window_delete">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>

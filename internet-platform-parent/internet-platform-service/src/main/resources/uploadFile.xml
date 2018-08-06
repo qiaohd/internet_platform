@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<internetData>
+  <!--上传文件路径-->
+  <images>
+     <imagesFilePath>upload/images</imagesFilePath>
+     <headerlogoFilePath>upload/images/headerlogo</headerlogoFilePath>
+  </images>
+  <importExcel>
+     <importExcelFilePath>upload/importExcel</importExcelFilePath>
+  </importExcel>
+  <template>
+     <templateFilePath>upload/template</templateFilePath>
+  </template>
+  <noticeAttachment>
+  	<attachmentFilePath>upload/noticeAttachment</attachmentFilePath>
+  </noticeAttachment>
+  
+</internetData>

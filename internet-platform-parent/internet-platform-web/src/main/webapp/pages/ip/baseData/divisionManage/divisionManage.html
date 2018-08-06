@@ -1,0 +1,125 @@
+<div class="duty-info">
+    <ul id="division-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#division-list" id="division-list-tab" role="tab"
+                                                  data-toggle="tab" aria-controls="list"
+                                                  aria-expanded="false">区划列表</a></li>
+        <li role="presentation" class=""><a href="#division-edit" role="tab" id="division-edit-tab"
+                                            data-toggle="tab" aria-controls="edit"
+                                            aria-expanded="true">区划编辑</a>
+        </li>
+    </ul>
+    <div id="divisionTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="division-list"
+             aria-labelledby="list-tab">
+            <div class="division-list-content">
+                <div class="division-search-content">
+                    <input id="division-search-text" type="text" placeholder="区划名称/区域编码">
+                    <button class="division-search-btn" data-bind="click: searchRegion">查询</button>
+                </div>
+                <div class="division-result-content">
+                    <div type="text"
+                         u-meta='{"id":"region-grid","data":"regionDataTable","type":"grid","editable":false,"autoExpand":false,"showTree":true,"keyField":"theId","parentKeyField":"parentId"}'>
+                        <div options='{"field":"theName","dataType":"String","title":"区划名称","editType":"string","width": 400}'></div>
+                        <div options='{"field":"theCode","dataType":"String","title":"区划编码","editType":"string","width": 100}'></div>
+                        <!--<div options='{"field":"updateDate","dataType":"String","title":"更新时间","editType":"string","width": 200,"renderType":"regionUpdataTimeFun"}'></div>-->
+                        <div options='{"field":"updateDate","dataType":"Date","title":"更新时间","editType":"Date","width": 200}'></div>
+                        <div options='{"field":"String","dataType":"String","title":"操作","editType":"string","width": 100,"renderType":"regionSetFun"}'></div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete-region-notice" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content jump-content-delete">
+                            <div class="jump-header">
+                                <p class="jump-header-title">系统提示</p>
+                                <a class="jump-header-close" href="javascript:void(0);"
+                                   data-bind="click: delete_region_close;">
+                                    <img src="images/ip/menu/close.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body">
+                                <div class="jump-body-delete">
+                                    <p id="jump-delete-text">您确定要删除吗？</p>
+                                </div>
+                            </div>
+                            <div class="jump-footer">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" data-bind="click: delete_region">确定</button>
+                                    <button class="jump-btn-cancel" data-bind="click: delete_region_close;">
+                                        取消
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="division-edit"
+             aria-labelledby="edit-tab">
+            <div class="division-edit-content">
+                <div class="division-edit-text">
+                    <p>
+                        <label><span class="must-set">*</span>区划名称：</label><input id="region-name" type="text" data-bind="event:{blur: checkRegionName}"><span id="name-error" class="error-notice">不能为空</span>
+                    </p>
+
+                    <p>
+                        <label><span class="must-set">*</span>区划编码：</label><input id="region-num" type="number" min="0" data-bind="event:{blur: checkRegionNum}"><span id="num-error" class="error-notice">不能为空</span><span id="num-error-style" class="error-notice">格式不正确</span>
+                        <div class="notice-care">编码只能是6位数字，例如：110000</div>
+                    </p>
+
+                    <p>
+                        <label>上级区划：</label><input id="father-region" type="text" disabled>
+                        <input id="more-division-info-btn" type="button" value="...">
+                    </p>
+                </div>
+                <div class="division-edit-function-btn">
+                    <button class="division-edit-save common-btn" data-bind="click: saveRegionDataEdit">保存</button>
+                    <button class="division-edit-back common-btn" data-bind="click: cancelRegionDataEdit">取消</button>
+                </div>
+                <div class="modal fade" id="father-region-choice-jump" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="jump-content region-jump-content">
+                            <div class="jump-header region-jump-header">
+                                <a class="jump-header-close" href="javascript:void(0);" data-bind="click: closeRegionDataTree">
+                                    <img src="images/ip/menu/close2.png" width="12" height="13">
+                                </a>
+                            </div>
+                            <div class="jump-body region-jump-body">
+                                <div class="father-region-tree">
+                                    <div class="ztree"
+                                         u-meta='{"id":"choice-father-region-tree","data":"fatherRegionDataTable","type":"tree","idField":"theId","pidField":"parentId","nameField":"theName","setting":"choiceFatherRigionSetting"}'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jump-footer clearfix">
+                                <div class="jump-footer-btn-right fr">
+                                    <button class="jump-btn-save" data-bind="click: closeRegionData">确定</button>
+                                    <button class="jump-btn-cancel" data-bind="click: closeRegionDataTree">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="error-notice" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="jump-content error-notice-content">
+                <div class="jump-header">
+                    <p class="jump-header-title">系统提示</p>
+                    <a class="jump-header-close" href="javascript:void(0);"
+                       data-bind="click: error_notice_close;">
+                        <img src="images/ip/menu/close.png" width="12" height="13">
+                    </a>
+                </div>
+                <div class="jump-body">
+                    <div class="jump-body-error">
+                        <p id="error-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>

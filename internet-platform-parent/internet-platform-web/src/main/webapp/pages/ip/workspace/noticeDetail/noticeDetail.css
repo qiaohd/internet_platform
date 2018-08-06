@@ -1,0 +1,98 @@
+.list-wrapper{
+	position: relative;
+}
+.detail-left{
+	position: absolute;
+	width: 230px;
+}
+.left-button{
+	width: 200px;
+	margin: 15px auto 20px;
+}
+.left-button .btn-primary{
+	background-color: rgb(72, 152, 232);
+	border-color: rgb(72, 152, 232);
+	border-radius: 0;
+}
+.left-button .btn-primary:hover{
+	background-color: rgb(72, 146, 226);
+}
+.left-bottom{
+	height: 40px;
+	line-height:40px;
+	padding-left: 40px;
+	border-top:1px solid #dedede;
+	border-bottom:1px solid #dedede;
+	background: #efefef;
+}
+.list-wrapper .detail-right{
+	width: auto;
+	margin-left: 240px;
+}
+.list-wrapper .append-search{
+	margin-left: 40px;
+}
+.list-wrapper .append-search input{
+	height: 28px;
+	line-height: 28px;
+	float: left;
+	margin-right:4px;
+	width: 180px;
+}
+.list-wrapper .append-search .btn{
+	padding: 3px 10px;
+	float: left;
+}
+.list-wrapper  .append-cont{
+}
+.list-wrapper .append-classfy,.append-search{
+	float: left;
+    margin-bottom: 0;
+    height: 36px;
+    line-height: 36px;
+}
+.list-wrapper .append-classfy a{
+	margin: 0 10px;
+	color: #999;
+}
+.list-wrapper .list-content ul{
+	margin-top: 20px;
+	padding-left: 0;
+}
+.list-wrapper .list-content li{
+	border: 1px solid #cdcdcd;
+	margin-bottom: 20px;
+}
+.list-wrapper .detail-cont{
+	margin-top: 10px;
+	border:1px solid #dedede;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	padding: 20px;
+}
+.list-wrapper .notice-tit{
+	padding-left: 10px;
+	line-height: 42px;
+	margin: 0;
+	font-size: 24px;
+}
+.list-wrapper .notice-cont{
+	margin-top: 5px;
+	border-top: 1px solid #eee;
+	padding: 20px 10px;
+}
+.list-wrapper .btn-conts{
+}
+.list-wrapper .btn-conts .btn{
+	padding: 4px 10px;
+	background: #2298ef;
+	color: #fff;
+}
+.list-wrapper .btn-conts .btn:hover{
+	background: #00a8ff;
+	color: #fff;
+}
+.go-turn{
+	width: 100%;
+    height: 100%;
+    display: inline-block;
+}

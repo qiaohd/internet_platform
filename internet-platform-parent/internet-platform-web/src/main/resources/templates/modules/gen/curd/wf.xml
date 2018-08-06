@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>wf</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/wf/${subModuleName}</filePath>
+	<fileName>AskForLeaveController.java</fileName>
+	<content><![CDATA[
+		
+package ${packageName}.${moduleName}.wf<#if subModuleName != "">.${subModuleName}</#if>;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yonyou.iuap.iweb.entity.DataTable;
+
+import uap.iweb.exception.WebRuntimeException;
+import uap.web.httpsession.cache.SessionCacheManager;
+import yonyou.bpm.rest.BpmRest;
+import yonyou.bpm.rest.exception.RestException;
+import yonyou.bpm.rest.request.RestVariable;
+import yonyou.bpm.rest.request.identity.OrgQueryParam;
+import yonyou.bpm.rest.request.identity.UserQueryParam;
+import yonyou.bpm.rest.request.task.TaskQueryParam;
+import yonyou.bpm.rest.response.historic.HistoricProcessInstanceResponse;
+import yonyou.bpm.rest.response.identity.OrgResponse;
+import yonyou.bpm.rest.utils.BaseUtils;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.ufgov.ip.api.sysmanager.IPRoleServiceI;
+import com.ufgov.ip.api.sysmanager.IpCompanyServiceI;
+import com.ufgov.ip.api.sysmanager.IpUserCompanyServiceI;
+import com.ufgov.ip.api.sysmanager.IpUserRoleServiceI;
+import com.ufgov.ip.api.system.AskForLeaveServiceI;
+import com.ufgov.ip.api.system.AskTicketListServiceI;
+import com.ufgov.ip.api.system.HirerAccountServiceI;
+import com.ufgov.ip.api.system.JsonResultServiceI;
+import com.ufgov.ip.api.system.ProcessServiceI;
+import com.ufgov.ip.api.system.UserAccountServiceI;
+import com.ufgov.ip.entity.sysmanager.IpCompany;
+import com.ufgov.ip.entity.sysmanager.IpRole;
+import com.ufgov.ip.entity.sysmanager.IpUserRole;
+import com.ufgov.ip.entity.system.ApproveStatus;
+import com.ufgov.ip.entity.system.AskForLeave;
+import com.ufgov.ip.entity.system.IpHirer;
+import com.ufgov.ip.entity.system.IpUser;
+import com.ufgov.ip.entity.system.IpUserCompany;
+import com.ufgov.ip.entity.system.TicketDetail;
+import com.ufgov.ip.utils.UUIDTools;
+//import com.ufgov.ip.util.PropertyUtil;
+import com.uggov.ip.web.tmp.PropertyUtilSys;
+
+/**
+ * 
+ * @author Administrator
+ *
+ */
+@Controller
+@RequestMapping(value = "${r"${adminPath}"}/${urlPrefix}")
+public class AskForLeaveController {
+
+	
+private final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	public static final int HASH_INTERATIONS = 1024;
+	// 默认一天
+	public static final int COOKIES_MAXAGE = 60 * 60 * 24;
+	private static final int SALT_SIZE = 8;
+	
+    @Autowired
+    private SessionCacheManager sessionCacheManager;
+
+    @Reference(version = "0.0.1")
+	private ProcessServiceI bpmServioce;
+    
+    @Reference(version = "0.0.1")
+    private AskForLeaveServiceI askForLeaveService;
+    
+    @Reference(version = "0.0.1")
+	protected UserAccountServiceI userAccountService;
+    
+    @Reference(version = "0.0.1")
+	protected HirerAccountServiceI hirerAccountService;
+    
+    @Reference(version = "0.0.1")
+	private IpUserCompanyServiceI ipUserCompanyService;
+    
+    @Reference(version = "0.0.1")
+    private AskTicketListServiceI askTicketListService;
+    
+    @Reference(version = "0.0.1")
+    private IpUserRoleServiceI ipUserRoleService;
+    
+    @Reference(version = "0.0.1")
+    private IPRoleServiceI iPRoleService;
+    
+    @Reference(version = "0.0.1")
+    private IpCompanyServiceI ipCompanyService;
+    
+    @Reference(version = "0.0.1")
+	private JsonResultServiceI jsonResultService;
+
+	public JsonResultServiceI getJsonResultService() {
+		return jsonResultService;
+	}
+    
+    
+    
+    public IpCompanyServiceI getIpCompanyService() {
+		return ipCompanyService;
+	}
+
+	public IPRoleServiceI getiPRoleService() {
+		return iPRoleService;
+	}
+
+	public IpUserRoleServiceI getIpUserRoleService() {
+		return ipUserRoleService;
+	}
+
+	public AskTicketListServiceI getAskTicketListService() {
+		return askTicketListService;
+	}
+
+	DataTable<AskForLeave> leaveDataTable;//请假单dataTable
+    
+    public IpUserCompanyServiceI getIpUserCompanyService() {
+		return ipUserCompanyService;
+	}
+
+	public AskForLeaveServiceI getAskForLeaveService() {
+		return askForLeaveService;
+	}
+
+
+	//保存请假单并启动流程
+    @RequestMapping(method = RequestMethod.POST,value="saveTicketAndStartProcess")
+	public @ResponseBody Map<String,String> saveTicketAndStartProcess(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+    	 final Map<String,String> reg=new HashMap<String, String>();
+		 reg.put("result", "true");
+		 String getbpmEnabledByKey = PropertyUtilSys.getbpmEnabledByKey("bpmEnabled");
+		 if("false".equals(getbpmEnabledByKey)){//工作流已经关闭
+			 reg.put("result", "Enabled");
+			 return reg;
+		 }
+    	 
+		final AskForLeave askforleave=new AskForLeave();
+		final IpUser user=new IpUser();
+		try {
+			BeanUtils.copyProperties(askforleave, request.getParameterMap());
+			askforleave.setStatus(1);
+			 IpUser findUserByUserId = userAccountService.findUserByUserId(askforleave.getUid());
+			 String hirerId = findUserByUserId.getHirerId();
+			 user.setHirerId(hirerId);
+			
+		} catch (Exception ex) {
+			throw new RuntimeException("获得表单参数时报错了",ex);
+		}
+			askforleave.setId(UUIDTools.uuidRandom());
+			//启动流程
+			Map<String, String> reg22=askForLeaveService.submitTicketAndRun(reg, askforleave, user);
+			 return reg22;
+	      }
+    
+    
+    //获得查询参数
+    @RequestMapping(method = RequestMethod.GET,value="/getQueryParamInfo")
+	public @ResponseBody Map<String, Object> getQueryParamInfo(HttpServletRequest request, HttpServletResponse response){
+		
+    	String cuser = null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		if (SecurityUtils.getSubject().getPrincipal() != null)
+			cuser = (String) SecurityUtils.getSubject().getPrincipal();
+		if (cuser == null) {
+			return null;
+		}
+		 IpUser ipUser=userAccountService.findUserByUserEmailOrLoginNameOrCellphoneNo(cuser); //普通用户
+		 
+		 if(ipUser!=null){
+			  String hirerId = ipUser.getHirerId();//获得租户id
+		      IpUserCompany ipUserCompany=ipUserCompanyService.findIpUserCompanyByUserId(ipUser.getUserId());
+			  String coId = ipUserCompany.getCoId();//获得coId
+			  List<IpUserRole> showUserRoleByUserIdAndIsPartTime = ipUserRoleService.showUserRoleByUserIdAndIsPartTime(ipUser.getUserId(), "0");
+			  IpUserRole ipUserRole = showUserRoleByUserIdAndIsPartTime.get(0);
+			  String roleId = ipUserRole.getRoleId();
+			  IpRole findIpRoleByRoleId = iPRoleService.findIpRoleByRoleId(roleId);
+			  String roleName = findIpRoleByRoleId.getRoleName();
+			 
+			  resultMap.put("roleName",roleName);
+			  resultMap.put("hirerId",hirerId);
+			  resultMap.put("coId",coId);
+			  resultMap.put("userId",ipUser.getUserId());
+			  
+		   }
+    	return resultMap;
+    }
+    
+    //获得当前部门已审批的请假单
+    public void getCurDeptCheckedTicket(){
+    	
+    	try {
+			int pageNumber = 0;
+			if (leaveDataTable.getPageIndex() != null) {
+				pageNumber = leaveDataTable.getPageIndex();
+			}
+			int pageSize = leaveDataTable.getPageSize();
+
+			Map<String, Object> searchParams = new HashMap<String, Object>();
+			searchParams = this.buildSearchParamsStartingWith("search_");
+			PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "auto");// 目前的pagesize是固定的，现在等待前台传值
+
+			// Sort sort = buildSortRequest(Direction.ASC, "employee_no");
+			Page<AskForLeave> categoryPage = askTicketListService.getCheckedTicketlistAll(
+					searchParams, pageRequest);
+			leaveDataTable.remove(leaveDataTable.getAllRow());
+			leaveDataTable.set(categoryPage.getContent().toArray(new AskForLeave[0]));
+			
+			 int totalPages = categoryPage.getTotalPages();
+			 leaveDataTable.setTotalPages(totalPages);
+			 leaveDataTable.setTotalRow(categoryPage.getTotalElements());
+			 leaveDataTable.setPageIndex(pageNumber);
+
+		} catch (Exception e) {
+			logger.error("查询数据失败!", e);
+			throw new WebRuntimeException("查询数据失败!");
+		}
+    }
+    
+    
+    
+    //获得当前部门未审批的请假单
+    public void getCurDeptTicket(){
+
+		try {
+			int pageNumber = 0;
+			if (leaveDataTable.getPageIndex() != null) {
+				pageNumber = leaveDataTable.getPageIndex();
+			}
+			int pageSize = leaveDataTable.getPageSize();
+			Map<String, Object> searchParams = new HashMap<String, Object>();
+			searchParams = this.buildSearchParamsStartingWith("search_");
+			PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "auto");// 目前的pagesize是固定的，现在等待前台传值
+			Page<AskForLeave> categoryPage = askTicketListService.getTicketlistAll(
+					searchParams, pageRequest);
+			leaveDataTable.remove(leaveDataTable.getAllRow());
+			leaveDataTable.set(categoryPage.getContent().toArray(new AskForLeave[0]));
+			int totalPages = categoryPage.getTotalPages();
+			leaveDataTable.setTotalPages(totalPages);
+			leaveDataTable.setTotalRow(categoryPage.getTotalElements());
+			leaveDataTable.setPageIndex(pageNumber);
+		} catch (Exception e) {
+			logger.error("查询数据失败!", e);
+			throw new WebRuntimeException("查询数据失败!");
+		}
+    }
+    
+    
+    //获得当前用户id
+    @RequestMapping(method = RequestMethod.GET,value="/getProposer")
+	public @ResponseBody Map<String, Object> getProposer(HttpServletRequest request, HttpServletResponse response){
+		String cuser = null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		if (SecurityUtils.getSubject().getPrincipal() != null)
+			cuser = (String) SecurityUtils.getSubject().getPrincipal();
+		if (cuser == null) {
+			return null;
+		}
+		
+		try {
+			IpHirer ipHirer = hirerAccountService.findHirerByEmailOrLoginNameOrCellphoneNo(cuser);//租户
+			if(ipHirer!=null){
+		    	String hirerId = ipHirer.getHirerId();
+		    	resultMap.put("hirerId",hirerId);
+		    	resultMap.put("cusername", ipHirer.getHirerName());
+			}else{
+				 IpUser ipUser=userAccountService.findUserByUserEmailOrLoginNameOrCellphoneNo(cuser); //普通用户
+				   if(ipUser!=null){
+					   resultMap.put("userId",ipUser.getUserId());
+					   resultMap.put("cusername", ipUser.getUserName());
+				   }
+			}
+			
+		}catch(Exception ex){
+			logger.error("获取用户权限失败!",ex);
+		}
+    	
+    	return resultMap;
+    }
+    
+  //审批当前任务
+    @RequestMapping(method = RequestMethod.POST,value="/doApprove")
+   	public @ResponseBody Map<String, Object> doApprove(HttpServletRequest request, HttpServletResponse response){
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+    	String getbpmEnabledByKey = PropertyUtilSys.getbpmEnabledByKey("bpmEnabled");
+		 if("false".equals(getbpmEnabledByKey)){//工作流已经关闭
+			 resultMap.put("result", "Enabled");
+			 return resultMap;
+		 }
+		 
+    	String taskId = request.getParameter("taskId");
+    	String userId = request.getParameter("userId");//IP里面的userId
+    	String check=request.getParameter("check");
+    	String hirerId=request.getParameter("hirerId");//租户id
+    	String businessId = request.getParameter("businessId");
+    	String suggestion = request.getParameter("suggestion");//审批意见
+    	
+    	IpUser findUserByUserId = userAccountService.findUserByUserId(userId);
+
+    	return askForLeaveService.doApproveService(resultMap, taskId, userId, check, hirerId,
+				businessId, suggestion, findUserByUserId);
+    }
+
+    
+    //获得当前人员的请假单
+    public void getCurSubmitTicket(){
+    	
+    	try {
+			int pageNumber = 0;
+			if (leaveDataTable.getPageIndex() != null) {
+				pageNumber = leaveDataTable.getPageIndex();
+			}
+			int pageSize = leaveDataTable.getPageSize();
+
+			Map<String, Object> searchParams = new HashMap<String, Object>();
+			searchParams = this.buildSearchParamsStartingWith("search_");
+			PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, "auto");// 目前的pagesize是固定的，现在等待前台传值
+
+			// Sort sort = buildSortRequest(Direction.ASC, "employee_no");
+			Page<AskForLeave> categoryPage = askTicketListService.getCurSubmitTicket(
+					searchParams, pageNumber,pageSize);
+			leaveDataTable.remove(leaveDataTable.getAllRow());
+			leaveDataTable.set(categoryPage.getContent().toArray(new AskForLeave[0]));
+			
+			 int totalPages = categoryPage.getTotalPages();
+			 leaveDataTable.setTotalPages(totalPages);
+			 leaveDataTable.setTotalRow(categoryPage.getTotalElements());
+			 leaveDataTable.setPageIndex(pageNumber);
+
+		} catch (Exception e) {
+			logger.error("查询数据失败!", e);
+			throw new WebRuntimeException("查询数据失败!");
+		}
+    	
+    }
+    
+	
+	
+    private Map<String, Object> buildSearchParamsStartingWith(String prefix) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> m = leaveDataTable.getParams();
+		Set<Entry<String, Object>> set = m.entrySet();
+		for (Entry<String, Object> entry : set) {
+			String key = entry.getKey();
+			if (key.startsWith(prefix)) {
+				String unprefixed = key.substring(prefix.length());
+				params.put(unprefixed, entry.getValue().toString());
+			}
+		}
+		return params;
+	}
+    
+	
+    
+    private PageRequest buildPageRequest(int pageNumber, int pagzSize,
+			String sortType) {
+		Sort sort = null;
+		return new PageRequest(pageNumber, pagzSize, sort);
+	}
+	
+}
+	]]>
+	</content>
+</template>

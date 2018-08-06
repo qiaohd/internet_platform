@@ -1,0 +1,141 @@
+a:hover {
+    color: #2097f1;
+    text-decoration: underline;
+}
+.u-grid-content-td-div {
+    height: 2.125em !important;
+}
+.u-grid-content-focus-row {
+    background-color: #4F8EDC !important;
+    color: #FFF !important;
+}
+.must-set {
+    color: red;
+}
+.duty-info ul {
+    padding-left: 10px;
+    /*height: 36px;*/
+}
+#dictionaryTabContent {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.duty-info .nav-tabs li.active a {
+    /*font-weight: bold;*/
+    background: #FFF;
+    color: #333333;
+    border-bottom-color: transparent;
+}
+.duty-info .nav-tabs li a {
+    color: #333333;
+    border-radius: 0;
+    line-height: 1;
+    background-color: white;
+    border-bottom-color: #ddd;
+}
+.sub-menu li.active {
+    background-color: #e8f5fe;
+}
+.dictionary-search-common {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    font-size: 14px;
+    border: 1px solid #e2e2e2;
+}
+.placeholder-type {
+    color: #b8b8b8;
+}
+.dictionary-search-btn {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    background-color: #229aee;
+    border: 0;
+    margin-left: 5px;
+}
+.u-grid td {
+    border-width: 0px 0px 1px 1px !important;
+}
+.u-grid-header-link {
+    text-align: center;
+}
+.u-grid-content-td-div {
+    text-align: center;
+}
+.dictionary-result-content {
+    margin-top: 10px;
+}
+.dictionary-edit-content {
+    margin-top: 25px;
+}
+.dictionary-edit-text p label {
+    width: 90px;
+    text-align: right;
+}
+.dictionary-edit-text p input {
+    margin-left: 10px;
+    padding-left: 10px;
+    width: 255px;
+    height: 38px;
+    border: 1px solid #e1e1e1;
+}
+.error-notice {
+    margin-left: 5px;
+    color: red;
+    display: none;
+}
+.notice-care {
+    margin-left: 100px;
+    color: #ccc;
+    font-size: 12px;
+    margin-top: -5px;
+}
+.dictionary-edit-function-btn {
+    margin-top: 36px;
+    margin-left: 190px;
+}
+.common-btn {
+    width: 72px;
+    height: 38px;
+    line-height: 38px;
+    border: 0;
+    color: white;
+    font-size: 17px;
+}
+.dictionary-edit-save {
+    background-color: #229aee;
+}
+.dictionary-edit-back {
+    background-color: #7ecef4;
+}
+.dictionary-edit-back {
+    margin-left: 17px;
+}
+.dictionary-edit-reset {
+    margin-left: 17px;
+}
+#more-dictionary-info-btn {
+    width: 38px;
+    height: 38px;
+    margin-left: -42px;
+    /*line-height: 38px;*/
+    background-color: #777;
+    display: inline-block;
+    color: white;
+    font-weight: 900;
+}
+.separator {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.dictionary-fun {
+    cursor: pointer;
+}
+.jump-content-delete,
+.error-notice-content{
+    margin: 0 auto;
+    margin-top: 165px;
+}

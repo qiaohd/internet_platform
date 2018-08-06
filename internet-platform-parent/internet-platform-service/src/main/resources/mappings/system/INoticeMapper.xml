@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ufgov.ip.dao.system.INoticeMapper">
+    
+    
+    <resultMap id="NoticeResultMap" type="com.ufgov.ip.entity.system.IpNotice">
+		<id column="notice_id" property="noticeId" jdbcType="VARCHAR"/>
+		<result column="hirer_id" property="hirerId" jdbcType="VARCHAR"/>
+		<result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR"/>
+		<result column="notice_title" property="noticeTitle" jdbcType="VARCHAR"/>
+		<result column="notice_content" property="noticeContent" jdbcType="VARCHAR"/>
+		<result column="isPublish" property="isPublish" jdbcType="VARCHAR"/>
+		<result column="create_date" property="createDate" jdbcType="DATE"/>
+		<result column="update_date" property="updateDate" jdbcType="DATE"/>
+	</resultMap>
+    
+    
+	<sql id="INoticeColumn">
+		
+			    n.notice_id AS "noticeId",
+			    n.hirer_id AS "hirerId",
+			    n.attachment_url AS "attachmentUrl",
+			    n.notice_title AS "noticeTitle",
+			    n.notice_content AS "noticeContent",
+			    n.isPublish AS "isPublish",
+			    n.create_date AS "createDate",
+			    n.update_date AS "updateDate" 
+	</sql>
+	
+	
+	<select id="getNoticeDetail" resultMap="NoticeResultMap">
+		SELECT 
+			<include refid="INoticeColumn"/>
+		FROM ip_notice n
+		WHERE n.notice_id = #{noticeId}
+	</select>
+	
+	
+	<select id="findBykeywords" resultMap="NoticeResultMap">
+		<if test="dbType == 'oracle'">
+				SELECT   
+			<include refid="INoticeColumn"/>
+			 FROM ( SELECT A.*, ROWNUM RN 
+       FROM (SELECT * FROM ip_notice
+       WHERE
+       <choose>
+	             <when test="ipNotice.keywords== null and ipNotice.keywords==''">
+		             isPublish = #{ipNotice.isPublish} and hirer_id=#{ipNotice.hirerId}  
+		         </when>
+	             <otherwise>
+	                 (notice_title like '%' || #{ipNotice.keywords} ||'%' or n.notice_content like '%'|| #{ipNotice.keywords} || '%') and isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId} 
+	             </otherwise>
+       </choose>
+       ) A ) n WHERE RN BETWEEN (${ipNotice.startNum}*${ipNotice.endNum}+1) AND (${ipNotice.startNum}+1)*${ipNotice.endNum}
+       ORDER BY n.update_date DESC
+       </if>
+       <if test="dbType == 'mysql'">
+		SELECT 
+			<include refid="INoticeColumn"/>
+		FROM ip_notice n
+		WHERE 
+		<choose>
+	             <when test="ipNotice.keywords== null and ipNotice.keywords==''">
+		             n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId} ORDER BY n.update_date DESC limit #{ipNotice.startNum},#{ipNotice.endNum}
+		         </when>
+	             <otherwise>
+	                 (n.notice_title like concat('%',#{ipNotice.keywords},'%') or n.notice_content like concat('%',#{ipNotice.keywords},'%')) and n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId} ORDER BY n.update_date DESC limit #{ipNotice.startNum},#{ipNotice.endNum}
+	             </otherwise>
+       </choose>
+       </if>
+	</select>
+	
+	<select id="findRecordNum" resultType="java.lang.Integer">
+		SELECT 
+			count(1)
+		FROM ip_notice n
+		WHERE 
+		<if test="dbType == 'mysql'">
+		<choose>
+			  	 <when test="ipNotice.keywords== null and ipNotice.keywords==''">
+		             n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId}
+		         </when>
+	             <otherwise>
+	                 (n.notice_title like concat('%',#{ipNotice.keywords},'%') or n.notice_content like concat('%',#{ipNotice.keywords},'%')) and n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId}
+	             </otherwise>
+       </choose>
+       </if>
+       <if test="dbType == 'oracle'">
+		<choose>
+			  	 <when test="ipNotice.keywords== null and ipNotice.keywords==''">
+		             n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId}
+		         </when>
+	             <otherwise>
+	                 (n.notice_title like '%'|| #{ipNotice.keywords}||'%' or n.notice_content like '%' ||#{ipNotice.keywords} ||'%') and n.isPublish = #{ipNotice.isPublish} and n.hirer_id=#{ipNotice.hirerId}
+	             </otherwise>
+       </choose>
+       </if>
+	</select>
+	
+	
+	
+	
+	<select id="getAllNotice" resultMap="NoticeResultMap">
+		<if test="dbType == 'oracle'">
+				SELECT (select count(1) from ip_notice) as count,  
+			<include refid="INoticeColumn"/>
+			 FROM ( SELECT A.*, ROWNUM RN 
+       FROM (SELECT * FROM ip_notice WHERE isPublish = #{ipNotice.NOTICE_ISPUBLISH} and hirer_id = #{ipNotice.hirerId}) A ) n WHERE RN BETWEEN 1 AND 10
+       order by n.update_date desc
+       </if>
+       <if test="dbType == 'mysql'">
+		SELECT (select count(1) from ip_notice) as count,  
+			<include refid="INoticeColumn"/>
+		FROM ip_notice n  
+		WHERE n.isPublish = #{ipNotice.NOTICE_ISPUBLISH} and n.hirer_id = #{ipNotice.hirerId} order by n.update_date desc limit 0,10
+	</if>
+	</select>
+	
+	
+	
+	<select id="getAllNoticeWithSP" resultMap="NoticeResultMap">
+		SELECT (select count(1) from ip_notice) as count,  
+			<include refid="INoticeColumn"/>
+		FROM ip_notice n  
+		WHERE
+		<if test="dbType == 'mysql'">
+		<choose>
+			  	 <when test="ipNotice.keywords==''">
+		             n.hirer_id = #{ipNotice.hirerId}
+		         </when>
+	             <otherwise>
+	                  n.hirer_id = #{ipNotice.hirerId} and (n.notice_title like concat('%',#{ipNotice.keywords},'%') or n.notice_content like concat('%',#{ipNotice.keywords},'%'))
+	             </otherwise>
+       </choose>
+       </if>
+       <if test="dbType == 'oracle'">
+       	<choose>
+			  	 <when test="ipNotice.keywords==''">
+		             n.hirer_id = #{ipNotice.hirerId}
+		         </when>
+	             <otherwise>
+	                  n.hirer_id = #{ipNotice.hirerId} and (n.notice_title like '%' || #{ipNotice.keywords} || '%' or n.notice_content like '%' || #{ipNotice.keywords} || '%')
+	             </otherwise>
+       </choose>
+       	</if>
+	</select>
+	
+	
+	
+	
+	<insert id="saveNotice">
+		INSERT INTO ip_notice(
+				
+			               	notice_id,
+				
+			               	hirer_id,
+				
+			               	attachment_url,
+				
+			               	notice_title,
+				
+			               	notice_content,
+				
+			            	isPublish,
+			            	
+			            	create_date,
+			            	
+			            	update_date
+		) VALUES (
+			               	#{noticeId},
+			               	#{hirerId},
+			               	#{attachmentUrl},
+			               	#{noticeTitle},
+			               	#{noticeContent},
+			               	#{isPublish},
+			            	#{createDate},
+			            	#{updateDate}
+		)
+	</insert>
+	
+	<update id="updateNotice">
+		UPDATE ip_notice SET 	
+			               	attachment_url = #{attachmentUrl},
+			               	notice_title = #{noticeTitle},
+			               	notice_content = #{noticeContent},
+			               	isPublish = #{isPublish},
+			               	update_date = #{updateDate}
+		<where>
+			 notice_id = #{noticeId} 
+		</where>
+	</update>
+	
+	<delete id="deleteNotice">
+		DELETE FROM ip_notice 
+		<where>
+			notice_id = #{noticeId}
+		</where>
+	</delete>
+	
+</mapper>

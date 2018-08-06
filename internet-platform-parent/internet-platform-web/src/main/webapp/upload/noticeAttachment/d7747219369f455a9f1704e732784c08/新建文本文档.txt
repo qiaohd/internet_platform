@@ -1,0 +1,2 @@
+<script>var exponent="${exponent}";</script>
+	<script>var modulus="${modulus}";</script>

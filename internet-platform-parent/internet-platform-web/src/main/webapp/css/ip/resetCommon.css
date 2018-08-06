@@ -1,0 +1,23 @@
+.u-table .u-checkbox-outline{
+    top : -11px
+}
+
+.u-checkbox, .u-radio, .u-table tbody tr td, .u-table thead tr th {
+    text-align: center;
+}
+
+.active {
+    background: #fff;
+}
+
+.u-pagination > .active > a, .u-pagination > .active > span, .u-pagination > .active > a:hover, .u-pagination > .active > span:hover, .u-pagination > .active > a:focus, .u-pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #0b5d9b;
+    border-color: #0b5d9b;
+}
+
+.ztree li span.button {
+    width: 15px;
+}

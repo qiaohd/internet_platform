@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IpCompanySynMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.sysmanager.IpCompany">
+        <id column="CO_ID" property="coId" jdbcType="VARCHAR"/>
+        <result column="CO_CODE_TMP" property="coCodeTmp" jdbcType="VARCHAR"/>
+        <result column="HIRER_ID" property="hirerId" jdbcType="VARCHAR"/>
+    </resultMap>
+     <sql id="Base_Column_List">
+        CO_ID,CO_CODE_TMP,HIRER_ID
+    </sql>
+	<select id="findCompanySynByCondition" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_company_syn h
+		<where>
+			  <if test="hirerId != null and hirerId!=''">
+			  	h.HIRER_ID = #{hirerId} 
+			  </if>
+			  <if test="coId != null and coId!=''">
+			  	and h.CO_ID = #{coId} 
+			  </if>
+			  <if test="coCodeTmp != null and coCodeTmp!=''">
+			  	and h.CO_CODE_TMP = #{coCodeTmp}
+			  </if>
+	   </where>
+	</select>
+	
+	<insert id="insert" parameterType="com.ufgov.ip.entity.sysmanager.IpCompany">
+        insert into ip_company_syn 
+        <trim prefix="(" suffixOverrides=",">
+			<if test="coId != null">CO_ID,</if>
+			<if test="coCodeTmp != null">CO_CODE_TMP,</if>
+			<if test="hirerId != null">HIRER_ID</if>
+		</trim>
+		)
+		values
+		<trim prefix="(" suffixOverrides=",">
+			<if test="coId != null">#{coId},</if>
+			<if test="coCodeTmp != null">#{coCodeTmp},</if>
+			<if test="hirerId != null">#{hirerId}</if>
+		</trim>
+		)
+    </insert>
+    
+    <delete id="delete">
+		DELETE FROM ip_company_syn 
+		<where>
+			HIRER_ID = #{hirerId}
+		</where>
+	</delete>
+    
+</mapper>

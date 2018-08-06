@@ -1,0 +1,177 @@
+.duty-permission-container {
+    padding: 10px 20px;
+}
+
+.duty {
+    margin-top: 10px;
+}
+
+.duty-info ul {
+    padding-left: 10px;
+}
+
+.duty-submit-btn {
+    color: #FFFFFF;
+    font-weight: bold;
+    width: 45px;
+    height: 22px;
+    margin-left: 20px;
+    margin-right: 15px;
+    background: #2298ef;
+    border: none;
+}
+
+.duty-cancel {
+    border: none;
+    background: none;
+    color: #0b5d9b;
+    font-size: 12px;
+}
+
+.duty-tit {
+    display: inline-block;
+    width: 75px;
+    text-align: right;
+}
+
+.duty-tit strong {
+    color: red;
+}
+
+.warn-red {
+    color: red;
+    font-size: 12px;
+}
+
+.wran-gray {
+    color: #999;
+    font-size: 12px;
+}
+
+.duty input {
+    width: 205px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #cdcdcd;
+    margin-right: 6px;
+}
+
+.duty textarea {
+    padding: 5px;
+    height: 74px;
+    width: 378px;
+    vertical-align: top;
+    border: 1px solid #cdcdcd;
+    margin-right: 6px;
+    overflow: hidden;
+}
+
+.dutytTitle {
+    background: #f2f2f2;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    text-indent: 10px;
+    line-height: 30px;
+    color: #111;
+}
+
+.back-right {
+    margin-right: 10px;
+}
+
+.back-right img {
+    margin-right: 5px;
+}
+
+.duty-operation-function {
+    margin-top: 120px;
+}
+
+.duty-info ul {
+    padding-left: 10px;
+}
+
+.duty-info .nav-tabs li.active a {
+    font-weight: bold;
+    background: #FFFFFF;
+    color: #333333;
+    border-bottom-color: transparent;
+}
+
+.duty-info .nav-tabs li a {
+    color: #333333;
+    border-radius: 0;
+    line-height: 1;
+    background-color: white;
+}
+
+.duty-operation-btn {
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    color: white;
+    border: 0;
+    background-color: #2298ef;
+}
+
+#check-staff-only {
+    width: 600px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+#check-staff-only thead th {
+    color: white;
+    text-align: center;
+    background-color: #53abeb;
+}
+
+.check-staff-num {
+    width: 80px;
+}
+
+.check-staff-name {
+    width: 120px;
+}
+
+.check-staff-duty-name {
+    width: 200px;
+}
+
+.check-staff-department {
+    width: 200px;
+}
+
+#check-staff-only thead tr {
+    line-height: 35px;
+}
+
+#check-staff-only tbody tr {
+    line-height: 40px;
+}
+
+#check-staff-only tbody tr td {
+    text-align: center;
+}
+
+.duty-operation-function {
+    margin-top: 120px;
+}
+
+#close-jump-submit {
+    margin-top: 0;
+}
+
+#add-new-permission {
+    margin: 230px auto;
+}
+
+.jump-body-icon {
+    margin: 20px 0;
+}
+.showChoiceDutyWran {
+    padding-left: 20px;
+}

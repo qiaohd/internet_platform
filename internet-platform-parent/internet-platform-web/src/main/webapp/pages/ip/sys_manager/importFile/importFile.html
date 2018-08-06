@@ -1,0 +1,108 @@
+	<script src="http://malsup.github.io/jquery.form.js"></script>
+	<div id="batch-import-content">
+		<p class="_p"><a href="">>> 组织机构 >></a>批量导入
+			<a href="" class="back"><img src="${ctx}/../../images/ip/sys/back.png" />返回</a>
+		</p>
+		<!--第一步-->
+		<div id="stepOne" style="">
+			<div class="batch-import-progress">
+				<div class="batch-line"></div>
+				<div class="batch-line"></div>
+				<div class="batch-1 batch-icon-1">
+					上传文件
+				</div>
+				<div class="batch-2 batch-icon-2">
+					执行导入
+				</div>
+				<div class="batch-3 batch-icon-2">
+					完成
+				</div>
+				
+			</div>
+			<div class="step-batch-import">
+				<div class="step batch-import-first" id="batch-import-first">1</div>
+				<div class="descript batch-import-step">
+					<p>填写导入员工的信息<span>（请按模板格式要求填写）</span></p>
+					<a href="${ctx}/../../upload/template/temp.xlsx"><img src="${ctx}/../../images/ip/sys/download.png" />下载模板</a>
+				</div>
+			</div>
+			<div class="step-batch-import">
+				<div class="step batch-import-second">2</div>
+				<div class="descript batch-import-step">
+					<p>上传填好的员工信息表（仅支持xls/xlsx格式，且文件大小不能超过2M）</p>
+					<form id="excelFileUpload" action="" method="post" enctype="multipart/form-data">
+						<a href="javascript:void(0);" data-bind="click:excelUpload"><img src="${ctx}/../../images/ip/sys/attachments.png" />上传附件</a>
+						<input type="file" id="uploadfile" name="excelFile" class="upload-file-btn" value="上传附件" data-bind="event: { change: previewFile }"/>
+					</form>
+				</div>
+			</div>
+			<button type="button" class="file-upload-btn" id="file-upload-btn" data-bind="click:fileUpdate">上传</button>
+		</div>
+		<!--第二步     -->
+		<div id="stepTwo" style="display:none;">
+			<div class="batch-import-progress">
+				<div class="batch-line batch-bgcolor"></div>
+				<div class="batch-line"></div>
+				<div class="batch-1 batch-icon-1">
+					上传文件
+				</div>
+				<div class="batch-2 batch-icon-1">
+					执行导入
+				</div>
+				<div class="batch-3 batch-icon-2">
+					完成
+				</div>
+			</div>
+			<div class="batch-dr">
+				<div class="batch-dr-1">本次可导入（<span id="validstaff">0</span>）人</div>
+				<div class="batch-dr-2">本次不可导入（<span id="invalidstaff">0</span>）人</div>
+			</div>
+			<button type="button" class="file-upload-btn" >下一步</button>
+			<div class="batch-back">
+				<a href="javascript:void(0);" data-bind="click:returnOne">重新上传</a>
+			</div>
+			<div class="batch-message">
+				不可导入的员工
+			</div>
+			<div id="batch-table" class="batch-table">
+				<div>
+					<table>
+						<tr>
+							<th>行号</th>
+							<th>错误原因</th>
+						</tr>
+						<!-- <tr>
+							<td class="batch-center">3</td>
+							<td class="batch-error">
+								<p>1 【手机】已被占用，须与其他账号解绑</p>
+								<p>2 【Email】已已被占用，须与其他账号解绑</p>
+							</td>
+						</tr> -->
+						
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--第三步     -->
+		<div id="stepSuc" style="display: none;">
+			<div class="batch-import-progress">
+				<div class="batch-line batch-bgcolor"></div>
+				<div class="batch-line batch-bgcolor"></div>
+				<div class="batch-1 batch-icon-1">
+					上传文件
+				</div>
+				<div class="batch-2 batch-icon-1">
+					执行导入
+				</div>
+				<div class="batch-3 batch-icon-1">
+					完成
+				</div>
+			</div>
+			<div class="batch-success">
+				<img src="${ctx}/../../images/ip/sys/upload-success.png" />
+				<p>成功导入1人！初始密码：12345678</p>
+			</div>
+			<button type="button" class="file-upload-btn" >完成</button>
+			
+		</div>
+	</div>

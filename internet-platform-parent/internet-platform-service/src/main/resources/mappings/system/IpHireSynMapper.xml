@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IpHirerSynMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.system.IpHirer">
+        <id column="HIRER_ID" property="hirerId" jdbcType="VARCHAR"/>
+        <result column="CELLPHONE_NO" property="cellphoneNo" jdbcType="VARCHAR"/>
+    </resultMap>
+     <sql id="Base_Column_List">
+        HIRER_ID, CELLPHONE_NO
+    </sql>
+	<select id="findHirerSynByCondition" resultMap="BaseResultMap" parameterType="com.ufgov.ip.entity.system.IpHirer" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_hirer_syn h
+		<where>
+			  <if test="hirerId != null and hirerId!=''">
+			  	h.HIRER_ID = #{hirerId}
+			  </if>
+			  <if test="cellphoneNo != null and cellphoneNo!=''">
+			  	and h.CELLPHONE_NO = #{cellphoneNo}
+			  </if>
+	   </where>
+	</select>
+	
+	<insert id="insert" parameterType="com.ufgov.ip.entity.system.IpHirer">
+        insert into ip_hirer_syn 
+        <trim prefix="(" suffixOverrides=",">
+			<if test="hirerId != null">HIRER_ID,</if>
+			<if test="cellphoneNo != null">CELLPHONE_NO</if>
+		</trim>
+		)
+		values
+		<trim prefix="(" suffixOverrides=",">
+			<if test="hirerId != null">#{hirerId},</if>
+			<if test="cellphoneNo != null">#{cellphoneNo}</if>
+		</trim>
+		)
+    </insert>
+</mapper>

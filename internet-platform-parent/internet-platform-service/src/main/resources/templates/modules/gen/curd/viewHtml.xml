@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>viewHtml</name>
+	<filePath>src/main/webapp/WEB-INF/views/${lastPackageName}/${moduleName}/${subModuleName}/${className}Edit</filePath>
+	<fileName>${className}.html</fileName>
+	<content><![CDATA[
+		
+		<div id="code-area">
+	<ul class="nav nav-tabs">
+		<li role="presentation" data-bind="click: getList" class="active"><a id="table-list" href="#tableList" data-toggle="tab">业务表列表</a></li>
+		<li role="presentation" data-bind="click: getFormat"><a id="table-add" href="#tabledit" data-toggle="tab">业务表添加</a></li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="tableList">
+			<div id="search" class="row clearfix"></div>
+			<div id="grid" class="row clearfix"></div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="tabledit">
+			<div id="add" class="row"></div>
+			<div id="edit" class="row"></div>
+		</div>
+	</div>
+	<div id="save-success-new" class="save-success-new"><img src="images/ip/menu/success_p.png" height="" width=""/>保存成功!</div>
+</div>
+		
+		
+	]]>
+	</content>
+</template>

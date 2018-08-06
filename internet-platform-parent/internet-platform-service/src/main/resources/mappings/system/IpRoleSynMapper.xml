@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IpRoleSynMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.sysmanager.IpRole">
+        <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+        <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR"/>
+        <result column="HIRER_ID" property="hirerId" jdbcType="VARCHAR"/>
+    </resultMap>
+     <sql id="Base_Column_List">
+        ROLE_ID,ROLE_CODE,HIRER_ID
+    </sql>
+	<select id="findRoleSynByCondition" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_role_syn h
+		<where>
+			  <if test="hirerId != null and hirerId!=''">
+			  	h.HIRER_ID = #{hirerId} 
+			  </if>
+			  <if test="roleId != null and roleId!=''">
+			  	and h.ROLE_ID = #{roleId} 
+			  </if>
+			  <if test="roleCode != null and roleCode!=''">
+			  	and h.ROLE_CODE = #{roleCode}
+			  </if>
+	   </where>
+	</select>
+	
+	<insert id="insert" parameterType="com.ufgov.ip.entity.sysmanager.IpRole">
+        insert into ip_role_syn 
+        <trim prefix="(" suffixOverrides=",">
+        	<if test="roleId != null">ROLE_ID,</if>
+        	<if test="roleCode != null">ROLE_CODE,</if>
+			<if test="hirerId != null">HIRER_ID</if>
+		</trim>
+		)
+		values
+		<trim prefix="(" suffixOverrides=",">
+			<if test="roleId != null">#{roleId},</if>
+			<if test="roleCode != null">#{roleCode},</if>
+			<if test="hirerId != null">#{hirerId}</if>
+		</trim>
+		)
+    </insert>
+    
+    <delete id="delete">
+		DELETE FROM ip_role_syn 
+		<where>
+			HIRER_ID = #{hirerId}
+		</where>
+	</delete>
+</mapper>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IMenuMapper">
+	<resultMap id="BaseResultMap" type="com.ufgov.ip.entity.system.IpMenu">
+		<id column="MENU_ID" property="menuId" jdbcType="VARCHAR"/>
+		<result column="AUTH_LEVEL" property="authLevel" jdbcType="VARCHAR"/>
+		<result column="DISP_ORDER" property="dispOrder" jdbcType="INTEGER"/>
+		<result column="IS_JUMP" property="isJump" jdbcType="VARCHAR"/>
+		<result column="IS_LEAF" property="isLeaf" jdbcType="VARCHAR"/>
+		<result column="IS_SHOW" property="isShow" jdbcType="VARCHAR"/>
+		<result column="LEVEL_NUM" property="levelNum" jdbcType="VARCHAR"/>
+		<result column="MENU_DESC" property="menuDesc" jdbcType="VARCHAR"/>
+		<result column="MENU_NAME" property="menuName" jdbcType="VARCHAR"/>
+		<result column="PARENT_MENU_ID" property="parentMenuId" jdbcType="VARCHAR"/>
+		<result column="PARENT_MENU_NAME" property="parentMenuName" jdbcType="VARCHAR"/>
+		<result column="URL" property="url" jdbcType="VARCHAR"/>
+		<result column="MENU_LOGO" property="menuLogo" jdbcType="VARCHAR"/>
+		<result column="PERMISSION" property="permission" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">MENU_ID, AUTH_LEVEL, DISP_ORDER, IS_JUMP, IS_LEAF, IS_SHOW, LEVEL_NUM,
+		MENU_DESC, MENU_NAME, PARENT_MENU_ID, PARENT_MENU_NAME, url,
+		MENU_LOGO,PERMISSION</sql>
+	<sql id="key">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="menuId != null">MENU_ID,</if>
+			<if test="authLevel != null">AUTH_LEVEL,</if>
+			<if test="dispOrder != null">DISP_ORDER,</if>
+			<if test="isJump != null">IS_JUMP,</if>
+			<if test="isLeaf != null">IS_LEAF,</if>
+			<if test="isShow != null">IS_SHOW,</if>
+			<if test="levelNum != null">LEVEL_NUM,</if>
+			<if test="menuDesc != null">MENU_DESC,</if>
+			<if test="menuName != null">MENU_NAME,</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID,</if>
+			<if test="parentMenuName != null">PARENT_MENU_NAME,</if>
+			<if test="url != null">url,</if>
+			<if test="menuLogo != null">MENU_LOGO,</if>
+			<if test="permission != null">PERMISSION</if>
+		</trim>
+	</sql>
+	<sql id="value">
+		<!-- 去掉最后一个, -->
+		<trim suffixOverrides=",">
+			<if test="menuId != null">#{menuId,jdbcType=VARCHAR},</if>
+			<if test="authLevel != null">#{authLevel,jdbcType=VARCHAR},</if>
+			<if test="dispOrder != null">#{dispOrder,jdbcType=INTEGER},</if>
+			<if test="isJump != null">#{isJump,jdbcType=VARCHAR},</if>
+			<if test="isLeaf != null">#{isLeaf,jdbcType=VARCHAR},</if>
+			<if test="isShow != null">#{isShow,jdbcType=VARCHAR},</if>
+			<if test="levelNum != null">#{levelNum,jdbcType=VARCHAR},</if>
+			<if test="menuDesc != null">#{menuDesc,jdbcType=VARCHAR},</if>
+			<if test="menuName != null">#{menuName,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">#{parentMenuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuName != null">#{parentMenuName,jdbcType=VARCHAR},</if>
+			<if test="url != null">#{url,jdbcType=VARCHAR},</if>
+			<if test="menuLogo != null">#{menuLogo,jdbcType=VARCHAR},</if>
+			<if test="permission != null">#{permission,jdbcType=VARCHAR}</if>
+		</trim>
+	</sql>
+	<sql id="update_IpMenu_where">
+		<set>
+			<if test="authLevel != null">AUTH_LEVEL = #{authLevel,jdbcType=VARCHAR},</if>
+			<if test="dispOrder != null">DISP_ORDER = #{dispOrder,jdbcType=INTEGER},</if>
+			<if test="isJump != null">IS_JUMP = #{isJump,jdbcType=VARCHAR},</if>
+			<if test="isLeaf != null">IS_LEAF = #{isLeaf,jdbcType=VARCHAR},</if>
+			<if test="isShow != null">IS_SHOW = #{isShow,jdbcType=VARCHAR},</if>
+			<if test="levelNum != null">LEVEL_NUM = #{levelNum,jdbcType=VARCHAR},</if>
+			<if test="menuDesc != null">MENU_DESC = #{menuDesc,jdbcType=VARCHAR},</if>
+			<if test="menuName != null">MENU_NAME = #{menuName,jdbcType=VARCHAR},</if>
+			<if test="parentMenuId != null">PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},</if>
+			<if test="parentMenuName != null">PARENT_MENU_NAME = #{parentMenuName,jdbcType=VARCHAR},</if>
+			<if test="url != null">URL = #{url,jdbcType=VARCHAR},</if>
+			<if test="menuLogo != null">MENU_LOGO = #{menuLogo,jdbcType=VARCHAR},</if>
+			<if test="permission != null">PERMISSION = #{permission,jdbcType=VARCHAR}</if>
+		</set>
+	</sql>
+	<select id="findAll" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+	</select>
+	<select id="findMenuByLevelNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where LEVEL_NUM = #{levelNum,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findMenuByRole" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	</select>
+	<select id="findMenuByLevelNumAndIsShow" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu h
+		<where>
+			<if test="levelNum != null and levelNum!=''">and h.LEVEL_NUM = #{levelNum,jdbcType=VARCHAR}</if>
+			<if test="isShow != null and isShow!=''">and h.IS_SHOW = #{isShow,jdbcType=VARCHAR}</if>
+		</where>
+	</select>
+	<update id="updateMenuByMenuId" parameterType="java.util.HashMap">
+		update ip_menu
+		<include refid="update_IpMenu_where"/>
+		where MENU_ID = #{menuId,jdbcType=VARCHAR}
+	</update>
+	<select id="findMenuByMenuName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where PARENT_MENU_NAME = #{parentMenuName,jdbcType=VARCHAR}
+	</select>
+	<insert id="save" parameterType="com.ufgov.ip.entity.system.IpMenu" >
+		insert into ip_menu(
+		<include refid="key"/>
+		) values(
+		<include refid="value"/>
+		)
+	</insert>
+	<delete id="delete" parameterType="java.lang.String">delete from ip_menu
+		where MENU_ID = #{menuId}</delete>
+	<select id="findByParentMenuId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+	</select>
+	<select id="findByMenuName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where MENU_NAME = #{menuName,jdbcType=VARCHAR}
+	</select>
+	<select id="findMenuByMenuNameLike" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where MENU_NAME like '%${value}%'
+	</select>
+	<select id="findMenuAll" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		order by LEVEL_NUM,DISP_ORDER asc
+	</select>
+	<select id="findByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		where MENU_ID = #{menuId,jdbcType=VARCHAR}
+	</select>
+	<update id="updateMenuByparentMenuId" parameterType="java.util.HashMap">
+		update ip_menu
+		<include refid="update_IpMenu_where"/>
+		where PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR}
+	</update>
+	<select id="findMenuForLevelNum" resultMap="BaseResultMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu h
+		<where>
+			is_leaf='0'  
+			<if test="levelNum1 != null and levelNum1!=''">and h.LEVEL_NUM = #{levelNum1}</if>
+			<if test="levelNum2 != null and levelNum2!=''">or h.LEVEL_NUM = #{levelNum2}</if>
+			<if test="levelNum3 != null and levelNum3!=''">or h.LEVEL_NUM = #{levelNum3}</if>
+		</where>
+		order by LEVEL_NUM,DISP_ORDER asc
+	</select>
+	
+	<select id="findMenuByAuthLevel" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu h
+		order by LEVEL_NUM,DISP_ORDER asc
+	</select>
+
+	<!-- 替换MenuService中替换jdbc的
+	<select id="getIpMenuListByUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select
+	<include refid="Base_Column_List"/>
+	from ip_menu m
+	where m.LEVEL_NUM=1 and m.MENU_ID
+	in (select menu_id from ip_role_menu where role_id
+	in (select role_id from ip_user_role where user_id =?))
+	and not exists
+	(select 1 from ip_user_hide_menu um where um.menu_id=m.menu_id and um.user_id=? )
+	order by DISP_ORDER asc
+	</select>
+
+	<select id="getIpMenuListByHirer" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select
+	<include refid="Base_Column_List"/>
+	from ip_menu m
+	where LEVEL_NUM=1 and (AUTH_LEVEL=1 or AUTH_LEVEL=2)
+	and not exists
+	(select 1 from ip_user_hide_menu um where um.menu_id=m.menu_id and um.user_id=? )
+	order by DISP_ORDER asc
+	</select>
+
+	<select id="getIpHideMenuListByUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select
+	<include refid="Base_Column_List"/>
+	from ip_menu m
+	where m.LEVEL_NUM=1 and m.MENU_ID
+	in (select menu_id from ip_role_menu where role_id
+	in (select role_id from ip_user_role where user_id =?))
+	and exists
+	(select 1 from ip_user_hide_menu um where um.menu_id=m.menu_id and um.user_id=? )
+	order by DISP_ORDER asc
+	</select>
+
+	<select id="getIpHideMenuListByHirer" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select
+	<include refid="Base_Column_List"/>
+	from ip_menu m
+	where LEVEL_NUM=1 and (AUTH_LEVEL=1 or AUTH_LEVEL=2)
+	and exists
+	(select 1 from ip_user_hide_menu um where um.menu_id=m.menu_id and um.user_id=? )
+	order by DISP_ORDER asc
+	</select>
+
+	<select id="getMenuByParentId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select
+	<include refid="Base_Column_List"/>
+	from ip_menu
+	where  MENU_ID
+	in (select menu_id from ip_role_menu where role_id
+	in (select role_id from ip_user_role where user_id =?))
+	order by LEVEL_NUM,DISP_ORDER asc
+	</select>
+
+	<delete id="deleteUserMenu" >
+	delete from ip_user_hide_menu
+	where user_id = #{0}
+	and menu_id =#{1}
+	</delete>
+
+	<insert id="saveUserMenu">
+	insert into ip_user_hide_menu (user_id,menu_id) VALUES (#{0},#{1})
+	</insert> -->
+	<select id="findAllBySort" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM ip_menu
+		order by LEVEL_NUM, DISP_ORDER asc
+	</select>
+
+   <select id="findIpUserMngMenuList" resultMap="BaseResultMap" >
+		SELECT 
+		 <include refid="Base_Column_List"/>	
+		FROM ip_menu h 
+		where auth_level in ('1','2')
+		order by LEVEL_NUM,DISP_ORDER
+	</select>
+</mapper>
+

@@ -1,0 +1,111 @@
+{
+  "config": {
+    "showType": [
+      {
+        "label": "单行文本",
+        "value": "input"
+      },
+      {
+        "label": "多行文本",
+        "value": "textarea"
+      },
+      {
+        "label": "下拉选项",
+        "value": "select"
+      }
+    ],
+    "div": [
+      {
+        "label": "小学",
+        "value": "primary"
+      },
+      {
+        "label": "高中",
+        "value": "high"
+      },
+      {
+        "label": "大学",
+        "value": "university"
+      }
+    ]
+  },
+  "info": [
+    {
+      "DBWord": "1",
+      "showName": "11",
+      "showType": "input",
+      "dicType": "高中",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "2",
+      "showName": "22",
+      "showType": "select",
+      "dicType": "大学",
+      "isUse": "N"
+    },
+    {
+      "DBWord": "3",
+      "showName": "33",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "4",
+      "showName": "44",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "5",
+      "showName": "55",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "6",
+      "showName": "66",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "7",
+      "showName": "77",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "8",
+      "showName": "88",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "9",
+      "showName": "99",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "10",
+      "showName": "1010",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    },
+    {
+      "DBWord": "11",
+      "showName": "1111",
+      "showType": "input",
+      "dicType": "小学",
+      "isUse": "Y"
+    }
+  ]
+}

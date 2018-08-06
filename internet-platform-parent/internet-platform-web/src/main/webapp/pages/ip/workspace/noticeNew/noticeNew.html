@@ -1,0 +1,244 @@
+<link rel="stylesheet" type="text/css" href="trd/wangEditor/dist/css/wangEditor.min.css">
+<div class="new-wrapper">
+	<div class="detail-left">
+		<div class="left-button">
+			<a id="go-new" class="btn btn-primary btn-lg btn-block" href="#/ip/workspace/noticeNew/noticeNew" type="button">+新建公告</a>
+		</div>
+		<div class="left-button">
+			<a id="go-turn"  class="btn btn-primary btn-lg btn-block" href="#/ip/workspace/noticeList/noticeList" type="button">全部公告</a>
+		</div>
+	</div>
+	<div class="detail-right clearfix">
+		<div class="notice-title-new"><h5>新建公告</h5></div>
+		<form id="form1" action="" method="post" enctype="multipart/form-data">
+		<input name="noticeId" id="noticeId" type="hidden"/>
+		<input name="isPublish" id="isPublish" type="hidden"/>
+		<input name="noticeContent" id="noticeContent" type="hidden"/>
+		<input name="oldFile" id="oldFile" type="hidden"/>
+		<div class="list-content">
+			<div class="notice-title clearfix">
+				<p class="spe">标题：</p>
+				<input name="noticeTitle" id="notice-name" type="text" maxlength="37" placeholder="不能超过36个字..."/>
+			</div>
+			<div class="notice-content clearfix">
+				<p class="spe">公告内容：</p>
+				<div id="editor-container" class="container">
+			        <div id="editor-trigger">
+			        	
+			        </div>
+			    </div>
+			</div>
+			<span id="show" class="show"></span>
+			<div class="upload-file clearfix">
+				<span>上传附件：</span>
+				<!-- <input name="file" id="upload-file" type="file"/>-->
+				<input name="attachmentUrl" id="upload-file" type="file" class="layui-upload-file"/>
+			</div>
+			<div class="save-btns clearfix">
+				<button class="btn" type="submit" data-bind="event:{click:getImportData.bind($data,'1','9')}">保存并发布</button>
+				<button id="save-notice" class="btn" type="button" data-bind="event:{click:getImportData.bind($data,'0')}">保存</button>
+				<button id="preview" class="btn" type="button">预览</button>
+			</div>
+			
+			<div class="modal fade" id="preview-content-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	            <div class="modal-dialog">
+					<div id="preview-content" class="preview-content hide">
+						<div class="preview-title clearfix">
+							<p id="new-tit" class="new-tit">公告一</p>
+							<div class="new-cont">
+								<div class="new-classfy">
+									<p class="new-selected">发布人：<span>管理员</span></p>
+									<p>发布时间<span id="pubdate"></span></p>
+								</div>
+							</div>
+						</div>
+						<div id="preview-html" class="preview-html"></div>
+						<a id="close-preview" class="close-preview btn" type="button">关闭</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	
+        // 阻止输出log
+        // wangEditor.config.printLog = false;
+
+        var editor = new wangEditor('editor-trigger');
+
+        // 上传图片
+        editor.config.uploadImgUrl = '/upload';
+        editor.config.uploadParams = {
+            // token1: 'abcde',
+            // token2: '12345'
+        };
+        editor.config.uploadHeaders = {
+            // 'Accept' : 'text/x-json'
+        }
+        // editor.config.uploadImgFileName = 'myFileName';
+
+        // 隐藏网络图片
+        // editor.config.hideLinkImg = true;
+
+        // 表情显示项
+        editor.config.emotionsShow = 'icon';
+        editor.config.emotions = {
+            'default': {
+                title: '默认',
+                data: './emotions.data'
+            },
+            'weibo': {
+                title: '微博表情',
+                data: [
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                        value: '[草泥马]'    
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                        value: '[神马]'    
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                        value: '[浮云]'    
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                        value: '[给力]'    
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                        value: '[围观]'    
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                        value: '[威武]'
+                    },
+                    {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif',
+                    value: '[熊猫]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif',
+                    value: '[兔子]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif',
+                    value: '[奥特曼]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif',
+                    value: '[囧]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif',
+                    value: '[互粉]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif',
+                    value: '[礼物]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif',
+                    value: '[呵呵]'
+                },
+                {
+                    icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif',
+                    value: '[哈哈]'
+                }
+                ]
+            }
+        };
+
+        // 插入代码时的默认语言
+        // editor.config.codeDefaultLang = 'html'
+
+        // 只粘贴纯文本
+        // editor.config.pasteText = true;
+
+        // 跨域上传
+        // editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+
+        // 第三方上传
+        // editor.config.customUpload = true;
+
+        // 普通菜单配置
+        // editor.config.menus = [
+        //     'img',
+        //     'insertcode',
+        //     'eraser',
+        //     'fullscreen'
+        // ];
+        // 只排除某几个菜单（兼容IE低版本，不支持ES5的浏览器），支持ES5的浏览器可直接用 [].map 方法
+        // editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
+        //     if (item === 'insertcode') {
+        //         return null;
+        //     }
+        //     if (item === 'fullscreen') {
+        //         return null;
+        //     }
+        //     return item;
+        // });
+
+        // onchange 事件
+        var textFlag = false, htmlFlag = false;
+	editor.onchange = function() {
+		$("#noticeContent").val($.trim(editor.$txt.html()));
+		//console.log(this.$txt.html());
+		var textLength = $.trim(editor.$txt.text()).length;
+		$("#count").html(textLength);
+		var div = $("#editor-trigger");
+		var html_len = $.trim(div.html()).length;
+		var text_len = $.trim(div.text()).length;
+		var div = $("#editor-trigger");
+		var show = "你已输入" + text_len + "个字";
+		var total = "您的输入不能超过500字";
+		//document.getElementById("show").innerText = show;
+		$("#show").removeClass("showspe");
+		if (text_len > 500) {
+			var show = "你已输入" + text_len + "个字，超出500字限制无法进行保存！";
+			$("#show").addClass("showspe");
+			document.getElementById("show").innerText = show;
+			textFlag = true;
+		} else {
+			var show = "你已输入" + textLength + "/500个字";
+			document.getElementById("show").innerText = show;
+			textFlag = false;
+		}
+		if (html_len > 3000) {
+			htmlFlag = true;
+		} else {
+			htmlFlag = false;
+		}
+	};
+
+
+        // 取消过滤js
+        // editor.config.jsFilter = false;
+
+        // 取消粘贴过来
+        // editor.config.pasteFilter = false;
+
+        // 设置 z-index
+        // editor.config.zindex = 20000;
+
+        // 语言
+        // editor.config.lang = wangEditor.langs['en'];
+
+        // 自定义菜单UI
+        // editor.UI.menus.bold = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
+        //     selected: '.selected'
+        // };
+        // editor.UI.menus.italic = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
+        //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
+        // };
+        editor.create();
+        $("#get-info").click(function(){
+        	var html = editor.$txt.html();
+        	console.log(html);
+        });
+    </script>

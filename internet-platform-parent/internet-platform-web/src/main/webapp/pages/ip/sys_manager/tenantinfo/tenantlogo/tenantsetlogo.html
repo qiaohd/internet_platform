@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="../trd/Jcorp-0.9.12/css/jquery.Jcrop.css" />
+<script src="../trd/Jcorp-0.9.12/js/jquery.Jcrop.js" type="text/javascript"></script>	
+<div class="sys-right-content">
+	<p class="toggle-msg">>>&nbsp;租户LOGO</p>
+	<form id="picupload" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="x" name="x" />
+        <input type="hidden" id="y" name="y" />
+        <input type="hidden" id="w" name="w" />
+        <input type="hidden" id="h" name="h" />
+        <input type="hidden" id="w1" name="w1" />
+        <input type="hidden" id="h2" name="h2" />
+        <input type="hidden" id="filePath" name="filePath" />
+	<div class="upload-logo">
+		<div>
+			<div class="upload-logo-btn-cont">上传LOGO
+				<input type="file" id="previewfile" name="imgFile" class="upload-logo-btn" value="" data-bind="event: { change: previewImage }"/>
+			</div>
+			<span class="tips-text">支持jpg、jpeg、png、bmp格式，且照片小于100K,大小为320px*320px最佳</span>
+		</div>
+		<div class="jc-demo-box">
+			<div id="targetBg" style="display: inline-block;position:absolute;height:323px;width:323px; z-index:9999;background: url(../images/upload_logo.jpg) no-repeat;border: 1px solid #eee;"></div>
+				<div id="target">
+					<img id="target-img" src="../images/upload_logo.jpg" />
+				</div>
+				
+		    <div id="preview-pane">
+			    <div class="preview-container">
+					<div id="preview" class="jcrop-preview" style="width:100%;height: 100%;">
+						<img src="../images/upload_logo.jpg" />
+			    	</div>
+			    </div>
+		    </div>
+		</div>
+		<button disabled id="upload-logo-save-btn" class="upload-logo-save-btn" data-bind="click:imgUpload">保存</button>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+  jQuery(function($){
+  		var browser=navigator.appName ;
+		var b_version=navigator.appVersion;
+		var version=b_version.split(";"); 
+		var trim_Version=""
+		if(version[1]!=null){
+			trim_Version=version[1].replace(/[ ]/g,""); 
+		}
+    // Create variables (in this scope) to hold the API and image size
+    var jcrop_api,
+        boundx,
+        boundy,
+
+        // Grab some information about the preview pane
+        $preview = $('#preview-pane'),
+        $pcnt = $('#preview-pane .preview-container'),
+        //此处有修改
+        xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+        if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){
+			 $pimg = $('#preview-pane .preview-container .jcrop-preview');
+		}else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0"){
+			$pimg = $('#preview-pane .preview-container .jcrop-preview');
+		} else{
+			$pimg = $('#preview-pane .preview-container img');
+		}
+   
+    $('#target').Jcrop({
+      onChange: updatePreview,
+      onSelect: updatePreview,
+      aspectRatio: xsize / ysize
+    },function(){
+      // Use the API to get the real image size
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+
+      // Move the preview into the jcrop container for css positioning
+      $preview.appendTo(jcrop_api.ui.holder);
+    });
+
+    function updatePreview(c)
+    {
+      if (parseInt(c.w) > 0)
+      {
+        var rx = xsize / c.w;
+        var ry = ysize / c.h;
+
+        $pimg.css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });
+      }
+    };
+  });
+</script>

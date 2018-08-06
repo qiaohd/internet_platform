@@ -1,0 +1,39 @@
+.u-grid td{
+	line-height: 1.6em !important;
+}
+.u-grid-header-link {
+    display: block;
+    padding-left: 1.33em;
+    padding-right: 2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333333;
+    font-size: 0.85em;
+    height: 2.83em;
+    line-height: 2.83em;
+}
+.clearfix:before,
+.nav::before, .navbar::before,
+.navbar-header::before,
+.selectpicker::before,
+.navbar-collapse::before {
+    display: table;
+    content: " ";
+}
+#audited-tabs {
+    height:42px;
+}
+#auditedTabContent {
+    margin-top: 20px;
+}
+
+.clearfix:after,
+.nav::after, .navbar::after,
+.navbar-header::after,
+.container-fluid::after,
+.selectpicker::after,
+.navbar-collapse::after {
+    clear: none;
+!important;
+}

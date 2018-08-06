@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ufgov.ip.dao.system.IpMenuIconMapper">
+	<select id="query" resultType="com.ufgov.ip.entity.system.IpMenuIcon" parameterType="com.ufgov.ip.entity.system.IpMenuIcon" >
+		SELECT *
+		FROM ip_menu_icon h
+		<where>
+			   <if test="menu_id != null and menu_id!=''">
+			  	h.menu_id = #{menu_id}
+			  	</if>
+			  	<if test="menu_name != null and menu_name!=''">
+			  	 and h.menu_name = #{menu_name}
+			  	</if>
+			  	<if test="url != null and url!=''">
+			  	and h.url = #{url}
+			  	</if>
+			  	<if test="user_id != null and user_id!=''">
+			  	and h.user_id = #{user_id}
+			  	</if>
+			  	<if test="icon_id != null and icon_id!=''">
+			  	and h.icon_id = #{icon_id}
+			  	</if>
+			  	<if test="icon_path != null and icon_path!=''">
+			  	and h.icon_path = #{icon_path}
+			  	</if>
+			</where>
+	</select>
+	<select id="selectByPk" resultType="com.ufgov.ip.entity.system.IpMenuIcon" parameterType="com.ufgov.ip.entity.system.IpMenuIcon" >
+		SELECT *
+		FROM ip_menu_icon h
+		where h.menu_id=#{menu_id} and user_id=#{user_id}
+	</select>
+		
+	<insert id="insert" parameterType="com.ufgov.ip.entity.system.IpMenuIcon" >
+		insert into ip_menu_icon 
+		<trim prefix="(" suffixOverrides=",">
+			<if test="menu_id != null">menu_id,</if>
+			<if test="menu_name != null">menu_name,</if>
+			<if test="url != null">url,</if>
+			<if test="user_id != null">user_id,</if>
+			<if test="icon_id != null">icon_id,</if>
+			<if test="icon_path != null">icon_path</if>
+		</trim>
+		)
+		values
+		<trim prefix="(" suffixOverrides=",">
+			<if test="menu_id != null">#{menu_id},</if>
+			<if test="menu_name != null">#{menu_name},</if>
+			<if test="url != null">#{url},</if>
+			<if test="user_id != null">#{user_id},</if>
+			<if test="icon_id != null">#{icon_id},</if>
+			<if test="icon_path != null">#{icon_path}</if>
+		</trim>
+		)
+	</insert>
+	
+	<update id="update">
+        update ip_menu_icon
+        <set>
+        	<if test="menu_name != null">
+                menu_name = #{menu_name},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="icon_id != null">
+                icon_id = #{icon_id},
+            </if>
+            <if test="icon_path != null">
+                icon_path = #{icon_path}
+            </if>            
+        </set>
+         where menu_id = #{menu_id} and user_id = #{user_id}
+    </update>
+    
+    <delete id="delete" parameterType="com.ufgov.ip.entity.system.IpMenuIcon">
+    delete from ip_menu_icon
+    where menu_id = #{menu_id} and user_id = #{user_id}
+  </delete>
+</mapper>
+

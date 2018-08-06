@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>service</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/service/${subModuleName}</filePath>
+	<fileName>${ClassName}Service.java</fileName>
+	<content><![CDATA[
+
+package ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+import com.alibaba.dubbo.config.annotation.Service;
+
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.ufgov.ip.utils.UUIDTools;
+import yonyou.bpm.rest.request.RestVariable;
+import yonyou.bpm.rest.response.historic.HistoricProcessInstanceResponse;
+
+import com.ufgov.ip.entity.system.IpUser;
+import com.ufgov.ip.api.system.UserAccountServiceI;
+import com.ufgov.ip.api.system.ProcessServiceI;
+import java.util.ArrayList;
+import yonyou.bpm.rest.exception.RestException;
+/**
+ * ${functionName}Service
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service(version = "0.0.1")
+@Transactional(readOnly = true)
+public class ${ClassName}Service implements ${ClassName}ServiceI {
+
+    @Autowired
+	private ${ClassName}Mapper ${className}Mapper;
+	
+	@Autowired
+	private ProcessServiceI bpmServioce;
+	
+	@Autowired
+	protected UserAccountServiceI userAccountService;
+
+
+	public ${ClassName} get(String id) {
+		return ${className}Mapper.get(id);
+	}
+	
+	public List<${ClassName}> findList(${ClassName} ${className}) {
+		return ${className}Mapper.findList(${className});
+	}
+	
+	
+	
+	public List<${ClassName}> findAllList(${ClassName} ${className}){
+	    return ${className}Mapper.findAllList(${className});
+	}
+	
+	@Transactional(readOnly = false)
+	public void update(${ClassName} ${className}){
+	   ${className}Mapper.update(${className});
+	}
+	
+	<#if schemeType=='3' || schemeType=='0'>
+			@Transactional(readOnly = false)
+			public void saveAndStartBpm(${ClassName} ${className},String optionId) {
+			         <#list table.columnList as c>
+							<#if c.isPk == "Y">
+							 	${className}.set${c.simpleJavaField?cap_first}(UUIDTools.uuidRandom());
+							</#if>
+				        </#list>
+				        
+			                //启动流程
+							 	try {
+							 		
+							        //定义流程变量
+								    	List<RestVariable> variables=new ArrayList<RestVariable> ();
+								    	RestVariable restVariable=new RestVariable();
+								    	restVariable.setName("流程名称");
+								    	restVariable.setValue("${table.tableComments}");
+								    	variables.add(restVariable);
+								    	
+								    	RestVariable entityVariables=new RestVariable();
+								    	entityVariables.setName("业务数据");
+								    	entityVariables.setValue("${className}");
+								    	variables.add(entityVariables);
+							      
+							      //启动流程
+								       <#list table.columnList as c>
+											<#if c.isPk == "Y">
+											 	String ${c.javaField}=${className}.get${c.simpleJavaField?cap_first}();
+											 	HistoricProcessInstanceResponse startProcessByKey = bpmServioce.startProcessByKey(optionId, "${className}", ${c.javaField},variables);
+											</#if>
+								        </#list>
+							      
+								} catch (RestException e) {
+									// TODO 自动生成的 catch 块
+									e.printStackTrace();
+								}
+				        ${className}Mapper.save(${className});
+			}
+	<#else>
+		  @Transactional(readOnly = false)
+			public void save(${ClassName} ${className}) {
+			         <#list table.columnList as c>
+							<#if c.isPk == "Y">
+							 	${className}.set${c.simpleJavaField?cap_first}(UUIDTools.uuidRandom());
+							</#if>
+				        </#list>
+			                
+				        ${className}Mapper.save(${className});
+			}
+		
+	</#if>
+	
+	@Transactional(readOnly = false)
+	public void delete(${ClassName} ${className}) {
+		${className}Mapper.delete(${className});
+	}
+	
+}]]>
+	</content>
+</template>

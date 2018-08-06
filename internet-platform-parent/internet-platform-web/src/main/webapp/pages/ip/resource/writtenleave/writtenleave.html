@@ -1,0 +1,30 @@
+<div class="duty-info">
+    <ul id="division-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a >我的请假条</a></li>
+    </ul>
+    <div id="divisionTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active in" id="division-list"
+             aria-labelledby="list-tab">
+            <span id="askHirerId" class="hidden">111</span>
+            <span id="askCoId" class="hidden">111</span>
+            <span id="askUserId" class="hidden">111</span>
+            <span id="roleType" class="hidden">111</span>
+            <span id="askTaskId" class="hidden">111</span>
+            <span id="businessId" class="hidden">111</span>
+            <div class="division-list-content">
+                <div class="division-result-content">
+                    <div type="text"
+                         u-meta='{"id":"leave-grid","data":"leaveDataTable","type":"grid","editable":false,"autoExpand":false,"keyField":"theId"}'>
+                        <div options='{"field":"id","dataType":"String","title":"序号","editType":"String","width": 100}'></div>
+                        <div options='{"field":"startDate","dataType":"String","title":"请假开始时间","editType":"Date","width": 150}'></div>
+                        <div options='{"field":"endDate","dataType":"String","title":"请假结束时间","editType":"Date","width": 150}'></div>
+                        <div options='{"field":"type","dataType":"String","title":"请假类型","editType":"string","width": 100}'></div>
+                        <div options='{"field":"reason","dataType":"String","title":"请假理由","editType":"string","width": 250}'></div>
+                        <div options='{"field":"result","dataType":"String","title":"结果","editType":"string","width": 100}'></div>
+                        <div options='{"field":"String","dataType":"String","title":"操作","editType":"string","width": 200,"renderType":"LodopFun"}'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
