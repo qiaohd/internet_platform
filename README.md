@@ -2,7 +2,7 @@
 
 #### 1、代码下载
 
-- git clone git@git.yonyou.com:ip/internet_platform.git
+- git clone git@github.com:qiaohd/internet_platform.git
 	
 #### 2、导入工程时，需要将parent、admin、api、common、service、web 6个工程全部导入
 
